@@ -45,6 +45,7 @@ const installUI = el => {
     el.appendChild(container);
 
     input.addEventListener("change", fieldChangeListener(field));
+    input.addEventListener("keyup", fieldChangeListener(field));
   });
 };
 
