@@ -4,6 +4,16 @@ Renderjson.set_show_to_level(1);
 const container = document.getElementById("container");
 const actionText = document.getElementById("action-text");
 const actionButton = document.getElementById("action-button");
+const configButton = document.getElementById("config-button");
+const configPanel = document.getElementById("config-panel");
+
+configButton.addEventListener("click", () => {
+  configPanel.classList.toggle("visible");
+});
+
+const showConfig = () => {
+  configPanel.classList.add("visible");
+};
 
 const addEntry = (message, className) => {
   const div = document.createElement("div");
@@ -28,17 +38,18 @@ const addLog = message => {
 
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
-    actionButton.textContent = loadingMessage || "Loading..."
-    actionButton.disabled = true
+    actionButton.textContent = loadingMessage || "Loading...";
+    actionButton.disabled = true;
   } else {
-    actionButton.textContent = "Continue"
-    actionButton.disabled = false
+    actionButton.textContent = "Continue";
+    actionButton.disabled = false;
   }
-}
+};
 
 const error = message => {
-  console.error(error)
-}
+  console.error(error);
+  addEntry(message, "error");
+};
 module.exports = {
   addEntry,
   setAction,
@@ -48,5 +59,6 @@ module.exports = {
   container,
   actionText,
   setLoading,
-  error
-}
+  error,
+  showConfig
+};

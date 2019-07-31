@@ -1,102 +1,140 @@
 body,
 html {
-	margin: 0;
-	font-family: inconsolata, sans-serif;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
+  margin: 0;
+  font-family: inconsolata, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 #empty-space {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 #action-bar {
-	flex-grow: 0;
-	padding: 8px;
+  flex-grow: 0;
+  padding: 8px;
 
-	border-top: 2px solid black;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #action-text {
-	flex-grow: 1;
-	text-align: center;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .bar-button {
-	display: block;
-	flex-grow: 0;
-	border-radius: 8px;
+  display: block;
+  flex-grow: 0;
+  border-radius: 8px;
 
-	padding: 8px;
+  padding: 8px;
 }
 
 #container {
-	flex-grow: 0;
-	padding: 8px;
-	overflow: scroll;
+  flex-grow: 0;
+  padding: 8px;
+  overflow: scroll;
 }
 
 .instruction {
-	color: #28b463;
-	margin-bottom: 8px;
+  color: #28b463;
+  margin-bottom: 8px;
+}
+
+.error {
+  color: red;
+  margin-bottom: 8px;
+  margin-left: 16px;
 }
 
 .instruction::before {
-	content: "> ";
+  content: "> ";
 }
 
 .log {
-	margin-bottom: 8px;
-	margin-left: 16px;
-	font-size: 14px;
-	white-space: pre;
+  margin-bottom: 8px;
+  margin-left: 16px;
+  font-size: 14px;
+  white-space: pre;
 }
 
 .renderjson {
-	margin-left: 16px;
-	margin-bottom: 8px;
+  margin-left: 16px;
+  margin-bottom: 8px;
 }
 
 .disclosure:first-child {
-	display: none;
+  display: none;
 }
 
 iframe {
-	position: fixed;
-	bottom: 0;
-	right: 80px;
+  position: fixed;
+  bottom: 0;
+  right: 80px;
 }
 iframe.appear {
-	animation: fadein 0.3s;
+  animation: fadein 0.3s;
 }
 
 iframe.disappear {
-	animation: fadeout 0.3s;
-	animation-fill-mode: forwards;
+  animation: fadeout 0.3s;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fadein {
-	from {
-		opacity: 0;
-		transform: translateY(30px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0px);
-	}
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 
 @keyframes fadeout {
-	from {
-		opacity: 1;
-		transform: translateY(0px);
-	}
-	to {
-		opacity: 0;
-		transform: translateY(30px);
-	}
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+#config-panel {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  padding: 8px;
+  width: 256px;
+  height: 286px;
+  background: white;
+  border: 1px solid black;
+  box-shadow: 2px 2px 0px black;
+  display: none;
+  box-sizing: border-box;
+}
+
+#config-panel.visible {
+  display: block;
+}
+
+.config-group {
+  margin-top: 8px;
+}
+
+.config-group label {
+  display: block;
+  font-size: 12px;
+}
+
+.config-group input {
+  padding: 4px;
+  width: 90%;
 }
