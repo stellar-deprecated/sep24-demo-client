@@ -1,0 +1,23 @@
+{
+	"name": "sep6-demo-client",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"start": "webpack-dev-server",
+		"build": "webpack && cp index.html dist/"
+	},
+	"devDependencies": {
+		"css-loader": "^3.1.0",
+		"style-loader": "^0.23.1",
+		"webpack": "^4.37.0",
+		"webpack-cli": "^3.3.6",
+		"webpack-dev-server": "^3.7.2"
+	},
+	"dependencies": {
+		"dotenv": "^8.0.0",
+		"dotenv-webpack": "^1.7.0",
+		"renderjson": "^1.4.0",
+		"stellar-sdk": "^2.1.1"
+	}
+}
