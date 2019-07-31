@@ -1,8 +1,14 @@
 import "./style.css";
 import * as uiActions from "./ui/ui-actions";
+const Config = require("./config");
 
-const BRIDGE_URL = process.env.URL;
-// Reset the bridge state on each run
+Config.installUI(document.querySelector("#config-form"));
+if (!Config.isValid()) {
+  uiActions.showConfig();
+}
+window.Config = Config;
+
+const BRIDGE_URL = Config.get("BRIDGE_URL");
 fetch(BRIDGE_URL + "/reset", { method: "POST" });
 
 /**
@@ -24,35 +30,43 @@ fetch(BRIDGE_URL + "/reset", { method: "POST" });
 const state = {};
 
 const steps = [
-	require("./steps/get_withdraw_unauth"),
-	require("./steps/start_sep10"),
-	require("./steps/sign_sep10"),
-	require("./steps/send_challenge_sep10"),
-	require("./steps/show_interactive_webapp"),
-	require("./steps/validate_transaction"),
-	require("./steps/send_stellar_transaction"),
-	require("./steps/poll_for_success")
+  require("./steps/get_withdraw_unauth"),
+  require("./steps/start_sep10"),
+  require("./steps/sign_sep10"),
+  require("./steps/send_challenge_sep10"),
+  require("./steps/show_interactive_webapp"),
+  require("./steps/validate_transaction"),
+  require("./steps/send_stellar_transaction"),
+  require("./steps/poll_for_success")
 ];
 
 let currentStep = null;
 const runStep = step => {
-	if (!step) {
-		uiActions.setAction("Finished");
-		uiActions.setLoading(true, "Finished");
-		return;
-	}
-	uiActions.instruction(step.instruction);
-	uiActions.setAction(step.action);
-	currentStep = step;
+  if (!step) {
+    uiActions.setAction("Finished");
+    uiActions.setLoading(true, "Finished");
+    return;
+  }
+  uiActions.instruction(step.instruction);
+  uiActions.setAction(step.action);
+  currentStep = step;
 };
 
 const next = async () => {
-	if (currentStep && currentStep.execute) {
-		uiActions.setLoading(true);
-		await currentStep.execute(state, uiActions);
-		uiActions.setLoading(false);
-	}
-	runStep(steps.splice(0, 1)[0]);
+  if (currentStep && currentStep.execute) {
+    uiActions.setLoading(true);
+    try {
+      await currentStep.execute(state, uiActions);
+      steps.splice(0, 1);
+    } catch (e) {
+      uiActions.error(e);
+      uiActions.setLoading(false);
+      throw e;
+    }
+
+    uiActions.setLoading(false);
+  }
+  runStep(steps[0]);
 };
 next();
 uiActions.actionButton.addEventListener("click", next);
