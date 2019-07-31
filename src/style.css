@@ -138,3 +138,10 @@ iframe.disappear {
   padding: 4px;
   width: 90%;
 }
+
+#close-button {
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}

@@ -40,6 +40,7 @@ const fieldChangeListener = (field, copyInput) => {
 
 const installUI = el => {
   load();
+
   const copyField = document.querySelector("#copy-url");
   copyField.addEventListener("click", e => {
     e.target.focus();
