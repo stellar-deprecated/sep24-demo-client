@@ -50,7 +50,6 @@ const setLoading = (loading, loadingMessage) => {
 };
 
 const error = message => {
-  console.error(error);
   addEntry(message, "error");
 };
 module.exports = {
