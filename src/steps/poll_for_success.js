@@ -1,5 +1,5 @@
 const get = require("../util/get");
-const BRIDGE_URL = process.env.URL;
+const Config = require("../config");
 
 // TODO should this poll?
 module.exports = {
@@ -7,13 +7,17 @@ module.exports = {
   action: "GET /transaction (SEP6)",
   execute: async function(state, { log, instruction, error }) {
     return new Promise((resolve, reject) => {
+      const BRIDGE_URL = Config.get("BRIDGE_URL");
       const poll = async () => {
         const transactionParams = {
           id: state.stellar_memo
         };
         log("GET /transaction params");
         log(transactionParams);
-        const transactionResult = await get("/transaction", transactionParams);
+        const transactionResult = await get(
+          `${BRIDGE_URL}/withdraw`,
+          transactionParams
+        );
         log("GET /transaction results");
         log(transactionResult);
         if (transactionResult.transaction.status === "completed") {

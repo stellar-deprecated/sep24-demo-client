@@ -1,5 +1,4 @@
 const Config = require("../config");
-
 const get = require("../util/get");
 
 module.exports = {
@@ -9,6 +8,7 @@ module.exports = {
   execute: async function(state, { log, instruction }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_PK = Config.get("USER_PK");
+    const BRIDGE_URL = Config.get("BRIDGE_URL");
     const withdrawType = "cash";
     const params = {
       type: withdrawType,
@@ -18,7 +18,7 @@ module.exports = {
     log("GET /withdraw with params");
     log(params);
     // Expect this to fail with 403
-    const result = await get("/withdraw", params);
+    const result = await get(`${BRIDGE_URL}/withdraw`, params);
     log("GET /withdraw response");
     log(result);
     instruction(

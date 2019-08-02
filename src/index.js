@@ -8,8 +8,10 @@ if (!Config.isValid()) {
 }
 window.Config = Config;
 
-const BRIDGE_URL = Config.get("BRIDGE_URL");
-fetch(BRIDGE_URL + "/reset", { method: "POST" });
+try {
+  const BRIDGE_URL = Config.get("BRIDGE_URL");
+  fetch(BRIDGE_URL + "/reset", { method: "POST" });
+} catch (e) {}
 
 /**
  * State maintained between steps
