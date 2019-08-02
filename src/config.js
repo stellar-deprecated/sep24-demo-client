@@ -1,5 +1,10 @@
 let fields = [
   { key: "BRIDGE_URL", label: "URL to the TRANSFER_SERVER", value: null },
+  {
+    key: "AUTH_SERVER_URL",
+    label: "URL to the WEB_AUTH_ENDPOINT",
+    value: null
+  },
   { key: "USER_PK", label: "Stellar wallet public key / account", value: null },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URI", label: "URL of the horizon server", value: null },

@@ -4,7 +4,7 @@ module.exports = {
     "We need to send the signed SEP10 challenge back to the server to get a JWT token to authenticate our stellar account with future actions",
   action: "Send signed response back to server",
   execute: async function(state, { log }) {
-    const BRIDGE_URL = Config.get("BRIDGE_URL");
+    const BRIDGE_URL = Config.get("AUTH_SERVER_URL");
     const url = BRIDGE_URL + "/auth";
     const transaction = state.signed_challenge_tx;
     const params = new URLSearchParams();
