@@ -38,6 +38,10 @@ module.exports = {
             instruction(e.data.message);
           }
           if (e.data.type === "success") {
+            console.log(e.data);
+            state.anchors_stellar_address = e.data.withdraw_anchor_account;
+            state.stellar_memo = e.data.withdraw_memo;
+            state.stellar_memo_type = e.data.withdraw_memo_type;
             removeIframe();
             resolve();
           }

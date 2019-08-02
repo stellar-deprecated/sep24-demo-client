@@ -35,7 +35,6 @@ const steps = [
   require("./steps/sign_sep10"),
   require("./steps/send_challenge_sep10"),
   require("./steps/show_interactive_webapp"),
-  require("./steps/validate_transaction"),
   require("./steps/send_stellar_transaction"),
   require("./steps/poll_for_success")
 ];
