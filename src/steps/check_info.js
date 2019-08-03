@@ -7,7 +7,6 @@ module.exports = {
   execute: async function(state, { log, instruction }) {
     const BRIDGE_URL = Config.get("BRIDGE_URL");
     log("GET /info");
-    // Expect this to fail with 403
     const result = await get(`${BRIDGE_URL}/info`);
     log("GET /info response");
     log(result);
