@@ -15,7 +15,7 @@ module.exports = {
         log("GET /transaction params");
         log(transactionParams);
         const transactionResult = await get(
-          `${BRIDGE_URL}/withdraw`,
+          `${BRIDGE_URL}/transaction`,
           transactionParams
         );
         log("GET /transaction results");
