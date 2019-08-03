@@ -3,8 +3,8 @@ const Config = require("../config");
 
 module.exports = {
   instruction:
-    "Before we launch the interactive portion, the client app should negotiate SEP10 authentication",
-  action: "GET /auth (sep10)",
+    "Start the SEP-0010 flow to authenticate the wallet's Stellar account",
+  action: "GET /auth (SEP-0010)",
   execute: async function(state, { log, instruction }) {
     const USER_PK = Config.get("USER_PK");
     const AUTH_URL = Config.get("AUTH_SERVER_URL");

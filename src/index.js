@@ -32,10 +32,11 @@ try {
 const state = {};
 
 const steps = [
-  require("./steps/get_withdraw_unauth"),
+  require("./steps/check_info"),
   require("./steps/start_sep10"),
   require("./steps/sign_sep10"),
   require("./steps/send_challenge_sep10"),
+  require("./steps/get_withdraw_unauth"),
   require("./steps/show_interactive_webapp"),
   require("./steps/send_stellar_transaction"),
   require("./steps/poll_for_success")

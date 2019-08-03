@@ -3,8 +3,8 @@ const get = require("../util/get");
 
 module.exports = {
   instruction:
-    "Client initiates a withdrawal. This should fail due to lack of authentication.",
-  action: "GET /withdraw (sep6, unauthenticated)",
+    "In order to find out whether we need to enter the interactive or non-interactive flow, check the /withdraw endpoint",
+  action: "GET /withdraw (SEP-0006)",
   execute: async function(state, { log, instruction }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_PK = Config.get("USER_PK");
@@ -22,7 +22,7 @@ module.exports = {
     log("GET /withdraw response");
     log(result);
     instruction(
-      "GET /withdraw fails, we need to collect info interactively.  The URL for the interactive portion is " +
+      "GET /withdraw tells us we need to collect info interactively.  The URL for the interactive portion is " +
         result.url
     );
     state.interactive_url = Config.get("BRIDGE_URL") + result.url;
