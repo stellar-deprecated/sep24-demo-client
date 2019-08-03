@@ -13,7 +13,10 @@ module.exports = {
         };
         log("GET /transaction params");
         log(transactionParams);
-        const transactionResult = await get("/transaction", transactionParams);
+        const transactionResult = await get(
+          `${BRIDGE_URL}/transaction`,
+          transactionParams
+        );
         log("GET /transaction results");
         log(transactionResult);
         if (transactionResult.transaction.status === "completed") {
