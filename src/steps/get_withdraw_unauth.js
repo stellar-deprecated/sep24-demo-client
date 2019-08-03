@@ -25,6 +25,6 @@ module.exports = {
       "GET /withdraw tells us we need to collect info interactively.  The URL for the interactive portion is " +
         result.url
     );
-    state.interactive_url = Config.get("BRIDGE_URL") + result.url;
+    state.interactive_url = result.url;
   }
 };
