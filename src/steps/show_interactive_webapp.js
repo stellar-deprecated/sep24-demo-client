@@ -8,11 +8,12 @@ module.exports = {
   action: "Launch interactive portion",
   execute: async function(state, { log, instruction }) {
     return new Promise((resolve, reject) => {
-      const USER_PK = Config.get("USER_PK");
+      const USER_SK = Config.get("USER_SK");
+      const pk = StellarSdk.Keypair.fromSecret(USER_SK).publicKey();
       // Add the parent_url so we can use postMessage inside the webapp
       const url =
         state.interactive_url +
-        `?stellar_account=${USER_PK}&token=${state.token}&parent_url=${
+        `?stellar_account=${pk}&token=${state.token}&parent_url=${
           window.location.href
         }`;
       instruction(
