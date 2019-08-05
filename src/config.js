@@ -5,7 +5,6 @@ let fields = [
     label: "URL to the WEB_AUTH_ENDPOINT",
     value: null
   },
-  { key: "USER_PK", label: "Stellar wallet public key / account", value: null },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URI", label: "URL of the horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null }

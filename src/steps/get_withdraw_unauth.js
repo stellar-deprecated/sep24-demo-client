@@ -1,3 +1,4 @@
+const StellarSDK = require("stellar-sdk");
 const Config = require("../config");
 const get = require("../util/get");
 
@@ -7,13 +8,14 @@ module.exports = {
   action: "GET /withdraw (SEP-0006)",
   execute: async function(state, { log, instruction }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
-    const USER_PK = Config.get("USER_PK");
+    const USER_SK = Config.get("USER_SK");
+    const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const BRIDGE_URL = Config.get("BRIDGE_URL");
     const withdrawType = "cash";
     const params = {
       type: withdrawType,
       asset_code: ASSET_CODE,
-      account: USER_PK
+      account: pk
     };
     log("GET /withdraw with params");
     log(params);
