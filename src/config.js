@@ -25,7 +25,7 @@ const load = () => {
       obj[val[0]] = val[1];
       return obj;
     }, {});
-  console.log(hashFields);
+
   fields.forEach(field => {
     // Prefer query param but fall back to local storage
     field.value =
