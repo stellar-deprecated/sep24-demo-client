@@ -55,13 +55,18 @@ const runStep = step => {
   uiActions.instruction(step.instruction);
   uiActions.setAction(step.action);
   currentStep = step;
+  next();
 };
 
 const next = async () => {
   if (currentStep && currentStep.execute) {
     uiActions.setLoading(true);
     try {
-      await currentStep.execute(state, uiActions);
+      await Promise.all([
+        currentStep.execute(state, uiActions),
+        // Take at least a second for each step otherwise its overwhelming
+        new Promise(resolve => setTimeout(resolve, 1000))
+      ]);
       steps.splice(0, 1);
     } catch (e) {
       uiActions.error(e);
