@@ -1,0 +1,26 @@
+html,
+body {
+  background: #e8dbff;
+  font-family: Montserrat;
+  height: 100%;
+}
+
+.currency-group {
+  margin-bottom: 20px;
+}
+
+button {
+  border: 0;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  margin: 8px 4px 8px 0;
+  border-radius: 8px;
+  border-bottom: 1px solid black;
+  outline: transparent;
+  opacity: 0.5;
+}
+
+button.active {
+  opacity: 1;
+  cursor: pointer;
+}
