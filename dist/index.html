@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Connector Demo</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="instructions-section">
+      <div id="empty-space"></div>
+      <div id="container"></div>
+      <div id="action-bar">
+        <button id="config-button" class="bar-button">Config</button>
+        <div id="action-text"></div>
+        <button id="action-button" class="bar-button">Continue</button>
+      </div>
+      <div id="config-panel">
+        <div id="close-button">X</div>
+        <div>Config</div>
+        <form id="config-form"></form>
+        <div class="config-group">
+          <label for="copy-url">Shareable URL</label>
+          <input type="text" id="copy-url" readonly />
+        </div>
+      </div>
+    </div>
+    <div id="device-section">
+      <div id="frame">
+        <div id="frame-content">
+          <iframe width="300" height="600" id="device-frame"></iframe>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
