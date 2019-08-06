@@ -37,6 +37,7 @@ const addInstruction = instruction => addEntry(instruction, "instruction");
 const addLog = message => {
   if (typeof message === "object") {
     container.appendChild(Renderjson(message));
+    container.scrollTop = container.scrollHeight;
     return;
   }
   addEntry(message, "log");
