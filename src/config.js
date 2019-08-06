@@ -17,24 +17,30 @@ const save = () => {
 };
 
 const load = () => {
-  const url = new URL(window.location);
+  const hashFields = window.location.hash
+    .substring(1)
+    .split("&")
+    .map(entry => entry.split("="))
+    .reduce((obj, val) => {
+      obj[val[0]] = val[1];
+      return obj;
+    }, {});
+
   fields.forEach(field => {
     // Prefer query param but fall back to local storage
     field.value =
-      url.searchParams.get(field.key) ||
-      JSON.parse(localStorage.getItem(field.key));
+      hashFields[field.key] || JSON.parse(localStorage.getItem(field.key));
   });
   save(); // In case we used the query params we should persist it
 };
 
 const update = () => {
-  const copyField = document.querySelector("#copy-url");
-  const url = new URL(window.location.origin);
-  fields.forEach(field => url.searchParams.append(field.key, field.value));
-  copyField.value = url;
+  window.location.hash = fields
+    .map(field => `${field.key}=${encodeURI(field.value)}`)
+    .join("&");
 };
 
-const fieldChangeListener = (field, copyInput) => {
+const fieldChangeListener = field => {
   return e => {
     field.value = e.target.value;
     save();
@@ -45,11 +51,6 @@ const fieldChangeListener = (field, copyInput) => {
 const installUI = el => {
   load();
 
-  const copyField = document.querySelector("#copy-url");
-  copyField.addEventListener("click", e => {
-    e.target.focus();
-    e.target.select();
-  });
   fields.forEach(field => {
     const container = document.createElement("div");
     container.className = "config-group";
@@ -67,8 +68,8 @@ const installUI = el => {
     container.appendChild(input);
     el.appendChild(container);
 
-    input.addEventListener("change", fieldChangeListener(field, copyField));
-    input.addEventListener("keyup", fieldChangeListener(field, copyField));
+    input.addEventListener("change", fieldChangeListener(field));
+    input.addEventListener("keyup", fieldChangeListener(field));
   });
   update();
 };
