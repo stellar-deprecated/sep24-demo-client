@@ -7,7 +7,13 @@ let fields = [
   },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URI", label: "URL of the horizon server", value: null },
-  { key: "ASSET_CODE", label: "Asset code to withdraw", value: null }
+  { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
+  {
+    key: "AUTO_ADVANCE",
+    label: "Automatically perform background operations",
+    value: false,
+    type: "checkbox"
+  }
 ];
 
 const save = () => {
@@ -42,7 +48,11 @@ const update = () => {
 
 const fieldChangeListener = field => {
   return e => {
-    field.value = e.target.value;
+    if (field.type === "checkbox") {
+      field.value = e.target.checked ? "true" : "false";
+    } else {
+      field.value = e.target.value;
+    }
     save();
     update();
   };
@@ -60,7 +70,7 @@ const installUI = el => {
 
     const input = document.createElement("input");
     input.id = `config-field-${field.key}`;
-    input.type = "text";
+    input.type = field.type || "text";
     input.placeholder = field.key;
     input.value = field.value;
 
@@ -70,6 +80,7 @@ const installUI = el => {
 
     input.addEventListener("change", fieldChangeListener(field));
     input.addEventListener("keyup", fieldChangeListener(field));
+    input.addEventListener("click", fieldChangeListener(field));
   });
   update();
 };

@@ -21,12 +21,14 @@ const showConfig = () => {
   configPanel.classList.add("visible");
 };
 
+const scrollToTop = () => (container.scrollTop = container.scrollHeight);
+
 const addEntry = (message, className) => {
   const div = document.createElement("div");
   div.textContent = message;
   div.className = className;
   container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
+  scrollToTop();
 };
 
 const setAction = action => {
@@ -37,7 +39,7 @@ const addInstruction = instruction => addEntry(instruction, "instruction");
 const addLog = message => {
   if (typeof message === "object") {
     container.appendChild(Renderjson(message));
-    container.scrollTop = container.scrollHeight;
+    scrollToTop();
     return;
   }
   addEntry(message, "log");
