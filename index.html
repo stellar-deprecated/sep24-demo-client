@@ -8,17 +8,25 @@
     />
   </head>
   <body>
-    <div id="empty-space"></div>
-    <div id="container"></div>
-    <div id="action-bar">
-      <button id="config-button" class="bar-button">Config</button>
-      <div id="action-text"></div>
-      <button id="action-button" class="bar-button">Continue</button>
-    </div>
+    <div id="instructions-section">
+      <div id="empty-space"></div>
+      <div id="container"></div>
+      <div id="action-bar">
+        <button id="config-button" class="bar-button">Config</button>
+        <div id="action-text"></div>
+        <button id="action-button" class="bar-button">Continue</button>
+      </div>
     <div id="config-panel">
       <div id="close-button">X</div>
       <div>Config</div>
       <form id="config-form"></form>
+    </div>
+    <div id="device-section">
+      <div id="frame">
+        <div id="frame-content">
+          <iframe width="300" height="600" id="device-frame"></iframe>
+        </div>
+      </div>
     </div>
     <script src="main.js"></script>
   </body>
