@@ -27,10 +27,15 @@ module.exports = {
             "Success!  You can pick up your cash at a storefront with reference number " +
               state.external_transaction_id
           );
-          setDevicePage(
-            "pages/receipt.html?reference_number=" +
-              state.external_transaction_id
-          );
+          if (transactionResult.transaction.url) {
+            setDevicePage(transactionResult.transaction.url);
+          } else {
+            setDevicePage(
+              "pages/receipt.html?reference_number=" +
+                state.external_transaction_id
+            );
+          }
+
           resolve();
         } else if (
           ["pending_external", "pending_anchor", "pending_stellar"].indexOf(
