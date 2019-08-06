@@ -32,12 +32,14 @@ try {
 const state = {};
 
 const steps = [
+  require("./steps/wait_for_begin"),
   require("./steps/check_info"),
   require("./steps/start_sep10"),
   require("./steps/sign_sep10"),
   require("./steps/send_challenge_sep10"),
   require("./steps/get_withdraw_unauth"),
   require("./steps/show_interactive_webapp"),
+  require("./steps/confirm_payment"),
   require("./steps/send_stellar_transaction"),
   require("./steps/poll_for_success")
 ];
@@ -49,6 +51,7 @@ const runStep = step => {
     uiActions.setLoading(true, "Finished");
     return;
   }
+  uiActions.setDevicePage(step.devicePage || "pages/loader.html");
   uiActions.instruction(step.instruction);
   uiActions.setAction(step.action);
   currentStep = step;

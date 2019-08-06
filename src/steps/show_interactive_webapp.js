@@ -6,7 +6,7 @@ module.exports = {
   instruction:
     "To collect the interactive information we launch the interactive URL in a frame or webview, and await payment details from a postMessage callback",
   action: "Launch interactive portion",
-  execute: async function(state, { log, instruction }) {
+  execute: async function(state, { log, instruction, setDevicePage }) {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
       const urlBuilder = new URL(state.interactive_url);
@@ -15,12 +15,7 @@ module.exports = {
       instruction(
         `Launching interactive webapp at ${url} and watching for postMessage callback`
       );
-      const frame = document.createElement("iframe");
-      frame.className = "appear";
-      frame.width = 300;
-      frame.height = 600;
-      frame.src = url;
-      document.body.appendChild(frame);
+      setDevicePage(url);
       window.addEventListener(
         "message",
         function(e) {
@@ -39,19 +34,11 @@ module.exports = {
             state.anchors_stellar_address = e.data.withdraw_anchor_account;
             state.stellar_memo = e.data.withdraw_memo;
             state.stellar_memo_type = e.data.withdraw_memo_type;
-            removeIframe();
             resolve();
           }
         },
         false
       );
-
-      function removeIframe() {
-        frame.className = "disappear";
-        setTimeout(() => {
-          frame.parentNode.removeChild(frame);
-        }, 300);
-      }
     });
   }
 };
