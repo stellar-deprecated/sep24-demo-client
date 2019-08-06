@@ -35,7 +35,6 @@ module.exports = {
                 state.external_transaction_id
             );
           }
-
           resolve();
         } else if (
           ["pending_external", "pending_anchor", "pending_stellar"].indexOf(
