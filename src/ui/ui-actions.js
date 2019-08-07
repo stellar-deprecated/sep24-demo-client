@@ -47,11 +47,13 @@ const addLog = message => {
 
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
-    actionButton.textContent = loadingMessage || "Loading...";
+    actionButton.textContent = loadingMessage || "Waiting...";
     actionButton.disabled = true;
+    actionText.classList.add("loading");
   } else {
     actionButton.textContent = "Continue";
     actionButton.disabled = false;
+    actionText.classList.remove("loading");
   }
 };
 
