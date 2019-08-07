@@ -6,12 +6,6 @@ Config.installUI(document.querySelector("#config-form"));
 if (!Config.isValid()) {
   uiActions.showConfig();
 }
-window.Config = Config;
-
-try {
-  const BRIDGE_URL = Config.get("BRIDGE_URL");
-  fetch(BRIDGE_URL + "/reset", { method: "POST" });
-} catch (e) {}
 
 /**
  * State maintained between steps
