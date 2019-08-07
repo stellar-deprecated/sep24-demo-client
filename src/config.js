@@ -34,7 +34,8 @@ const load = () => {
 
   fields.forEach(field => {
     // Prefer query param but fall back to local storage
-    let hashValue = JSON.parse(decodeURI(hashFields[field.key]));
+    let hashValue = hashFields[field.key];
+    if (hashValue) hashValue = JSON.parse(decodeURI(hashValue));
     console.log("Hash value", hashValue, typeof hashValue);
     field.value =
       hashValue !== undefined
