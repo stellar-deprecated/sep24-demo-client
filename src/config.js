@@ -34,22 +34,26 @@ const load = () => {
 
   fields.forEach(field => {
     // Prefer query param but fall back to local storage
+    let hashValue = JSON.parse(decodeURI(hashFields[field.key]));
+    console.log("Hash value", hashValue, typeof hashValue);
     field.value =
-      hashFields[field.key] || JSON.parse(localStorage.getItem(field.key));
+      hashValue !== undefined
+        ? hashValue
+        : JSON.parse(localStorage.getItem(field.key));
   });
   save(); // In case we used the query params we should persist it
 };
 
 const update = () => {
   window.location.hash = fields
-    .map(field => `${field.key}=${encodeURI(field.value)}`)
+    .map(field => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
     .join("&");
 };
 
 const fieldChangeListener = field => {
   return e => {
     if (field.type === "checkbox") {
-      field.value = e.target.checked ? "true" : "false";
+      field.value = e.target.checked;
     } else {
       field.value = e.target.value;
     }
@@ -73,6 +77,7 @@ const installUI = el => {
     input.type = field.type || "text";
     input.placeholder = field.key;
     input.value = field.value;
+    input.checked = field.value;
 
     container.appendChild(label);
     container.appendChild(input);
@@ -87,9 +92,10 @@ const installUI = el => {
 
 const get = key => {
   const field = fields.find(f => f.key === key);
-  if (!field || !field.value) {
+  if (!field || !(field.value || field.type == "checkbox")) {
     throw "Missing required config for " + key;
   }
+  if (field.type == "checkbox") return field.value;
   return field.value;
 };
 
