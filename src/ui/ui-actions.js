@@ -61,6 +61,7 @@ const expect = (value, message) => {
   if (value === undefined || value === null) {
     error(message);
   }
+};
 
 const setDevicePage = src => {
   deviceFrame.src = src;
