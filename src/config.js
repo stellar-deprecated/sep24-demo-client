@@ -7,7 +7,13 @@ let fields = [
   },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URI", label: "URL of the horizon server", value: null },
-  { key: "ASSET_CODE", label: "Asset code to withdraw", value: null }
+  { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
+  {
+    key: "AUTO_ADVANCE",
+    label: "Automatically perform background operations",
+    value: false,
+    type: "checkbox"
+  }
 ];
 
 const save = () => {
@@ -27,22 +33,30 @@ const load = () => {
     }, {});
 
   fields.forEach(field => {
+    let hashValue = hashFields[field.key];
+    if (hashValue) hashValue = JSON.parse(decodeURI(hashValue));
     // Prefer query param but fall back to local storage
     field.value =
-      hashFields[field.key] || JSON.parse(localStorage.getItem(field.key));
+      hashValue !== undefined
+        ? hashValue
+        : JSON.parse(localStorage.getItem(field.key));
   });
   save(); // In case we used the query params we should persist it
 };
 
 const update = () => {
   window.location.hash = fields
-    .map(field => `${field.key}=${encodeURI(field.value)}`)
+    .map(field => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
     .join("&");
 };
 
 const fieldChangeListener = field => {
   return e => {
-    field.value = e.target.value;
+    if (field.type === "checkbox") {
+      field.value = e.target.checked;
+    } else {
+      field.value = e.target.value;
+    }
     save();
     update();
   };
@@ -60,9 +74,10 @@ const installUI = el => {
 
     const input = document.createElement("input");
     input.id = `config-field-${field.key}`;
-    input.type = "text";
+    input.type = field.type || "text";
     input.placeholder = field.key;
     input.value = field.value;
+    input.checked = field.value;
 
     container.appendChild(label);
     container.appendChild(input);
@@ -70,20 +85,22 @@ const installUI = el => {
 
     input.addEventListener("change", fieldChangeListener(field));
     input.addEventListener("keyup", fieldChangeListener(field));
+    input.addEventListener("click", fieldChangeListener(field));
   });
   update();
 };
 
 const get = key => {
   const field = fields.find(f => f.key === key);
-  if (!field || !field.value) {
+  if (!field || !(field.value || field.type == "checkbox")) {
     throw "Missing required config for " + key;
   }
+  if (field.type == "checkbox") return field.value;
   return field.value;
 };
 
 const isValid = () => {
-  return fields.every(f => !!f.value);
+  return fields.every(f => !!f.value || f.type === "checkbox");
 };
 
 module.exports = {
