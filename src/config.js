@@ -101,7 +101,7 @@ const get = key => {
 };
 
 const isValid = () => {
-  return fields.every(f => !!f.value);
+  return fields.every(f => !!f.value || f.type === "checkbox");
 };
 
 module.exports = {
