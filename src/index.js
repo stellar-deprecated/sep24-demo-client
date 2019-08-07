@@ -55,7 +55,7 @@ const runStep = step => {
   uiActions.instruction(step.instruction);
   uiActions.setAction(step.action);
   currentStep = step;
-  next();
+  if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
 };
 
 const next = async () => {
