@@ -49,12 +49,19 @@ const setLoading = (loading, loadingMessage) => {
   }
 };
 
+const expect = (value, message) => {
+  if (value === undefined || value === null) {
+    error(message);
+  }
+};
+
 const error = message => {
   addEntry(message, "error");
 };
 module.exports = {
   addEntry,
   setAction,
+  expect,
   instruction: addInstruction,
   log: addLog,
   actionButton,
