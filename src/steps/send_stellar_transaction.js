@@ -9,7 +9,7 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const HORIZON_URI = Config.get("HORIZON_URI");
     const pk = StellarSdk.Keypair.fromSecret(USER_SK).publicKey();
-    instruction("Send the payment using the following anchor account info");
+    instruction("Sending the payment using the following anchor account info");
     log({
       address: state.anchors_stellar_address,
       memo: state.stellar_memo,
