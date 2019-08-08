@@ -57,6 +57,12 @@ const setLoading = (loading, loadingMessage) => {
   }
 };
 
+const expect = (expectation, message) => {
+  if (!expectation) {
+    error(message);
+  }
+};
+
 const setDevicePage = src => {
   deviceFrame.src = src;
 };
@@ -81,6 +87,7 @@ const error = message => {
 module.exports = {
   addEntry,
   setAction,
+  expect,
   instruction: addInstruction,
   log: addLog,
   actionButton,
