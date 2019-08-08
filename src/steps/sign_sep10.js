@@ -1,6 +1,5 @@
 const Config = require("../config");
 const StellarSdk = require("stellar-sdk");
-StellarSdk.Network.useTestNetwork();
 
 module.exports = {
   instruction:
@@ -17,6 +16,8 @@ module.exports = {
     transaction.sign(StellarSdk.Keypair.fromSecret(USER_SK));
     log("SEP-0010 Signed Transaction");
     log(transaction);
+    log("Base64 Encoded");
+    log(transaction.toEnvelope().toXDR("base64"));
     state.signed_challenge_tx = transaction;
   }
 };
