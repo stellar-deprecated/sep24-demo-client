@@ -17,6 +17,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
+    "lodash.get": "^4.4.2",
     "renderjson": "^1.4.0",
     "stellar-sdk": "^2.1.1"
   }

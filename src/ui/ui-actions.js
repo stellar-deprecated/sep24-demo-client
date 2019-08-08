@@ -57,8 +57,8 @@ const setLoading = (loading, loadingMessage) => {
   }
 };
 
-const expect = (value, message) => {
-  if (value === undefined || value === null) {
+const expect = (expectation, message) => {
+  if (!expectation) {
     error(message);
   }
 };
