@@ -6,11 +6,18 @@ module.exports = {
   execute: async function(state, { log, expect }) {
     const AUTH_URL = Config.get("AUTH_SERVER_URL");
     const transaction = state.signed_challenge_tx;
-    const params = new URLSearchParams();
-    params.set("transaction", transaction.toEnvelope().toXDR("base64"));
+    const params = {
+      transaction: transaction.toEnvelope().toXDR("base64")
+    };
     log("POST /auth request with params:");
-    log(params.toString());
-    const response = await fetch(AUTH_URL, { method: "POST", body: params });
+    log(params);
+    const response = await fetch(AUTH_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(params)
+    });
     const json = await response.json();
     log("POST /auth response");
     log(json);
