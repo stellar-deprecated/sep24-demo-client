@@ -8,6 +8,18 @@ html {
   height: 100%;
 }
 
+#mainnet-disclaimer {
+  position: fixed;
+  background: red;
+  color: white;
+  padding: 16px;
+  display: none;
+}
+
+#mainnet-disclaimer.visible {
+  display: block;
+}
+
 #instructions-section {
   display: flex;
   flex-direction: column;

@@ -2,7 +2,17 @@ import "./style.css";
 import * as uiActions from "./ui/ui-actions";
 const Config = require("./config");
 const StellarSdk = require("stellar-sdk");
-StellarSdk.Network.usePublicNetwork();
+
+Config.listen(() => {
+  const disclaimer = document.getElementById("mainnet-disclaimer");
+  if (Config.get("MAINNET")) {
+    disclaimer.classList.add("visible");
+    StellarSdk.Network.usePublicNetwork();
+  } else {
+    disclaimer.classList.remove("visible");
+    StellarSdk.Network.useTestNetwork();
+  }
+});
 
 Config.installUI(document.querySelector("#config-form"));
 if (!Config.isValid()) {

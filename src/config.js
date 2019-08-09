@@ -13,6 +13,12 @@ let fields = [
     label: "Automatically perform background operations",
     value: false,
     type: "checkbox"
+  },
+  {
+    key: "MAINNET",
+    label: "Operate on Mainnet instead of Testnet (NOT RECOMMENDED)",
+    value: false,
+    type: "checkbox"
   }
 ];
 
@@ -44,10 +50,19 @@ const load = () => {
   save(); // In case we used the query params we should persist it
 };
 
+const callbacks = [];
+/*
+ * Add a listener to be called back whenever the config changes.
+ */
+const listen = callback => {
+  callbacks.push(callback);
+};
+
 const update = () => {
   window.location.hash = fields
     .map(field => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
     .join("&");
+  callbacks.forEach(f => f());
 };
 
 const fieldChangeListener = field => {
@@ -107,5 +122,6 @@ module.exports = {
   installUI,
   get,
   isValid,
-  fields
+  fields,
+  listen
 };
