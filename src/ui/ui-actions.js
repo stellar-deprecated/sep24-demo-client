@@ -67,13 +67,13 @@ const setDevicePage = src => {
   deviceFrame.src = src;
 };
 
-const waitForPageContinue = src => {
+const waitForPageMessage = src => {
   return new Promise((resolve, reject) => {
     deviceFrame.src = src;
     const cb = function(e) {
-      if (e.data.continue) {
+      if (e.data.message) {
         window.removeEventListener("message", cb);
-        resolve();
+        resolve(e.data.message);
       }
     };
     window.addEventListener("message", cb);
@@ -97,5 +97,5 @@ module.exports = {
   error,
   showConfig,
   setDevicePage,
-  waitForPageContinue
+  waitForPageMessage
 };

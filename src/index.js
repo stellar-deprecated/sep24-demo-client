@@ -37,8 +37,7 @@ if (!Config.isValid()) {
  */
 const state = {};
 
-const steps = [
-  require("./steps/wait_for_begin"),
+const withdrawSteps = [
   require("./steps/check_info"),
   require("./steps/start_sep10"),
   require("./steps/sign_sep10"),
@@ -49,6 +48,20 @@ const steps = [
   require("./steps/send_stellar_transaction"),
   require("./steps/poll_for_success")
 ];
+
+const depositSteps = [require("./steps/unimplemented")];
+
+let steps = null;
+
+uiActions.waitForPageMessage("pages/wallet.html").then(message => {
+  if (message === "start-withdraw") {
+    steps = withdrawSteps;
+    next();
+  } else if (message === "start-deposit") {
+    steps = depositSteps;
+    next();
+  }
+});
 
 let currentStep = null;
 const runStep = step => {
@@ -84,5 +97,5 @@ const next = async () => {
   }
   runStep(steps[0]);
 };
-next();
+
 uiActions.actionButton.addEventListener("click", next);
