@@ -1,7 +1,7 @@
 import "./style.css";
 import * as uiActions from "./ui/ui-actions";
 
-import StellarSdk from "stellar-sdk";
+const StellarSdk = require("stellar-sdk");
 StellarSdk.Network.usePublicNetwork();
 const Config = require("./config");
 
