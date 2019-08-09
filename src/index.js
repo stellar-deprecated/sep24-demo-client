@@ -1,8 +1,9 @@
 import "./style.css";
 import * as uiActions from "./ui/ui-actions";
+
+import StellarSdk from "stellar-sdk";
+StellarSdk.Network.usePublicNetwork();
 const Config = require("./config");
-const StellarSDK = require("stellar-sdk");
-StellarSDK.Network.useTestNetwork();
 
 Config.installUI(document.querySelector("#config-form"));
 if (!Config.isValid()) {

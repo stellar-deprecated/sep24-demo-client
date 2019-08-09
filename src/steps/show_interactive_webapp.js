@@ -1,6 +1,5 @@
 const Config = require("../config");
 const StellarSdk = require("stellar-sdk");
-StellarSdk.Network.useTestNetwork();
 
 module.exports = {
   instruction:
