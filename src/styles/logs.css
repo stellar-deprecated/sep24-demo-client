@@ -1,0 +1,109 @@
+.log-entry {
+  margin-bottom: 8px;
+  background-repeat: no-repeat;
+  background-position: 24px center;
+  background-size: 24px;
+}
+
+.instruction {
+  padding: 16px;
+  padding-left: 64px;
+  background-color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  background-image: url("../assets/message.svg");
+}
+
+.action {
+  padding: 16px;
+  padding-left: 64px;
+  background-color: white;
+  color: #702bf5;
+  border-radius: 32px;
+  font-size: 16px;
+  background-image: url("../assets/triangle.svg");
+}
+
+.error {
+  padding: 16px;
+  padding-left: 64px;
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.detail {
+  background-color: #4d556d;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-left: 32px;
+  margin-right: 32px;
+  color: white;
+}
+
+.detail-title {
+  background-image: url("../assets/arrow-left.svg");
+  background-color: #474e62;
+  background-repeat: no-repeat;
+  background-position: 24px center;
+  background-size: 24px;
+  padding: 16px;
+  padding-left: 64px;
+}
+
+.incoming .detail-title {
+  background-image: url("../assets/arrow-left.svg");
+}
+
+.outgoing .detail-title {
+  background-image: url("../assets/arrow-right.svg");
+}
+
+.informational .detail-title {
+  background-image: url("../assets/message.svg");
+}
+
+.detail-body {
+  padding: 16px;
+}
+
+.renderjson a {
+  color: white;
+}
+
+.disclosure:first-child {
+  display: none;
+}
+
+/* 
+.instruction {
+  color: #28b463;
+  margin-bottom: 8px;
+}
+
+.error {
+  color: red;
+  margin-bottom: 8px;
+  margin-left: 16px;
+}
+
+.instruction::before {
+  content: "> ";
+}
+
+.log {
+  margin-bottom: 8px;
+  margin-left: 16px;
+  font-size: 14px;
+  white-space: pre;
+}
+
+.renderjson {
+  margin-left: 16px;
+  margin-bottom: 8px;
+}
+
+.disclosure:first-child {
+  display: none;
+} */

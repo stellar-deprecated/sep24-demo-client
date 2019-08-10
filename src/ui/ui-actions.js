@@ -26,24 +26,42 @@ const scrollToTop = () => (container.scrollTop = container.scrollHeight);
 const addEntry = (message, className) => {
   const div = document.createElement("div");
   div.textContent = message;
-  div.className = className;
+  div.className = className + " log-entry";
   container.appendChild(div);
   scrollToTop();
+};
+
+const logObject = (message, params, className = "informational") => {
+  const div = document.createElement("div");
+  div.className = `detail log-entry ${className}`;
+  const title = document.createElement("div");
+  title.className = "detail-title";
+  title.textContent = message;
+  div.appendChild(title);
+  if (params) {
+    const body = document.createElement("div");
+    body.className = "detail-body";
+
+    body.appendChild(Renderjson(params));
+    div.appendChild(body);
+  }
+  container.appendChild(div);
+};
+
+const addRequest = (message, params) => {
+  logObject(message, params, "outgoing");
+};
+
+const addResponse = (message, params) => {
+  logObject(message, params, "incoming");
 };
 
 const setAction = action => {
   actionText.textContent = action || "Continue";
 };
 
+const addAction = message => addEntry(message, "action");
 const addInstruction = instruction => addEntry(instruction, "instruction");
-const addLog = message => {
-  if (typeof message === "object") {
-    container.appendChild(Renderjson(message));
-    scrollToTop();
-    return;
-  }
-  addEntry(message, "log");
-};
 
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
@@ -85,11 +103,14 @@ const error = message => {
 };
 
 module.exports = {
-  addEntry,
   setAction,
   expect,
   instruction: addInstruction,
-  log: addLog,
+  action: addAction,
+  response: addResponse,
+  request: addRequest,
+  logObject,
+
   actionButton,
   container,
   actionText,

@@ -5,21 +5,22 @@ const Config = require("../config");
 module.exports = {
   instruction: "Start polling the bridge for success",
   action: "GET /transaction (SEP6)",
-  execute: async function(state, { log, instruction, error, setDevicePage }) {
+  execute: async function(
+    state,
+    { request, response, instruction, error, setDevicePage }
+  ) {
     return new Promise((resolve, reject) => {
       const BRIDGE_URL = Config.get("BRIDGE_URL");
       const poll = async () => {
         const transactionParams = {
           id: state.stellar_memo
         };
-        log("GET /transaction params");
-        log(transactionParams);
+        request("GET /transaction", transactionParams);
         const transactionResult = await get(
           `${BRIDGE_URL}/transaction`,
           transactionParams
         );
-        log("GET /transaction results");
-        log(transactionResult);
+        response("GET /transaction", transactionResult);
         if (transactionResult.transaction.status === "completed") {
           state.external_transaction_id =
             transactionResult.transaction.externalTransactionId;
