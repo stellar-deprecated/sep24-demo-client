@@ -8,29 +8,33 @@
     />
   </head>
   <body>
-    <div id="mainnet-disclaimer">
-      You are operating on mainnet, this is not recommended
-    </div>
-    <div id="instructions-section">
-      <div id="empty-space"></div>
-      <div id="container"></div>
-      <div id="action-bar">
+    <div class="column">
+      <div id="main-content" class="row grow">
+        <div id="instructions-section" class="grow">
+          <div id="empty-space"></div>
+          <div id="container"></div>
+        </div>
+        <div class="dont-grow device">
+          <div id="frame">
+            <div id="frame-content">
+              <iframe width="300" height="600" id="device-frame"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="action-bar" class="row dont-grow">
         <button id="config-button" class="bar-button">Config</button>
         <div id="action-text"></div>
         <button id="action-button" class="bar-button">Continue</button>
-      </div>
-      <div id="config-panel">
-        <div id="close-button">X</div>
-        <div>Config</div>
-        <form id="config-form"></form>
-      </div>
-    </div>
-    <div id="device-section">
-      <div id="frame">
-        <div id="frame-content">
-          <iframe width="300" height="600" id="device-frame"></iframe>
+        <div id="config-panel">
+          <div id="close-button">X</div>
+          <div>Config</div>
+          <form id="config-form"></form>
         </div>
       </div>
+    </div>
+    <div id="mainnet-disclaimer">
+      You are operating on mainnet, this is not recommended
     </div>
     <script src="main.js"></script>
   </body>

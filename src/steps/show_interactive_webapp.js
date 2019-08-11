@@ -5,13 +5,16 @@ module.exports = {
   instruction:
     "To collect the interactive information we launch the interactive URL in a frame or webview, and await payment details from a postMessage callback",
   action: "Launch interactive portion",
-  execute: async function(state, { response, instruction, setDevicePage }) {
+  execute: async function(
+    state,
+    { response, action, instruction, setDevicePage }
+  ) {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
       const urlBuilder = new URL(state.interactive_url);
       urlBuilder.searchParams.set("jwt", state.token);
       const url = urlBuilder.toString();
-      instruction(
+      action(
         `Launching interactive webapp at ${url} and watching for postMessage callback`
       );
       setDevicePage(url);

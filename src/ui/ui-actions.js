@@ -30,6 +30,8 @@ const addEntry = (message, className) => {
   container.appendChild(div);
   scrollToTop();
 };
+const action = message => addEntry(message, "action");
+const instruction = instruction => addEntry(instruction, "instruction");
 
 const logObject = (message, params, className = "informational") => {
   const div = document.createElement("div");
@@ -46,22 +48,20 @@ const logObject = (message, params, className = "informational") => {
     div.appendChild(body);
   }
   container.appendChild(div);
+  scrollToTop();
 };
 
-const addRequest = (message, params) => {
+const request = (message, params) => {
   logObject(message, params, "outgoing");
 };
 
-const addResponse = (message, params) => {
+const response = (message, params) => {
   logObject(message, params, "incoming");
 };
 
 const setAction = action => {
   actionText.textContent = action || "Continue";
 };
-
-const addAction = message => addEntry(message, "action");
-const addInstruction = instruction => addEntry(instruction, "instruction");
 
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
@@ -75,6 +75,11 @@ const setLoading = (loading, loadingMessage) => {
   }
 };
 
+/*
+ * Assertions to ensure things are going correctly,
+ * and to bail early if not.  Currently just shows
+ * an error, but we can make it actually stop the flow.
+ */
 const expect = (expectation, message) => {
   if (!expectation) {
     error(message);
@@ -102,20 +107,21 @@ const error = message => {
   addEntry(message, "error");
 };
 
+const onNext = cb => actionButton.addEventListener("click", cb);
+
 module.exports = {
   setAction,
   expect,
-  instruction: addInstruction,
-  action: addAction,
-  response: addResponse,
-  request: addRequest,
+  instruction,
+  action,
+  response,
+  request,
+  error,
   logObject,
 
-  actionButton,
-  container,
-  actionText,
+  onNext,
   setLoading,
-  error,
+
   showConfig,
   setDevicePage,
   waitForPageContinue

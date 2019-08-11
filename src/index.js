@@ -88,4 +88,4 @@ const next = async () => {
   runStep(steps[0]);
 };
 next();
-uiActions.actionButton.addEventListener("click", next);
+uiActions.onNext(next);
