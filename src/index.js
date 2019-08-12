@@ -30,6 +30,10 @@ if (!Config.isValid()) {
  * @property {string} stellar_memo_type - Memo type for the stellar transaction to specify the anchor's transaction
  * @property {string} stellar_memo - Memo required for the specified stellar transaction
  * @property {string} external_transaction_id - The reference identifier needed to retrieve or confirm the withdrawal
+ *
+ * Deposit
+ * @property {string} deposit_memo - The memo we asked the anchor to send our funds with
+ * @property {string} deposit_type - The memo type we asked the anchor to send our funds with
  */
 
 /**
@@ -53,7 +57,8 @@ const depositSteps = [
   require("./steps/deposit/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
-  require("./steps/SEP10/send")
+  require("./steps/SEP10/send"),
+  require("./steps/deposit/get_deposit")
 ];
 
 let steps = null;
