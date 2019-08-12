@@ -3,7 +3,7 @@ Renderjson.set_show_to_level(1);
 
 const $ = id => document.getElementById(id);
 
-const container = $("container");
+const container = $("instructions-container");
 const actionText = $("action-text");
 const actionButton = $("action-button");
 const configButton = $("config-button");
