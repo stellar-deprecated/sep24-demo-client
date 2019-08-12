@@ -1,0 +1,63 @@
+body,
+html {
+  margin: 0;
+  font-family: inconsolata, sans-serif;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+}
+
+body {
+  display: grid;
+  grid-template-columns: auto 420px;
+  grid-template-rows: auto 60px;
+}
+
+#device {
+  display: flex;
+  align-content: center;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#instructions-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  grid-row: 1;
+  grid-column: 1;
+  justify-content: flex-end;
+}
+
+#instructions-container {
+  overflow: auto;
+  padding: 16px;
+}
+
+#action-bar {
+  flex-grow: 0;
+  padding: 8px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row: 2;
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  perspective: 1000;
+}
+
+#action-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+#action-text.loading {
+  opacity: 0.5;
+}
+
+.bar-button {
+  display: block;
+  flex-grow: 0;
+}

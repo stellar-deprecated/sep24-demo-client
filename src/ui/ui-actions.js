@@ -3,8 +3,7 @@ Renderjson.set_show_to_level(1);
 
 const $ = id => document.getElementById(id);
 
-const container = $("container");
-const actionText = $("action-text");
+const container = $("instructions-container");
 const actionButton = $("action-button");
 const configButton = $("config-button");
 const configPanel = $("config-panel");
@@ -26,37 +25,56 @@ const scrollToTop = () => (container.scrollTop = container.scrollHeight);
 const addEntry = (message, className) => {
   const div = document.createElement("div");
   div.textContent = message;
-  div.className = className;
+  div.className = className + " log-entry";
+  container.appendChild(div);
+  scrollToTop();
+};
+const action = message => addEntry(message, "action");
+const instruction = instruction => addEntry(instruction, "instruction");
+
+const logObject = (message, params, className = "informational") => {
+  const div = document.createElement("div");
+  div.className = `detail log-entry ${className}`;
+  const title = document.createElement("div");
+  title.className = "detail-title";
+  title.textContent = message;
+  div.appendChild(title);
+  if (params) {
+    const body = document.createElement("div");
+    body.className = "detail-body";
+
+    body.appendChild(Renderjson(params));
+    div.appendChild(body);
+  }
   container.appendChild(div);
   scrollToTop();
 };
 
-const setAction = action => {
-  actionText.textContent = action || "Continue";
+const request = (message, params) => {
+  logObject(message, params, "outgoing");
 };
 
-const addInstruction = instruction => addEntry(instruction, "instruction");
-const addLog = message => {
-  if (typeof message === "object") {
-    container.appendChild(Renderjson(message));
-    scrollToTop();
-    return;
-  }
-  addEntry(message, "log");
+const response = (message, params) => {
+  logObject(message, params, "incoming");
 };
 
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
     actionButton.textContent = loadingMessage || "Waiting...";
     actionButton.disabled = true;
-    actionText.classList.add("loading");
+    actionButton.classList.add("loading");
   } else {
-    actionButton.textContent = "Continue";
+    actionButton.textContent = loadingMessage || "Continue";
     actionButton.disabled = false;
-    actionText.classList.remove("loading");
+    actionButton.classList.remove("loading");
   }
 };
 
+/*
+ * Assertions to ensure things are going correctly,
+ * and to bail early if not.  Currently just shows
+ * an error, but we can make it actually stop the flow.
+ */
 const expect = (expectation, message) => {
   if (!expectation) {
     error(message);
@@ -84,17 +102,20 @@ const error = message => {
   addEntry(message, "error");
 };
 
+const onNext = cb => actionButton.addEventListener("click", cb);
+
 module.exports = {
-  addEntry,
-  setAction,
   expect,
-  instruction: addInstruction,
-  log: addLog,
-  actionButton,
-  container,
-  actionText,
-  setLoading,
+  instruction,
+  action,
+  response,
+  request,
   error,
+  logObject,
+
+  onNext,
+  setLoading,
+
   showConfig,
   setDevicePage,
   waitForPageContinue

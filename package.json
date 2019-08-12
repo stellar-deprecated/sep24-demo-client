@@ -8,8 +8,11 @@
     "build": "webpack && cp index.html dist/ && cp -r pages dist/"
   },
   "devDependencies": {
-    "css-loader": "^3.1.0",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
     "style-loader": "^0.23.1",
+    "svg-url-loader": "^3.0.0",
+    "url-loader": "^2.1.0",
     "webpack": "^4.37.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
