@@ -2,9 +2,9 @@
   border-radius: 200px;
   color: white;
   outline: transparent;
-  border: 2px solid #7d00ff;
+  border: 2px solid var(--purple);
   font-size: 16px;
-  background-color: #7d00ff;
+  background-color: var(--purple);
   padding: 12px 48px;
   background-image: url("../assets/next-arrow.svg");
   background-position: 16px center;
@@ -28,11 +28,11 @@
 }
 
 #config-button {
-  border: 2px solid #7d00ff;
+  border: 2px solid var(--purple);
   border-radius: 100px;
   height: 30px;
   background-color: white;
-  color: #7d00ff;
+  color: var(--purple);
 }
 
 @keyframes pulse {
