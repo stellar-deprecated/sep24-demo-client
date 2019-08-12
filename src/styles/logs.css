@@ -80,35 +80,3 @@
 .disclosure:first-child {
   display: none;
 }
-
-/* 
-.instruction {
-  color: #28b463;
-  margin-bottom: 8px;
-}
-
-.error {
-  color: red;
-  margin-bottom: 8px;
-  margin-left: 16px;
-}
-
-.instruction::before {
-  content: "> ";
-}
-
-.log {
-  margin-bottom: 8px;
-  margin-left: 16px;
-  font-size: 14px;
-  white-space: pre;
-}
-
-.renderjson {
-  margin-left: 16px;
-  margin-bottom: 8px;
-}
-
-.disclosure:first-child {
-  display: none;
-} */
