@@ -39,9 +39,9 @@ const state = {};
 
 const withdrawSteps = [
   require("./steps/check_info"),
-  require("./steps/start_sep10"),
-  require("./steps/sign_sep10"),
-  require("./steps/send_challenge_sep10"),
+  require("./steps/SEP10/start"),
+  require("./steps/SEP10/sign"),
+  require("./steps/SEP10/send"),
   require("./steps/get_withdraw_unauth"),
   require("./steps/show_interactive_webapp"),
   require("./steps/confirm_payment"),
@@ -49,7 +49,12 @@ const withdrawSteps = [
   require("./steps/poll_for_success")
 ];
 
-const depositSteps = [require("./steps/unimplemented")];
+const depositSteps = [
+  require("./steps/deposit/check_info"),
+  require("./steps/SEP10/start"),
+  require("./steps/SEP10/sign"),
+  require("./steps/SEP10/send")
+];
 
 let steps = null;
 

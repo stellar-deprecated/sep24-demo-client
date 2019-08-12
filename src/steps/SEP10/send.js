@@ -1,4 +1,4 @@
-const Config = require("../config");
+const Config = require("src/config");
 module.exports = {
   instruction:
     "We need to send the signed SEP10 challenge back to the server to get a JWT token to authenticate our stellar account with future actions",

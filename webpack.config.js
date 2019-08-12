@@ -9,6 +9,11 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist")
   },
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, "src")
+    }
+  },
   plugins: [],
   module: {
     rules: [

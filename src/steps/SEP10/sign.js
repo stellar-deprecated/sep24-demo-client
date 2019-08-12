@@ -1,4 +1,4 @@
-const Config = require("../config");
+const Config = require("src/config");
 const StellarSdk = require("stellar-sdk");
 
 module.exports = {
