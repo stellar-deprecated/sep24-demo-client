@@ -25,7 +25,11 @@ module.exports = {
       {
         test: /\.(svg)$/,
         use: [{ loader: "svg-url-loader" }]
-      }
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot)$/,
+        use: 'file-loader?name=fonts/[name].[ext]!static'
+       }
     ]
   }
 };
