@@ -1,3 +1,4 @@
+@import "./styles/device.css";
 @import "./styles/logs.css";
 @import "./styles/layout.css";
 
@@ -13,47 +14,8 @@
   display: block;
 }
 
-#frame {
-  width: 300px;
-  height: 600px;
-  border-width: 26px 10px;
-  background: black;
-  border-style: solid;
-  border-color: black;
-  border-radius: 20px;
-  margin: auto;
-}
-
-#frame-content {
-  border-width: 20px 10px;
-  border-radius: 10px;
-  background: white;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 #empty-space {
   flex-grow: 1;
-}
-
-#action-bar {
-  flex-grow: 0;
-  padding: 8px;
-
-  border-top: 2px solid black;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-#action-text {
-  flex-grow: 1;
-  text-align: center;
-}
-
-#action-text.loading {
-  opacity: 0.5;
 }
 
 .bar-button {

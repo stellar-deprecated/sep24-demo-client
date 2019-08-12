@@ -1,0 +1,71 @@
+body,
+html {
+  margin: 0;
+  font-family: inconsolata, sans-serif;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.grow {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.fixed-size {
+  flex-grow: 0;
+  flex-basis: 0;
+}
+
+.device {
+  width: 420px;
+  flex-basis: 420px;
+  display: flex;
+  align-content: center;
+}
+
+#main-content {
+  overflow: hidden;
+}
+
+#instructions-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+#action-bar {
+  flex-grow: 0;
+  padding: 8px;
+
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#action-text {
+  flex-grow: 1;
+  text-align: center;
+}
+
+#action-text.loading {
+  opacity: 0.5;
+}
