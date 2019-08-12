@@ -1,5 +1,8 @@
 import "./style.css";
 import * as uiActions from "./ui/ui-actions";
+
+// require("./ui/show-all-types")(uiActions);
+
 const Config = require("./config");
 const StellarSdk = require("stellar-sdk");
 
@@ -77,13 +80,11 @@ uiActions.waitForPageMessage("pages/wallet.html").then(message => {
 let currentStep = null;
 const runStep = step => {
   if (!step) {
-    uiActions.setAction("Finished");
     uiActions.setLoading(true, "Finished");
     return;
   }
   uiActions.setDevicePage(step.devicePage || "pages/loader.html");
   uiActions.instruction(step.instruction);
-  uiActions.setAction(step.action);
   currentStep = step;
   if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
 };
@@ -104,9 +105,10 @@ const next = async () => {
       throw e;
     }
 
-    uiActions.setLoading(false);
+    uiActions.setLoading(false, steps[0].action);
   }
   runStep(steps[0]);
 };
 
-uiActions.actionButton.addEventListener("click", next);
+next();
+uiActions.onNext(next);

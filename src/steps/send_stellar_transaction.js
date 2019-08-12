@@ -5,12 +5,11 @@ module.exports = {
   instruction:
     "Now that the anchor is expecting payment to a stellar address, we need to make that payment",
   action: "Send the stellar payment",
-  execute: async function(state, { log, instruction }) {
+  execute: async function(state, { request }) {
     const USER_SK = Config.get("USER_SK");
     const HORIZON_URI = Config.get("HORIZON_URI");
     const pk = StellarSdk.Keypair.fromSecret(USER_SK).publicKey();
-    instruction("Sending the payment using the following anchor account info");
-    log({
+    request("Sending the payment using the following anchor account info", {
       address: state.anchors_stellar_address,
       memo: state.stellar_memo,
       memo_type: state.stellar_memo_type
