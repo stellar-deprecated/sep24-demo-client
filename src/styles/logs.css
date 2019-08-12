@@ -1,37 +1,30 @@
 .log-entry {
-  margin-bottom: 8px;
+  font-size: 0.865rem;
+  color: var(--black-70);
+  margin-bottom: 15px;
+  padding: 7px;
+  padding-left: 45px;
   background-repeat: no-repeat;
-  background-position: 24px center;
-  background-size: 24px;
+  background-color: white;
+  background-position: 16px center;
+  background-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
   overflow: hidden;
 }
 
 .instruction {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: white;
   border-radius: 8px;
-  font-size: 16px;
   background-image: url("../assets/message.svg");
 }
 
 .action {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: white;
   color: #702bf5;
   border-radius: 32px;
-  font-size: 16px;
   background-image: url("../assets/triangle.svg");
 }
 
 .error {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: red;
-  color: white;
   border-radius: 8px;
-  font-size: 16px;
 }
 
 .detail {
