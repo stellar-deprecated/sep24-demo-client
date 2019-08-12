@@ -58,7 +58,8 @@ const depositSteps = [
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
-  require("./steps/deposit/get_deposit")
+  require("./steps/deposit/get_deposit"),
+  require("./steps/show_interactive_webapp")
 ];
 
 let steps = null;
