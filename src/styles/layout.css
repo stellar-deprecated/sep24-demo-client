@@ -30,22 +30,22 @@ body {
   justify-content: flex-end;
 }
 
-#instructions-container {
+.instructions-container {
   overflow: auto;
-  padding: 16px;
+  padding: 0 30px;
 }
 
-#action-bar {
+.action-bar {
   flex-grow: 0;
   padding: 8px;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 2;
-  border-top: 2px solid black;
+  border-top: 1px solid var(--black-20);
+  background-color: white;
   display: flex;
   flex-direction: row;
   align-items: center;
-  perspective: 1000;
 }
 
 #action-text {
