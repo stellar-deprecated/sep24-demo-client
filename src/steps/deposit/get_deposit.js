@@ -7,7 +7,7 @@ module.exports = {
   instruction:
     "In order to find out whether we need to enter the interactive or non-interactive flow, check the /deposit endpoint",
   action: "GET /deposit (SEP-0006)",
-  execute: async function(state, { log, instruction, expect }) {
+  execute: async function(state, { request, response, instruction, expect }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
@@ -26,12 +26,10 @@ module.exports = {
       memo: state.deposit_memo,
       memo_type: state.deposit_memo_type
     };
-    log("GET /deposit with params");
-    log(params);
+    request("GET /deposit", params);
     // Expect this to fail with 403
     const result = await get(`${BRIDGE_URL}/deposit`, params);
-    log("GET /deposit response");
-    log(result);
+    response("GET /deposit", result);
     expect(
       result.type === "interactive_customer_info_needed",
       `Expected interactive customer needed, received ${result.type}`

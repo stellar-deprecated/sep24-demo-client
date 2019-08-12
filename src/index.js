@@ -110,5 +110,4 @@ const next = async () => {
   runStep(steps[0]);
 };
 
-next();
 uiActions.onNext(next);
