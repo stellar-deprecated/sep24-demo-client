@@ -4,7 +4,6 @@ Renderjson.set_show_to_level(1);
 const $ = id => document.getElementById(id);
 
 const container = $("instructions-container");
-const actionText = $("action-text");
 const actionButton = $("action-button");
 const configButton = $("config-button");
 const configPanel = $("config-panel");
@@ -59,19 +58,15 @@ const response = (message, params) => {
   logObject(message, params, "incoming");
 };
 
-const setAction = action => {
-  actionText.textContent = action || "Continue";
-};
-
 const setLoading = (loading, loadingMessage) => {
   if (loading) {
     actionButton.textContent = loadingMessage || "Waiting...";
     actionButton.disabled = true;
-    actionText.classList.add("loading");
+    actionButton.classList.add("loading");
   } else {
-    actionButton.textContent = "Continue";
+    actionButton.textContent = loadingMessage || "Continue";
     actionButton.disabled = false;
-    actionText.classList.remove("loading");
+    actionButton.classList.remove("loading");
   }
 };
 
@@ -110,7 +105,6 @@ const error = message => {
 const onNext = cb => actionButton.addEventListener("click", cb);
 
 module.exports = {
-  setAction,
   expect,
   instruction,
   action,

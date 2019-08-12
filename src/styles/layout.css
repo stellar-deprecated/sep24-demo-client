@@ -55,3 +55,8 @@ body {
 #action-text.loading {
   opacity: 0.5;
 }
+
+.bar-button {
+  display: block;
+  flex-grow: 0;
+}

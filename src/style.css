@@ -1,3 +1,4 @@
+@import "./styles/buttons.css";
 @import "./styles/config-panel.css";
 @import "./styles/device.css";
 @import "./styles/logs.css";
@@ -13,14 +14,6 @@
 
 #mainnet-disclaimer.visible {
   display: block;
-}
-
-.bar-button {
-  display: block;
-  flex-grow: 0;
-  border-radius: 8px;
-
-  padding: 8px;
 }
 
 iframe {

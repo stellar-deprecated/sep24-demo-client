@@ -56,13 +56,11 @@ const steps = [
 let currentStep = null;
 const runStep = step => {
   if (!step) {
-    uiActions.setAction("Finished");
     uiActions.setLoading(true, "Finished");
     return;
   }
   uiActions.setDevicePage(step.devicePage || "pages/loader.html");
   uiActions.instruction(step.instruction);
-  uiActions.setAction(step.action);
   currentStep = step;
   if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
 };
@@ -83,7 +81,7 @@ const next = async () => {
       throw e;
     }
 
-    uiActions.setLoading(false);
+    uiActions.setLoading(false, steps[0].action);
   }
   runStep(steps[0]);
 };
