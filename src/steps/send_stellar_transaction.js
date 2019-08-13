@@ -1,5 +1,6 @@
 const StellarSdk = require("stellar-sdk");
 const Config = require("../config");
+const get = require("../util/get");
 
 module.exports = {
   instruction:
@@ -16,8 +17,7 @@ module.exports = {
     });
     const server = new StellarSdk.Server(HORIZON_URI);
     const account = await server.loadAccount(pk);
-    const fee = await server.fetchBaseFee();
-
+    const feeStats = await get(`${HORIZON_URI}/fee_stats`);
     let memo;
     try {
       const memoType = {
@@ -35,7 +35,9 @@ module.exports = {
       );
     }
 
-    const transaction = new StellarSdk.TransactionBuilder(account, { fee })
+    const transaction = new StellarSdk.TransactionBuilder(account, {
+      fee: feeStats.p70_accepted_fee
+    })
       .addOperation(
         StellarSdk.Operation.payment({
           destination: state.anchors_stellar_address,
