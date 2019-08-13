@@ -1,6 +1,26 @@
 const StellarSdk = require("stellar-sdk");
 const Config = require("../config");
 
+const generateMemo = (stellar_memo, stellar_memo_type) => {
+  let memo = null;
+  switch (stellar_memo_type) {
+    case "text":
+      memo = StellarSdk.Memo.text(stellar_memo);
+      break;
+    case "hash":
+      let memoBuffer = Buffer.alloc(32);
+      let anchorMemoBuffer = Buffer.from(stellar_memo);
+      // Sometimes the memo returned is smaller than 32 bytes so we need to pad to exactly 32
+      anchorMemoBuffer.copy(memoBuffer, 0, 0, 32);
+      memo = StellarSdk.Memo.hash(anchorMemoBuffer);
+      break;
+    case "id":
+      memo = StellarSdk.Memo.id(stellar_memo);
+      break;
+  }
+  return memo;
+};
+
 module.exports = {
   instruction:
     "Now that the anchor is expecting payment to a stellar address, we need to make that payment",
@@ -17,10 +37,19 @@ module.exports = {
     const server = new StellarSdk.Server(HORIZON_URI);
     const account = await server.loadAccount(pk);
     const fee = await server.fetchBaseFee();
-    let memoBuffer = Buffer.alloc(32);
-    let anchorMemoBuffer = Buffer.from(state.stellar_memo);
-    // Sometimes the memo returned is only 31 bytes so we need to pad to exactly 32
-    anchorMemoBuffer.copy(memoBuffer, 0, 0, 32);
+
+    let memo;
+    try {
+      memo = generateMemo(state.stellar_memo, state.stellar_memo_type);
+    } catch (e) {
+      expect(
+        false,
+        `The memo '${state.stellar_memo} could not be encoded to type ${
+          state.stellar_memo_type
+        }`
+      );
+    }
+
     const transaction = new StellarSdk.TransactionBuilder(account, { fee })
       .addOperation(
         StellarSdk.Operation.payment({
@@ -29,10 +58,10 @@ module.exports = {
           amount: "100" // TODO send amount through
         })
       )
-      .addMemo(StellarSdk.Memo.hash(anchorMemoBuffer))
+      .addMemo(memo)
       .setTimeout(30)
       .build();
     transaction.sign(StellarSdk.Keypair.fromSecret(USER_SK));
-    const result = await server.submitTransaction(transaction);
+    await server.submitTransaction(transaction);
   }
 };
