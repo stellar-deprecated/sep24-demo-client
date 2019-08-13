@@ -11,7 +11,7 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const BRIDGE_URL = Config.get("BRIDGE_URL");
-    const withdrawType = "cash";
+    const withdrawType = "bank_account";
     const params = {
       type: withdrawType,
       asset_code: ASSET_CODE,
