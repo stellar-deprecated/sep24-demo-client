@@ -2,8 +2,7 @@
   font-size: 0.865rem;
   color: var(--black-70);
   margin-bottom: 15px;
-  padding: 7px;
-  padding-left: 45px;
+  padding: 7px 20px 7px 45px;
   background-repeat: no-repeat;
   background-color: white;
   background-position: 16px center;
@@ -13,17 +12,20 @@
 }
 
 .instruction {
+  display: inline-block;
   border-radius: 4px;
   background-image: url("../assets/message.svg");
 }
 
 .action {
+  display: inline-block;
   color: #702bf5;
   border-radius: 32px;
   background-image: url("../assets/triangle.svg");
 }
 
 .error {
+  display: inline-block;
   border-radius: 4px;
 }
 
