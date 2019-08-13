@@ -1,5 +1,5 @@
 #config-panel {
-  position: fixed;
+  /* position: fixed;
   bottom: 32px;
   right: 32px;
   padding: 8px;
@@ -9,11 +9,11 @@
   border: 1px solid black;
   box-shadow: 2px 2px 0px black;
   display: none;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 }
 
 #config-panel.visible {
-  display: block;
+  /* display: block; */
 }
 
 .config-group {

@@ -5,7 +5,7 @@
   border: 9px solid var(--black-90);
   background: white;
   border-style: solid;
-  border-radius: 50px;
+  border-radius: 59px;
   margin: auto;
   position: relative;
 }
@@ -31,7 +31,7 @@
 
 #frame-content {
   box-sizing: border-box;
-  border-radius: 41px;
+  border-radius: 50px;
   overflow: hidden;
   background: white;
   width: 100%;
