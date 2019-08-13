@@ -5,15 +5,32 @@
     <style></style>
   </head>
   <body>
-    <h1>Stellar Wallet</h1>
-    <h2>Confirm Payment</h2>
-    <h3>
-      Send 100 USD @ Anchor to Anchor's address
-      GDWQ4IXCKRJ4GXD4C433DN52H4SRVMD6C6BJ4AOCKS322FB7BU5WEN4F
-    </h3>
-    <div>
-      <button data-continue-button="true" class="active">Confirm</button
-      ><button>Cancel</button>
+
+    <div class="header">
+      <h1 class="header__title">Confirm Payment</h1>
+    </div>
+    <div class="container">
+      <h2 class="card-title">You are sending:</h2>
+      <div class="card sending-value-card">
+        <div class="sending-value">100.00</div>
+        <div class="sending-token-info">USD @ Anchor Name</div>
+      </div>
+
+      <h2 class="card-title">Sending to anchor's address:</h2>
+      <div class="card sending-address-card">
+        <div class="sending-key">GDWQ...WEN4F</div>
+        <div class="sending-anchor-domain">
+          <p>anchorname.com</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container send-confirmation-buttons">
+      <button 
+        data-continue-button="true"
+        class="active button"
+      >Confirm</button>
+      <button class="button button--outline" disabled>Cancel</button>
     </div>
   </body>
   <script src="/wallet.js"></script>
