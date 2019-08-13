@@ -15,7 +15,8 @@ module.exports = {
     const params = {
       type: withdrawType,
       asset_code: ASSET_CODE,
-      account: pk
+      account: pk,
+      jwt: state.token
     };
     request("GET /withdraw", params);
     // Expect this to fail with 403

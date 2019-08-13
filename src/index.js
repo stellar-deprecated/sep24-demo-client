@@ -46,7 +46,7 @@ const steps = [
   require("./steps/start_sep10"),
   require("./steps/sign_sep10"),
   require("./steps/send_challenge_sep10"),
-  require("./steps/get_withdraw_unauth"),
+  require("./steps/get_withdraw"),
   require("./steps/show_interactive_webapp"),
   require("./steps/confirm_payment"),
   require("./steps/send_stellar_transaction"),
