@@ -1,10 +1,66 @@
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src:
+    url("../src/assets/fonts/suisseintl-regular-webfont.woff") format("woff"),
+    url("../src/assets/fonts/suisseintl-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src:
+    url("./assets/fonts/suisseintl-regularitalic-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-regularitalic-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse-mono;
+  src:
+    url("./assets/fonts/suisseintlmono-regular-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintlmono-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src:
+    url("./assets/fonts/suisseintl-semibold-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-semibold-webfont.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src:
+    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff2") format("woff2");
+  font-weight: 500;
+}
+
 html,
 body {
-  background: #e8dbff;
-  font-family: Montserrat;
+  font-family: suisse, sans-serif;
+  background: white;
   height: 100%;
 }
 
+.header {
+  padding: 50px 50px;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--black-100);
+}
+
+
+
+/* 
 .currency-group {
   margin-bottom: 20px;
 }
@@ -23,4 +79,4 @@ button {
 button.active {
   opacity: 1;
   cursor: pointer;
-}
+} */

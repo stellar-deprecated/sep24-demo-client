@@ -19,17 +19,17 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(png|jpeg|ttf)$/,
-        use: [{ loader: "file-loader" }]
+        test: /\.(png|jpeg|ttf|woff|woff2)$/,
+        use: [{ 
+          loader: "file-loader",
+          options: {
+            publicPath: '../' 
+        } }]
       },
       {
         test: /\.(svg)$/,
         use: [{ loader: "svg-url-loader" }]
-      },
-      {
-        test: /\.(woff|woff2|ttf|eot)$/,
-        use: 'file-loader?name=fonts/[name].[ext]!static'
-       }
+      }
     ]
   }
 };
