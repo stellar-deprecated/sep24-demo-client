@@ -5,66 +5,55 @@
   </head>
   <body>
     <div class="header">
-      <div class="header__hamburger"></div>
+      <div class="header__icon">
+        <div class="hamburger-icon"></div>
+      </div>
       <h1 class="header__title">Stellar Wallet</h1>
     </div>
-    <div class="tabs">
-      <div class="tabs__item">
-        XLM
-      </div>
-      <div class="tabs__item is-selected">
-        USD
-      </div>
-      <div class="tabs__item">
-        EUR
-      </div>
-      <div class="tabs__item">
-        BTC
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>
-        Available Balance
-      </h2>
-      <div class="balance">
-        <div class="balance__value">400</div>
-        <div class="balance__decimals">.00</div>
-        <div class="balance__info">.00</div>
-      </div>
-    </div>
-
-    <div class="actions">
-      <div class="grid__one-half">
-          <button class="button button--outline">Send</button>
-      </div>
-      <div class="grid__one-half">
-          <button class="button button--outline">Receive</button>
-      </div>
-      <button 
-        data-continue-button="true"
-        class="button"
-        id="withdraw-button"
-      >Withdraw Cash</button>
-    </div>
-    
-<!--     
-    <div>
-      <div class="currency-group">
-        <div class="currency-balance">250 USD @ Anchor</div>
-        <div class="buttons">
-          <button>Send</button>
-          <button>Receive</button>
-          <button
-            class="active"
-            data-continue-button="true"
-            id="withdraw-button"
-          >
-            Withdraw Cash
-          </button>
+    <div class="container">
+      <div class="tabs">
+        <div class="tabs__item">
+          XLM
+        </div>
+        <div class="tabs__item is-selected">
+          USD
+        </div>
+        <div class="tabs__item">
+          EUR
+        </div>
+        <div class="tabs__item">
+          BTC
         </div>
       </div>
-    </div> -->
+    </div>
+
+    <div class="container">
+      <div class="card card--balance">
+        <h2>
+          Available Balance
+        </h2>
+        <div class="balance">
+          <div class="balance__value">400</div>
+          <div class="balance__decimals">.00</div>
+          <div class="balance__info">USD @ Anchor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="actions">
+        <div class="actions__secondary">
+            <button class="button button--outline" disabled>Send</button>
+            <button class="button button--outline" disabled>Receive</button>
+        </div>
+        <button 
+          data-continue-button="true"
+          class="button"
+          id="withdraw-button"
+        >Withdraw Cash</button>
+      </div>
+    </div>
+    
     <script src="/wallet.js"></script>
   </body>
 </html>
