@@ -1,4 +1,6 @@
 .log-entry {
+  overflow-wrap: break-word;
+  max-width: 100%;
   font-size: 0.865rem;
   color: var(--black-70);
   margin-bottom: 15px;
@@ -8,34 +10,30 @@
   background-position: 16px center;
   background-size: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-  overflow: hidden;
 }
 
 .instruction {
-  display: inline-block;
   border-radius: 4px;
   background-image: url("../assets/message.svg");
 }
 
 .action {
-  display: inline-block;
   color: #702bf5;
   border-radius: 32px;
   background-image: url("../assets/triangle.svg");
 }
 
 .error {
-  display: inline-block;
   border-radius: 4px;
 }
 
 .detail {
+  align-self: stretch;
   background-color: #4d556d;
   padding: 0;
   border-radius: 4px;
   overflow: hidden;
-  margin-left: 32px;
-  margin-right: 32px;
+  margin-left: 20px;
   color: white;
 }
 
