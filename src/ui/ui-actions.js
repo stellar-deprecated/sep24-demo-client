@@ -3,6 +3,7 @@ Renderjson.set_show_to_level(1);
 
 const $ = id => document.getElementById(id);
 
+const section = $("instructions-section");
 const container = $("instructions-container");
 const actionButton = $("action-button");
 const configButton = $("config-button");
@@ -20,7 +21,7 @@ const showConfig = () => {
   configPanel.classList.add("visible");
 };
 
-const scrollToTop = () => (container.scrollTop = container.scrollHeight);
+const scrollToTop = () => (section.scrollTop = section.scrollHeight);
 
 const addEntry = (message, className) => {
   const div = document.createElement("div");

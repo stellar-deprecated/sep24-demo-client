@@ -2,7 +2,7 @@
   border-radius: 200px;
   color: white;
   outline: transparent;
-  border: 2px solid var(--purple);
+  border: none;
   font-size: 16px;
   background-color: var(--purple);
   padding: 12px 48px;
@@ -22,9 +22,7 @@
 }
 
 #action-button.loading {
-  background: white;
-  border: 2px solid gray;
-  color: gray;
+  background: var(--muted-purple);
 }
 
 #config-button {
