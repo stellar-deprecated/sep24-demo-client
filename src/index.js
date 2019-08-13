@@ -1,7 +1,7 @@
 import "./style.css";
 import * as uiActions from "./ui/ui-actions";
 
-require("./ui/show-all-types")(uiActions);
+// require("./ui/show-all-types")(uiActions);
 
 const Config = require("./config");
 const StellarSdk = require("stellar-sdk");
