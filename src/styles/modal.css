@@ -27,9 +27,8 @@
 .modal__window {
     position: relative;
     padding: 35px 50px;
-    min-width: 400px;
-    background: var(--black-5);
-    border: #333 solid 1px;
+    min-width: 550px;
+    background: var(--light-yellow);
     border-radius: 5px;
     position: fixed;
     z-index: 11;
@@ -48,6 +47,6 @@
 }
 
 .modal__body {
-    padding-top: 15px;
+    padding-top: 35px;
 }
 

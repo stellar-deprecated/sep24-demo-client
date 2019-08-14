@@ -1,10 +1,40 @@
 .form-group {
+    margin-bottom: 20px;
+}
+
+.form-group--checkbox {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.form-group--checkbox label {
+    cursor: pointer;
 }
 
 label {
-
+    font-size: 0.875rem;
+    color: var(--black-90);
 }
 
 input[type="text"] {
+    font-family: suisse-mono, suisse, sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: -0.05rem;
+    color: var(--black-70);
+    border: 1px solid var(--black-20);
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 10px 10px;
+    margin-top: 4px;
+}
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+
+::placeholder {
+    color: var(--black-50);
 }
