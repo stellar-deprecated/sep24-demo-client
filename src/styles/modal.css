@@ -11,6 +11,7 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s ease-out;
+  z-index: 10;
 }
 
 .modal.visible {
@@ -33,7 +34,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 10;
 }
 
 .modal__window {
