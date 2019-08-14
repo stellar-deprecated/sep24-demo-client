@@ -49,11 +49,11 @@ const withdrawSteps = [
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
-  require("./steps/get_withdraw_unauth"),
+  require("./steps/get_withdraw"),
   require("./steps/show_interactive_webapp"),
   require("./steps/confirm_payment"),
   require("./steps/send_stellar_transaction"),
-  require("./steps/poll_for_success")
+  require("./steps/poll_for_success"),
 ];
 
 const depositSteps = [
@@ -62,12 +62,12 @@ const depositSteps = [
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
-  require("./steps/show_interactive_webapp")
+  require("./steps/show_interactive_webapp"),
 ];
 
 let steps = null;
 
-uiActions.waitForPageMessage("pages/wallet.html").then(message => {
+uiActions.waitForPageMessage("pages/wallet.html").then((message) => {
   if (message === "start-withdraw") {
     steps = withdrawSteps;
     next();
@@ -78,7 +78,7 @@ uiActions.waitForPageMessage("pages/wallet.html").then(message => {
 });
 
 let currentStep = null;
-const runStep = step => {
+const runStep = (step) => {
   if (!step) {
     uiActions.setLoading(true, "Finished");
     return;
@@ -96,7 +96,7 @@ const next = async () => {
       await Promise.all([
         currentStep.execute(state, uiActions),
         // Take at least a second for each step otherwise its overwhelming
-        new Promise(resolve => setTimeout(resolve, 1000))
+        new Promise((resolve) => setTimeout(resolve, 1000)),
       ]);
       steps.splice(0, 1);
     } catch (e) {

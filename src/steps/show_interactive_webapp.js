@@ -7,7 +7,7 @@ module.exports = {
   action: "Launch interactive portion",
   execute: async function(
     state,
-    { response, action, instruction, setDevicePage }
+    { response, action, instruction, setDevicePage },
   ) {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
@@ -15,7 +15,7 @@ module.exports = {
       urlBuilder.searchParams.set("jwt", state.token);
       const url = urlBuilder.toString();
       action(
-        `Launching interactive webapp at ${url} and watching for postMessage callback`
+        `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
       setDevicePage(url);
       window.addEventListener(
@@ -38,8 +38,8 @@ module.exports = {
             resolve();
           }
         },
-        false
+        false,
       );
     });
-  }
+  },
 };

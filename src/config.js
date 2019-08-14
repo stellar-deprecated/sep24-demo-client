@@ -3,7 +3,7 @@ let fields = [
   {
     key: "AUTH_SERVER_URL",
     label: "URL to the WEB_AUTH_ENDPOINT",
-    value: null
+    value: null,
   },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URI", label: "URL of the horizon server", value: null },
@@ -12,18 +12,18 @@ let fields = [
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
     value: false,
-    type: "checkbox"
+    type: "checkbox",
   },
   {
     key: "MAINNET",
     label: "Operate on Mainnet instead of Testnet (NOT RECOMMENDED)",
     value: false,
-    type: "checkbox"
-  }
+    type: "checkbox",
+  },
 ];
 
 const save = () => {
-  fields.forEach(field => {
+  fields.forEach((field) => {
     localStorage.setItem(field.key, JSON.stringify(field.value));
   });
 };
@@ -32,13 +32,13 @@ const load = () => {
   const hashFields = window.location.hash
     .substring(1)
     .split("&")
-    .map(entry => entry.split("="))
+    .map((entry) => entry.split("="))
     .reduce((obj, val) => {
       obj[val[0]] = val[1];
       return obj;
     }, {});
 
-  fields.forEach(field => {
+  fields.forEach((field) => {
     let hashValue = hashFields[field.key];
     if (hashValue) hashValue = JSON.parse(decodeURI(hashValue));
     // Prefer query param but fall back to local storage
@@ -54,19 +54,19 @@ const callbacks = [];
 /*
  * Add a listener to be called back whenever the config changes.
  */
-const listen = callback => {
+const listen = (callback) => {
   callbacks.push(callback);
 };
 
 const update = () => {
   window.location.hash = fields
-    .map(field => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
+    .map((field) => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
     .join("&");
-  callbacks.forEach(f => f());
+  callbacks.forEach((f) => f());
 };
 
-const fieldChangeListener = field => {
-  return e => {
+const fieldChangeListener = (field) => {
+  return (e) => {
     if (field.type === "checkbox") {
       field.value = e.target.checked;
     } else {
@@ -77,14 +77,14 @@ const fieldChangeListener = field => {
   };
 };
 
-const installUI = el => {
+const installUI = (el) => {
   load();
 
-  fields.forEach(field => {
+  fields.forEach((field) => {
     const container = document.createElement("div");
-    container.className = "config-group";
+    container.className = "form-group form-group--" + (field.type || "text");
     const label = document.createElement("label");
-    label.for = `config-field-${field.key}`;
+    label.setAttribute("for", `config-field-${field.key}`);
     label.textContent = field.label;
 
     const input = document.createElement("input");
@@ -105,8 +105,8 @@ const installUI = el => {
   update();
 };
 
-const get = key => {
-  const field = fields.find(f => f.key === key);
+const get = (key) => {
+  const field = fields.find((f) => f.key === key);
   if (!field || !(field.value || field.type == "checkbox")) {
     throw "Missing required config for " + key;
   }
@@ -115,7 +115,7 @@ const get = key => {
 };
 
 const isValid = () => {
-  return fields.every(f => !!f.value || f.type === "checkbox");
+  return fields.every((f) => !!f.value || f.type === "checkbox");
 };
 
 module.exports = {
@@ -123,5 +123,5 @@ module.exports = {
   get,
   isValid,
   fields,
-  listen
+  listen,
 };

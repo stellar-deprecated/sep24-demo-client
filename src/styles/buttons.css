@@ -2,7 +2,7 @@
   border-radius: 200px;
   color: white;
   outline: transparent;
-  border: 2px solid var(--purple);
+  border: none;
   font-size: 16px;
   background-color: var(--purple);
   padding: 12px 48px;
@@ -22,9 +22,7 @@
 }
 
 #action-button.loading {
-  background: white;
-  border: 2px solid gray;
-  color: gray;
+  background: var(--muted-purple);
 }
 
 #config-button {
@@ -48,4 +46,35 @@
     transform: scale(0.9);
     box-shadow: 0 0 0 0px rgba(125, 0, 255, 0);
   }
+}
+
+.button {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 1.125rem;
+  background-color: var(--purple);
+  color: white;
+  border-radius: 100px;
+  padding: 14px 40px 12px 40px;
+  transition: all 0.2s ease-out;
+}
+
+.button:hover {
+  background: var(--bright-purple);
+}
+
+.button--ghost {
+  background-color: transparent;
+  color: var(--black-70);
+  border: 2px solid var(--black-20);
+}
+
+.button--ghost:hover {
+  color: var(--black-90);
+  background-color: transparent;
+  border-color: var(--black-70);
 }

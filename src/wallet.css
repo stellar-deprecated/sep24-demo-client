@@ -1,26 +1,272 @@
+@import "./styles/colors.css";
+
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src: url("../src/assets/fonts/suisseintl-regular-webfont.woff") format("woff"),
+    url("../src/assets/fonts/suisseintl-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src: url("./assets/fonts/suisseintl-regularitalic-webfont.woff")
+      format("woff"),
+    url("./assets/fonts/suisseintl-regularitalic-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse-mono;
+  src: url("./assets/fonts/suisseintlmono-regular-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintlmono-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src: url("./assets/fonts/suisseintl-semibold-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-semibold-webfont.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src: url("./assets/fonts/suisseintl-semibolditalic-webfont.woff")
+      format("woff"),
+    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff2")
+      format("woff2");
+  font-weight: 500;
+}
+
 html,
 body {
-  background: #e8dbff;
-  font-family: Montserrat;
+  font-family: suisse, sans-serif;
+  background: white;
   height: 100%;
+  margin: 0;
 }
 
-.currency-group {
-  margin-bottom: 20px;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
 }
 
-button {
-  border: 0;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px 16px;
-  margin: 8px 4px 8px 0;
-  border-radius: 8px;
-  border-bottom: 1px solid black;
-  outline: transparent;
+.container {
+  padding: 0px 20px;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--black-100);
+  margin: 0;
+}
+
+h2 {
+  color: var(--black-50);
+  text-transform: uppercase;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Header */
+
+.header {
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header__icon {
+  position: relative;
+  width: 30px;
+  height: 18px;
+  padding-right: 20px;
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: var(--black-100);
+  border-radius: 9px;
+}
+
+.hamburger-icon::before {
+  top: 7px;
+}
+
+.hamburger-icon::after {
+  top: 14px;
+}
+
+/* Tabs */
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.tabs__item {
+  flex-grow: 1;
+  text-align: center;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-weight: 500;
+  color: var(--black-60);
+}
+
+.tabs__item.is-selected {
+  background-color: var(--purple);
+  color: white;
+}
+
+/* Card */
+
+.card {
+  background-color: var(--black-5);
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.card-title {
+  padding-left: 5px;
+  padding-bottom: 4px;
+}
+
+.card--balance {
+  padding: 30px 30px 25px 30px;
+  margin-bottom: 40px;
+}
+
+/* Balance */
+
+.balance__value {
+  padding-top: 5px;
+  font-size: 3.187rem;
+  color: var(--purple);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.balance__decimals {
+  font-size: 1.375rem;
+  color: var(--purple);
+  font-weight: 500;
+  display: inline-block;
+}
+
+.balance__token-info {
+  font-size: 1.3125rem;
+  color: var(--black-70);
+  font-weight: 500;
+}
+
+/* Buttons */
+
+.button {
+  border: none;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.0625rem;
+  background-color: var(--purple);
+  color: white;
+  width: 100%;
+  border-radius: 100px;
+  padding: 13px 20px;
+  transition: all 0.3s ease-out;
+}
+
+.button:disabled {
   opacity: 0.5;
 }
 
-button.active {
-  opacity: 1;
+.button:enabled {
   cursor: pointer;
+}
+
+.button:hover:enabled {
+  background: var(--bright-purple);
+  transform: scale(1.05);
+}
+
+.button--outline {
+  background-color: white;
+  color: var(--purple);
+  border: 2px solid var(--purple);
+  padding: 9px 16px;
+}
+
+.button--outline:disabled {
+  opacity: 0.3;
+}
+
+/* Wallet page */
+
+.actions__secondary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.actions__secondary .button {
+  width: 48%;
+  display: inline-block;
+}
+
+/* Confirmation page */
+
+.sending-value-card {
+  margin-bottom: 40px;
+}
+
+.sending-address-card {
+  margin-bottom: 40px;
+}
+
+.sending-value {
+  font-size: 1.5625rem;
+  font-weight: 500;
+  padding-right: 5px;
+  display: inline-block;
+}
+
+.sending-token-info {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sending-key {
+  font-family: suisse-mono, monospace;
+  margin-bottom: 8px;
+}
+
+.sending-anchor-domain {
+  color: var(--green);
+  font-size: 0.875rem;
+  background-image: url("./assets/padlock.svg");
+  background-repeat: no-repeat;
+  background-position: 0px center;
+  padding-top: 2px;
+  padding-left: 20px;
+}
+
+.send-confirmation-buttons .active {
+  margin-bottom: 25px;
 }

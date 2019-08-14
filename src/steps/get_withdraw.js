@@ -15,7 +15,8 @@ module.exports = {
     const params = {
       type: withdrawType,
       asset_code: ASSET_CODE,
-      account: pk
+      account: pk,
+      jwt: state.token,
     };
     request("GET /withdraw", params);
     // Expect this to fail with 403
@@ -23,8 +24,8 @@ module.exports = {
     response("GET /withdraw", result);
     instruction(
       "GET /withdraw tells us we need to collect info interactively.  The URL for the interactive portion is " +
-        result.url
+        result.url,
     );
     state.interactive_url = result.url;
-  }
+  },
 };

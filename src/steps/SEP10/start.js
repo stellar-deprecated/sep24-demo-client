@@ -18,13 +18,13 @@ module.exports = {
     expect(!!result.transaction, "The response didn't contain a transaction");
     const transactionObj = new StellarSDK.Transaction(
       result.transaction,
-      StellarSDK.Networks.TESTNET
+      StellarSDK.Networks.TESTNET,
     );
     expect(
       Number.parseInt(transactionObj.sequence) === 0,
-      "Transaction sequence must be zero"
+      "Transaction sequence must be zero",
     );
 
     state.challenge_transaction = result.transaction;
-  }
+  },
 };

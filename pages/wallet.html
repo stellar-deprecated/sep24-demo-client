@@ -2,43 +2,60 @@
 <html>
   <head>
     <title>Connector Demo</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <h1>Stellar Wallet</h1>
-    <h2>Balances</h2>
-    <div>
-      <div class="currency-group">
-        <div class="currency-balance">1000 XLM</div>
-        <div class="buttons"><button>Send</button><button>Receive</button></div>
+    <div class="header">
+      <div class="header__icon">
+        <div class="hamburger-icon"></div>
+      </div>
+      <h1 class="header__title">Stellar Wallet</h1>
+    </div>
+
+    <div class="container">
+      <div class="tabs">
+        <div class="tabs__item">XLM</div>
+        <div class="tabs__item is-selected">USD</div>
+        <div class="tabs__item">EUR</div>
+        <div class="tabs__item">BTC</div>
       </div>
     </div>
-    <div>
-      <div class="currency-group">
-        <div class="currency-balance">250 USD @ Anchor</div>
-        <div class="buttons">
-          <button>Send</button>
-          <button>Receive</button>
-          <button
-            class="active"
-            data-send-message="start-withdraw"
-            id="withdraw-button"
-          >
-            Withdraw
-          </button>
-          <button
-            class="active"
-            data-send-message="start-deposit"
-            id="deposit-button"
-          >
-            Deposit
-          </button>
+
+    <div class="container">
+      <div class="card card--balance">
+        <h2>Available Balance</h2>
+        <div class="balance">
+          <div class="balance__value">400</div>
+          <div class="balance__decimals">.00</div>
+          <div class="balance__token-info">USD @ Anchor</div>
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <div class="actions">
+        <div class="actions__secondary">
+          <button class="button button--outline" disabled>Send</button>
+          <button class="button button--outline" disabled>Receive</button>
+        </div>
+        <button
+          data-send-message="start-deposit"
+          class="button"
+          id="withdraw-button"
+          disabled="true"
+        >
+          Deposit
+        </button>
+        <button
+          data-send-message="start-withdraw"
+          class="button"
+          id="withdraw-button"
+          style="margin-top: 16px;"
+        >
+          Withdraw
+        </button>
+      </div>
+    </div>
+
     <script src="/wallet.js"></script>
   </body>
 </html>

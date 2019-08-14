@@ -1,56 +1,50 @@
 .log-entry {
-  margin-bottom: 8px;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  font-size: 0.865rem;
+  color: var(--black-70);
+  margin-bottom: 15px;
+  padding: 7px 20px 7px 45px;
   background-repeat: no-repeat;
-  background-position: 24px center;
-  background-size: 24px;
-  overflow: hidden;
+  background-color: white;
+  background-position: 16px center;
+  background-size: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .instruction {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: white;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 4px;
   background-image: url("../assets/message.svg");
 }
 
 .action {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: white;
   color: #702bf5;
   border-radius: 32px;
-  font-size: 16px;
   background-image: url("../assets/triangle.svg");
 }
 
 .error {
-  padding: 16px;
-  padding-left: 64px;
-  background-color: red;
-  color: white;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 4px;
 }
 
 .detail {
+  align-self: stretch;
   background-color: #4d556d;
-  border-radius: 8px;
+  padding: 0;
+  border-radius: 4px;
   overflow: hidden;
-  margin-left: 32px;
-  margin-right: 32px;
+  margin-left: 20px;
   color: white;
 }
 
 .detail-title {
   background-image: url("../assets/arrow-left.svg");
+  font-size: 0.865rem;
   background-color: #474e62;
   background-repeat: no-repeat;
-  background-position: 24px center;
-  background-size: 24px;
-  padding: 16px;
-  padding-left: 64px;
+  background-position: 16px center;
+  padding: 9px;
+  padding-left: 45px;
 }
 
 .incoming .detail-title {
@@ -70,7 +64,9 @@
 }
 
 .renderjson {
+  margin: 0;
   overflow: scroll;
+  scrollbar-width: none;
 }
 
 .renderjson a {

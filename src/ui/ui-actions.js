@@ -1,8 +1,9 @@
 const Renderjson = require("renderjson");
 Renderjson.set_show_to_level(1);
 
-const $ = id => document.getElementById(id);
+const $ = (id) => document.getElementById(id);
 
+const section = $("instructions-section");
 const container = $("instructions-container");
 const actionButton = $("action-button");
 const configButton = $("config-button");
@@ -20,7 +21,7 @@ const showConfig = () => {
   configPanel.classList.add("visible");
 };
 
-const scrollToTop = () => (container.scrollTop = container.scrollHeight);
+const scrollToTop = () => (section.scrollTop = section.scrollHeight);
 
 const addEntry = (message, className) => {
   const div = document.createElement("div");
@@ -29,8 +30,8 @@ const addEntry = (message, className) => {
   container.appendChild(div);
   scrollToTop();
 };
-const action = message => addEntry(message, "action");
-const instruction = instruction => addEntry(instruction, "instruction");
+const action = (message) => addEntry(message, "action");
+const instruction = (instruction) => addEntry(instruction, "instruction");
 
 const logObject = (message, params, className = "informational") => {
   const div = document.createElement("div");
@@ -81,11 +82,11 @@ const expect = (expectation, message) => {
   }
 };
 
-const setDevicePage = src => {
+const setDevicePage = (src) => {
   deviceFrame.src = src;
 };
 
-const waitForPageMessage = src => {
+const waitForPageMessage = (src) => {
   return new Promise((resolve, reject) => {
     deviceFrame.src = src;
     const cb = function(e) {
@@ -98,11 +99,11 @@ const waitForPageMessage = src => {
   });
 };
 
-const error = message => {
+const error = (message) => {
   addEntry(message, "error");
 };
 
-const onNext = cb => actionButton.addEventListener("click", cb);
+const onNext = (cb) => actionButton.addEventListener("click", cb);
 
 module.exports = {
   expect,
@@ -118,5 +119,5 @@ module.exports = {
 
   showConfig,
   setDevicePage,
-  waitForPageMessage
+  waitForPageMessage,
 };

@@ -1,9 +1,51 @@
 @import "./styles/colors.css";
 @import "./styles/buttons.css";
-@import "./styles/config-panel.css";
 @import "./styles/device.css";
 @import "./styles/logs.css";
 @import "./styles/layout.css";
+@import "./styles/modal.css";
+@import "./styles/form.css";
+
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src: url("./assets/fonts/suisseintl-regular-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src: url("./assets/fonts/suisseintl-regularitalic-webfont.woff")
+      format("woff"),
+    url("./assets/fonts/suisseintl-regularitalic-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse-mono;
+  src: url("./assets/fonts/suisseintlmono-regular-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintlmono-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-display: block;
+  font-family: suisse;
+  src: url("./assets/fonts/suisseintl-semibold-webfont.woff") format("woff"),
+    url("./assets/fonts/suisseintl-semibold-webfont.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-display: swap;
+  font-family: suisse;
+  font-style: italic;
+  src: url("./assets/fonts/suisseintl-semibolditalic-webfont.woff")
+      format("woff"),
+    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff2")
+      format("woff2");
+  font-weight: 500;
+}
 
 #mainnet-disclaimer {
   position: fixed;
@@ -19,4 +61,9 @@
 
 iframe {
   border: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
 }

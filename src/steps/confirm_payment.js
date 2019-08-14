@@ -4,5 +4,5 @@ module.exports = {
   autoStart: true,
   execute: async function(state, { setDevicePage, waitForPageMessage }) {
     await waitForPageMessage("pages/confirm.html");
-  }
+  },
 };

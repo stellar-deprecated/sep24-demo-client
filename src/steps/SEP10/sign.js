@@ -10,7 +10,7 @@ module.exports = {
     const challenge_xdr = state.challenge_transaction;
     const envelope = StellarSdk.xdr.TransactionEnvelope.fromXDR(
       challenge_xdr,
-      "base64"
+      "base64",
     );
     const transaction = new StellarSdk.Transaction(envelope);
     transaction.sign(StellarSdk.Keypair.fromSecret(USER_SK));
@@ -18,5 +18,5 @@ module.exports = {
     logObject("SEP-0010 Signed Transaction", transaction);
     logObject("Base64 Encoded", transaction.toEnvelope().toXDR("base64"));
     state.signed_challenge_tx = transaction;
-  }
+  },
 };
