@@ -6,6 +6,8 @@
   --muted-purple: #DEBEFF;
   --dark-bluish-gray: #464E64;
   --bluish-gray: #4D556D;
+  --bluish-gray: #4D556D;
+  --light-yellow: #FBFAF7;
 
   --black-100: #000000;
   --black-90: #1E1E1E;
@@ -14,4 +16,6 @@
   --black-50: #888888;
   --black-20: #CCCCCC;
   --black-5: #F2F2F2;
+
+  
 }
