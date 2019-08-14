@@ -6,15 +6,27 @@
     bottom: 0;
     align-items: center;
     justify-content: center;
-    display: none;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-out;
 }
 
 .modal.visible {
-    display: flex;
-  }
+    visibility: visible;
+    opacity: 1;
+    pointer-events: inherit;
+}
 
-.modal:before {
+.modal.visible::before {
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+}
+
+.modal::before {
     content: "";
+    opacity: 0;
     background-color: rgba(0,0,0,0.7);
     position: fixed;
     top: 0;
@@ -27,13 +39,18 @@
 .modal__window {
     position: relative;
     padding: 35px 50px;
-    min-width: 550px;
+    min-width: 650px;
     background: var(--light-yellow);
     border-radius: 5px;
-    position: fixed;
     z-index: 11;
-    /* transform: translate(0, -500%); */
-    transition: transform 0.3s ease-out;
+    transform: translate(0, -100px);
+    opacity: 0;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.modal.visible .modal__window {
+    opacity: 1;
+    transform: translate(0, -50px);
 }
 
 .modal__close {
