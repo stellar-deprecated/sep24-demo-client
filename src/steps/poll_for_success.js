@@ -28,8 +28,8 @@ module.exports = {
             "Success!  You can pick up your cash at a storefront with reference number " +
               state.external_transaction_id,
           );
-          if (transactionResult.transaction.url) {
-            setDevicePage(transactionResult.transaction.url);
+          if (transactionResult.transaction.more_info_url) {
+            setDevicePage(transactionResult.transaction.more_info_url);
           } else {
             setDevicePage(
               "pages/receipt.html?reference_number=" +
