@@ -30,6 +30,13 @@ input[type="text"] {
   width: 100%;
   padding: 10px 10px;
   margin-top: 4px;
+  transition: all 0.3s ease-out;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 6px var(--muted-purple);
+  border-color: var(--bright-purple);
 }
 
 input[type="checkbox"] {

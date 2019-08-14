@@ -18,15 +18,19 @@
       </div>
 
       <div id="action-bar" class="action-bar">
-        <button id="action-button">Continue</button>
+        <button id="action-button" class="button">Continue</button>
         <div id="action-text"></div>
-        <button id="config-button">Config</button>
+        <button id="config-button" class="button button--small button--outline">
+          <i class="icon icon--gear"></i>Config
+        </button>
       </div>
     </div>
 
     <div id="config-panel" class="modal">
       <div class="modal__window">
-        <div id="close-button" class="modal__close">X</div>
+        <div id="close-button" class="modal__close">
+          <i class="icon icon--close"></i>
+        </div>
         <h2 class="modal__title">Config</h2>
         <div class="modal__body">
           <form id="config-form"></form>
