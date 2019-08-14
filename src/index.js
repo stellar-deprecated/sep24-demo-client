@@ -67,7 +67,9 @@ const depositSteps = [
 
 let steps = null;
 
+uiActions.setLoading(true, "Waiting for user...");
 uiActions.waitForPageMessage("pages/wallet.html").then((message) => {
+  uiActions.setLoading(false);
   if (message === "start-withdraw") {
     steps = withdrawSteps;
     next();
