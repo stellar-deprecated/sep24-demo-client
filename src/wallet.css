@@ -217,11 +217,14 @@ h2 {
 
 /* Wallet page */
 
+.actions > * {
+  margin-bottom: 20px;
+}
+
 .actions__secondary {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 25px;
 }
 
 .actions__secondary .button {
