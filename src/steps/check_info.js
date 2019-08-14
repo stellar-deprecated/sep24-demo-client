@@ -12,11 +12,11 @@ module.exports = {
     response("GET /info response", result);
     expect(
       prop(result, ["withdraw", Config.get("ASSET_CODE"), "enabled"]),
-      `${Config.get("ASSET_CODE")} is not enabled for withdraw`
+      `${Config.get("ASSET_CODE")} is not enabled for withdraw`,
     );
     instruction(
-      "Withdraw is enabled, and requires authentication so we should go through SEP-0010"
+      "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
     );
     state.interactive_url = Config.get("BRIDGE_URL") + result.url;
-  }
+  },
 };

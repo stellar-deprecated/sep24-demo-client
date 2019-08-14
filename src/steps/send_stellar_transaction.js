@@ -13,7 +13,7 @@ module.exports = {
     request("Sending the payment using the following anchor account info", {
       address: state.anchors_stellar_address,
       memo: state.stellar_memo,
-      memo_type: state.stellar_memo_type
+      memo_type: state.stellar_memo_type,
     });
     const server = new StellarSdk.Server(HORIZON_URI);
     const account = await server.loadAccount(pk);
@@ -23,32 +23,30 @@ module.exports = {
       const memoType = {
         text: StellarSdk.Memo.text,
         id: StellarSdk.Memo.id,
-        hash: StellarSdk.Memo.hash
+        hash: StellarSdk.Memo.hash,
       }[state.stellar_memo_type];
       memo = memoType(state.stellar_memo);
     } catch (e) {
       expect(
         false,
-        `The memo '${state.stellar_memo}' could not be encoded to type ${
-          state.stellar_memo_type
-        }`
+        `The memo '${state.stellar_memo}' could not be encoded to type ${state.stellar_memo_type}`,
       );
     }
 
     const transaction = new StellarSdk.TransactionBuilder(account, {
-      fee: feeStats.p70_accepted_fee
+      fee: feeStats.p70_accepted_fee,
     })
       .addOperation(
         StellarSdk.Operation.payment({
           destination: state.anchors_stellar_address,
           asset: StellarSdk.Asset.native(),
-          amount: "100" // TODO send amount through
-        })
+          amount: "100", // TODO send amount through
+        }),
       )
       .addMemo(memo)
       .setTimeout(30)
       .build();
     transaction.sign(StellarSdk.Keypair.fromSecret(USER_SK));
     await server.submitTransaction(transaction);
-  }
+  },
 };
