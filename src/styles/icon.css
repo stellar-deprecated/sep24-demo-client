@@ -1,0 +1,15 @@
+.icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.icon--gear {
+  background-image: url("../assets/gear.svg");
+}
+
+.icon--close {
+  background-image: url("../assets/close.svg");
+}
