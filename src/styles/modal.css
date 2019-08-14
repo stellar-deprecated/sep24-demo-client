@@ -38,7 +38,7 @@
 
 .modal__window {
     position: relative;
-    padding: 35px 50px;
+    padding: 35px 50px 20px 50px;
     min-width: 650px;
     background: var(--light-yellow);
     border-radius: 5px;
@@ -65,5 +65,20 @@
 
 .modal__body {
     padding-top: 35px;
+}
+
+
+.modal__footer {
+    border-top: 1px solid var(--black-20);
+    display: flex;
+    align-items: row;
+    justify-content: flex-end; 
+    margin-top: 40px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.modal__footer > * {
+    margin-left: 20px;
 }
 
