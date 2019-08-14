@@ -66,6 +66,7 @@
 .renderjson {
   margin: 0;
   overflow: scroll;
+  scrollbar-width: none;
 }
 
 .renderjson a {
