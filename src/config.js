@@ -24,8 +24,17 @@ let fields = [
 
 const save = () => {
   fields.forEach((field) => {
+    if (field.type === "checkbox") {
+      field.value = field.element.checked;
+    } else {
+      field.value = field.element.value;
+    }
     localStorage.setItem(field.key, JSON.stringify(field.value));
   });
+  window.location.hash = fields
+    .map((field) => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
+    .join("&");
+  callbacks.forEach((f) => f());
 };
 
 const load = () => {
@@ -46,6 +55,8 @@ const load = () => {
       hashValue !== undefined
         ? hashValue
         : JSON.parse(localStorage.getItem(field.key));
+    field.element.value = field.value;
+    field.element.checked = field.value;
   });
   save(); // In case we used the query params we should persist it
 };
@@ -58,27 +69,12 @@ const listen = (callback) => {
   callbacks.push(callback);
 };
 
-const update = () => {
-  window.location.hash = fields
-    .map((field) => `${field.key}=${encodeURI(JSON.stringify(field.value))}`)
-    .join("&");
-  callbacks.forEach((f) => f());
-};
+const createClose = (panel) => () => panel.classList.remove("visible");
 
-const fieldChangeListener = (field) => {
-  return (e) => {
-    if (field.type === "checkbox") {
-      field.value = e.target.checked;
-    } else {
-      field.value = e.target.value;
-    }
-    save();
-    update();
-  };
-};
-
-const installUI = (el) => {
-  load();
+const installUI = (panel) => {
+  const close = createClose(panel);
+  panel.querySelector("#close-button").addEventListener("click", close);
+  const form = panel.querySelector("form");
 
   fields.forEach((field) => {
     const container = document.createElement("div");
@@ -91,18 +87,20 @@ const installUI = (el) => {
     input.id = `config-field-${field.key}`;
     input.type = field.type || "text";
     input.placeholder = field.key;
-    input.value = field.value;
-    input.checked = field.value;
+    field.element = input;
 
     container.appendChild(label);
     container.appendChild(input);
-    el.appendChild(container);
-
-    input.addEventListener("change", fieldChangeListener(field));
-    input.addEventListener("keyup", fieldChangeListener(field));
-    input.addEventListener("click", fieldChangeListener(field));
+    form.appendChild(container);
   });
-  update();
+  load();
+  document.getElementById("cancel-config").addEventListener("click", () => {
+    close();
+  });
+  document.getElementById("apply-config").addEventListener("click", () => {
+    save();
+    close();
+  });
 };
 
 const get = (key) => {

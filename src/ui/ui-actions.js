@@ -13,9 +13,6 @@ const deviceFrame = $("device-frame");
 configButton.addEventListener("click", () => {
   configPanel.classList.toggle("visible");
 });
-configPanel.querySelector("#close-button").addEventListener("click", () => {
-  configPanel.classList.toggle("visible");
-});
 
 const showConfig = () => {
   configPanel.classList.add("visible");

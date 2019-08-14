@@ -17,7 +17,7 @@ Config.listen(() => {
   }
 });
 
-Config.installUI(document.querySelector("#config-form"));
+Config.installUI(document.querySelector("#config-panel"));
 if (!Config.isValid()) {
   uiActions.showConfig();
 }
