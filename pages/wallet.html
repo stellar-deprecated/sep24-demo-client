@@ -34,17 +34,28 @@
     <div class="container">
       <div class="actions">
         <div class="actions__secondary">
-            <button class="button button--outline" disabled>Send</button>
-            <button class="button button--outline" disabled>Receive</button>
+          <button class="button button--outline" disabled>Send</button>
+          <button class="button button--outline" disabled>Receive</button>
         </div>
-        <button 
-          data-continue-button="true"
+        <button
+          data-send-message="start-deposit"
           class="button"
           id="withdraw-button"
-        >Withdraw Cash</button>
+          disabled="true"
+        >
+          Deposit
+        </button>
+        <button
+          data-send-message="start-withdraw"
+          class="button"
+          id="withdraw-button"
+          style="margin-top: 16px;"
+        >
+          Withdraw
+        </button>
       </div>
     </div>
-    
+
     <script src="/wallet.js"></script>
   </body>
 </html>

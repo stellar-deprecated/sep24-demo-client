@@ -21,7 +21,6 @@ module.exports = {
       window.addEventListener(
         "message",
         function(e) {
-          console.log("Message", e.data);
           if (e.data.type === "log") {
             instruction(e.data.message);
           }
