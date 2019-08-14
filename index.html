@@ -4,26 +4,37 @@
     <title>Connector Demo</title>
   </head>
   <body>
-    <div id="instructions-section" class="instructions-section">
-      <div id="instructions-container" class="instructions-container"></div>
-    </div>
+    <div class="layout-wrapper">
+      <div id="instructions-section" class="instructions-section">
+        <div id="instructions-container" class="instructions-container"></div>
+      </div>
 
-    <div id="device">
-      <div id="frame">
-        <div id="frame-content">
-          <iframe width="300" height="650" id="device-frame"></iframe>
+      <div id="device">
+        <div id="frame">
+          <div id="frame-content">
+            <iframe width="300" height="650" id="device-frame"></iframe>
+          </div>
         </div>
+      </div>
+
+      <div id="action-bar" class="action-bar">
+        <button id="action-button">Continue</button>
+        <div id="action-text"></div>
+        <button id="config-button">Config</button>
       </div>
     </div>
 
-    <div id="action-bar" class="action-bar">
-      <button id="action-button">Continue</button>
-      <div id="action-text"></div>
-      <button id="config-button">Config</button>
-      <div id="config-panel">
-        <div id="close-button">X</div>
-        <div>Config</div>
-        <form id="config-form"></form>
+    <div id="config-panel" class="modal">
+      <div  class="modal__window">
+        <div id="close-button" class="modal__close"> X</div>
+        <h2 class="modal__title">Config</h2>
+        <div class="modal__body">
+          <form id="config-form"></form>
+        </div>
+        <div class="modal__footer">
+          <div class="button button--ghost">Cancel</div>
+          <div class="button">Apply Changes</div>
+        </div>
       </div>
     </div>
     <div id="mainnet-disclaimer">

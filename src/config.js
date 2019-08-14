@@ -82,9 +82,9 @@ const installUI = el => {
 
   fields.forEach(field => {
     const container = document.createElement("div");
-    container.className = "config-group";
+    container.className = "form-group form-group--" + (field.type || "text");
     const label = document.createElement("label");
-    label.for = `config-field-${field.key}`;
+    label.setAttribute("for", `config-field-${field.key}`);
     label.textContent = field.label;
 
     const input = document.createElement("input");
