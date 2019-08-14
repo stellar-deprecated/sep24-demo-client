@@ -1,13 +1,11 @@
 import "./wallet.css";
-const $ = (qs) => document.querySelector(qs);
 
-const continueButton = $("[data-continue-button]");
-
-if (continueButton) {
-  continueButton.addEventListener("click", function() {
-    window.parent.postMessage({ continue: true }, "*");
+document.querySelectorAll("[data-send-message]").forEach((el) => {
+  el.addEventListener("click", function() {
+    const message = this.getAttribute("data-send-message");
+    window.parent.postMessage({ message }, "*");
   });
-}
+});
 
 const url = new URL(document.location);
 document.querySelectorAll("[data-replace]").forEach((el) => {

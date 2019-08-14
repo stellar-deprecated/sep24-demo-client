@@ -191,6 +191,10 @@ h2 {
   transition: all 0.3s ease-out;
 }
 
+.button:disabled {
+  opacity: 0.5;
+}
+
 .button:enabled {
   cursor: pointer;
 }
