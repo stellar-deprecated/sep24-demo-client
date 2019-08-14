@@ -4,5 +4,5 @@ module.exports = {
   autoStart: true,
   execute: async function(state, { waitForPageContinue }) {
     return waitForPageContinue("pages/confirm.html");
-  }
+  },
 };

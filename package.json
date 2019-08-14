@@ -21,6 +21,7 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "@stellar/prettier-config": "^1.0.1",
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "lodash.get": "^4.4.2",
@@ -31,5 +32,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "prettier": "@stellar/prettier-config"
 }

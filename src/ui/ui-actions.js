@@ -1,7 +1,7 @@
 const Renderjson = require("renderjson");
 Renderjson.set_show_to_level(1);
 
-const $ = id => document.getElementById(id);
+const $ = (id) => document.getElementById(id);
 
 const section = $("instructions-section");
 const container = $("instructions-container");
@@ -30,8 +30,8 @@ const addEntry = (message, className) => {
   container.appendChild(div);
   scrollToTop();
 };
-const action = message => addEntry(message, "action");
-const instruction = instruction => addEntry(instruction, "instruction");
+const action = (message) => addEntry(message, "action");
+const instruction = (instruction) => addEntry(instruction, "instruction");
 
 const logObject = (message, params, className = "informational") => {
   const div = document.createElement("div");
@@ -82,11 +82,11 @@ const expect = (expectation, message) => {
   }
 };
 
-const setDevicePage = src => {
+const setDevicePage = (src) => {
   deviceFrame.src = src;
 };
 
-const waitForPageContinue = src => {
+const waitForPageContinue = (src) => {
   return new Promise((resolve, reject) => {
     deviceFrame.src = src;
     const cb = function(e) {
@@ -99,11 +99,11 @@ const waitForPageContinue = src => {
   });
 };
 
-const error = message => {
+const error = (message) => {
   addEntry(message, "error");
 };
 
-const onNext = cb => actionButton.addEventListener("click", cb);
+const onNext = (cb) => actionButton.addEventListener("click", cb);
 
 module.exports = {
   expect,
@@ -119,5 +119,5 @@ module.exports = {
 
   showConfig,
   setDevicePage,
-  waitForPageContinue
+  waitForPageContinue,
 };

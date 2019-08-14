@@ -50,11 +50,11 @@ const steps = [
   require("./steps/show_interactive_webapp"),
   require("./steps/confirm_payment"),
   require("./steps/send_stellar_transaction"),
-  require("./steps/poll_for_success")
+  require("./steps/poll_for_success"),
 ];
 
 let currentStep = null;
-const runStep = step => {
+const runStep = (step) => {
   if (!step) {
     uiActions.setLoading(true, "Finished");
     return;
@@ -72,7 +72,7 @@ const next = async () => {
       await Promise.all([
         currentStep.execute(state, uiActions),
         // Take at least a second for each step otherwise its overwhelming
-        new Promise(resolve => setTimeout(resolve, 1000))
+        new Promise((resolve) => setTimeout(resolve, 1000)),
       ]);
       steps.splice(0, 1);
     } catch (e) {
