@@ -60,8 +60,8 @@
   transition: background-color 0.2s ease-out;
   cursor: pointer;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 5px;
+  top: 5px;
   display: flex;
   align-items: center;
   justify-content: center;

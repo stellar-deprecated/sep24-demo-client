@@ -1,19 +1,12 @@
 #action-button {
-  border-radius: 200px;
-  color: white;
-  outline: transparent;
-  border: none;
-  font-size: 16px;
-  background-color: var(--purple);
-  padding: 12px 48px;
+  padding: 12px 48px 12px 60px;
   background-image: url("../assets/next-arrow.svg");
-  background-position: 16px center;
-  background-repeat: no-repeat;
+  background-position: 20px center;
 }
 
 #action-button:not(.loading) {
   animation: pulse 1.5s infinite;
-  animation-delay: 1s;
+  animation-delay: 0.5s;
 }
 
 #action-button:hover {
@@ -23,20 +16,16 @@
 
 #action-button.loading {
   background: var(--muted-purple);
+  padding-left: 48px;
 }
 
 @keyframes pulse {
   0% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0px rgba(125, 0, 255, 0.5);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 50px rgba(125, 0, 255, 0);
+    box-shadow: 0 0 0 0px rgba(125, 0, 255, 0.5),
+      0 0 0 0px rgba(125, 0, 255, 0.5);
   }
   100% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0px rgba(125, 0, 255, 0);
+    box-shadow: 0 0 0 40px rgba(125, 0, 255, 0), 0 0 0 20px rgba(125, 0, 255, 0);
   }
 }
 
@@ -52,8 +41,10 @@
   color: white;
   border-radius: 100px;
   padding: 14px 40px 12px 40px;
-  transition: all 0.2s ease-out;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out,
+    border 0.2s ease-out;
   display: flex;
+  background-repeat: no-repeat;
   align-items: center;
 }
 
@@ -74,7 +65,7 @@
 }
 
 .button:hover {
-  background: var(--bright-purple);
+  background-color: var(--bright-purple);
 }
 
 .button--ghost {
