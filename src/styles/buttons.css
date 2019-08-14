@@ -71,7 +71,6 @@
   background-color: transparent;
   color: var(--black-70);
   border: 2px solid var(--black-20);
-
 }
 
 .button--ghost:hover {
@@ -79,6 +78,3 @@
   background-color: transparent;
   border-color: var(--black-70);
 }
-
-
-

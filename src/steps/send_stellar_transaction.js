@@ -29,9 +29,7 @@ module.exports = {
     } catch (e) {
       expect(
         false,
-        `The memo '${state.stellar_memo}' could not be encoded to type ${
-          state.stellar_memo_type
-        }`
+        `The memo '${state.stellar_memo}' could not be encoded to type ${state.stellar_memo_type}`
       );
     }
 

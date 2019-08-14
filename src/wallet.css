@@ -3,8 +3,7 @@
 @font-face {
   font-display: block;
   font-family: suisse;
-  src:
-    url("../src/assets/fonts/suisseintl-regular-webfont.woff") format("woff"),
+  src: url("../src/assets/fonts/suisseintl-regular-webfont.woff") format("woff"),
     url("../src/assets/fonts/suisseintl-regular-webfont.woff2") format("woff2");
   font-weight: 400;
 }
@@ -12,24 +11,22 @@
   font-display: swap;
   font-family: suisse;
   font-style: italic;
-  src:
-    url("./assets/fonts/suisseintl-regularitalic-webfont.woff") format("woff"),
+  src: url("./assets/fonts/suisseintl-regularitalic-webfont.woff")
+      format("woff"),
     url("./assets/fonts/suisseintl-regularitalic-webfont.woff2") format("woff2");
   font-weight: 400;
 }
 @font-face {
   font-display: swap;
   font-family: suisse-mono;
-  src:
-    url("./assets/fonts/suisseintlmono-regular-webfont.woff") format("woff"),
+  src: url("./assets/fonts/suisseintlmono-regular-webfont.woff") format("woff"),
     url("./assets/fonts/suisseintlmono-regular-webfont.woff2") format("woff2");
   font-weight: 400;
 }
 @font-face {
   font-display: block;
   font-family: suisse;
-  src:
-    url("./assets/fonts/suisseintl-semibold-webfont.woff") format("woff"),
+  src: url("./assets/fonts/suisseintl-semibold-webfont.woff") format("woff"),
     url("./assets/fonts/suisseintl-semibold-webfont.woff2") format("woff2");
   font-weight: 500;
 }
@@ -37,9 +34,10 @@
   font-display: swap;
   font-family: suisse;
   font-style: italic;
-  src:
-    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff") format("woff"),
-    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff2") format("woff2");
+  src: url("./assets/fonts/suisseintl-semibolditalic-webfont.woff")
+      format("woff"),
+    url("./assets/fonts/suisseintl-semibolditalic-webfont.woff2")
+      format("woff2");
   font-weight: 500;
 }
 
@@ -62,7 +60,6 @@ body {
   padding: 0px 20px;
 }
 
-
 h1 {
   font-size: 1.75rem;
   font-weight: 500;
@@ -77,7 +74,6 @@ h2 {
   font-weight: 400;
   margin: 0;
 }
-
 
 /* Header */
 
@@ -95,7 +91,9 @@ h2 {
   padding-right: 20px;
 }
 
-.hamburger-icon, .hamburger-icon::before, .hamburger-icon::after {
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
   position: absolute;
   content: "";
   display: block;
@@ -112,7 +110,6 @@ h2 {
 .hamburger-icon::after {
   top: 14px;
 }
-
 
 /* Tabs */
 
@@ -136,7 +133,6 @@ h2 {
   color: white;
 }
 
-
 /* Card */
 
 .card {
@@ -156,7 +152,6 @@ h2 {
 }
 
 /* Balance */
-
 
 .balance__value {
   padding-top: 5px;
@@ -178,7 +173,6 @@ h2 {
   color: var(--black-70);
   font-weight: 500;
 }
-
 
 /* Buttons */
 
@@ -226,7 +220,7 @@ h2 {
   margin-bottom: 25px;
 }
 
-.actions__secondary .button{
+.actions__secondary .button {
   width: 48%;
   display: inline-block;
 }
@@ -255,8 +249,8 @@ h2 {
 }
 
 .sending-key {
- font-family: suisse-mono, monospace;
- margin-bottom: 8px;
+  font-family: suisse-mono, monospace;
+  margin-bottom: 8px;
 }
 
 .sending-anchor-domain {

@@ -10,21 +10,22 @@
   position: relative;
 }
 
-#frame::after, #frame::before {
+#frame::after,
+#frame::before {
   content: "";
   background-color: var(--black-90);
   border-radius: 30px;
   display: block;
   position: absolute;
   left: -14px;
-  
+
   width: 12px;
   height: 48px;
 }
 
 #frame::after {
   top: 90px;
-} 
+}
 #frame::before {
   top: 140px;
 }

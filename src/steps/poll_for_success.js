@@ -43,16 +43,12 @@ module.exports = {
           ) != -1
         ) {
           instruction(
-            `Status is ${
-              transactionResult.transaction.status
-            }, lets retry in 2s`
+            `Status is ${transactionResult.transaction.status}, lets retry in 2s`
           );
           setTimeout(poll, 2000);
         } else {
           error(
-            `Status is ${
-              transactionResult.transaction.status
-            }, something must have gone wrong`
+            `Status is ${transactionResult.transaction.status}, something must have gone wrong`
           );
         }
       };
