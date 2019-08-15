@@ -48,7 +48,7 @@
   font-weight: 500;
 }
 
-#PUBNET-disclaimer {
+#pubnet-disclaimer {
   font-size: 0.875rem;
   text-align: center;
   position: fixed;
@@ -61,7 +61,7 @@
   display: none;
 }
 
-#PUBNET-disclaimer.visible {
+#pubnet-disclaimer.visible {
   display: block;
 }
 
