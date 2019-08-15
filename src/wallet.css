@@ -191,6 +191,11 @@ h2 {
   transition: all 0.3s ease-out;
 }
 
+.button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem var(--muted-purple);
+}
+
 .button:disabled {
   opacity: 0.5;
 }

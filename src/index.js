@@ -7,8 +7,8 @@ const Config = require("./config");
 const StellarSdk = require("stellar-sdk");
 
 Config.listen(() => {
-  const disclaimer = document.getElementById("mainnet-disclaimer");
-  if (Config.get("MAINNET")) {
+  const disclaimer = document.getElementById("pubnet-disclaimer");
+  if (Config.get("PUBNET")) {
     disclaimer.classList.add("visible");
     StellarSdk.Network.usePublicNetwork();
   } else {

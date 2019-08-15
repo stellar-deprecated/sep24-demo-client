@@ -1,12 +1,12 @@
 let fields = [
-  { key: "BRIDGE_URL", label: "URL to the TRANSFER_SERVER", value: null },
+  { key: "BRIDGE_URL", label: "URL of the TRANSFER_SERVER", value: null },
   {
     key: "AUTH_SERVER_URL",
-    label: "URL to the WEB_AUTH_ENDPOINT",
+    label: "URL of the WEB_AUTH_ENDPOINT",
     value: null,
   },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
-  { key: "HORIZON_URI", label: "URL of the horizon server", value: null },
+  { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
   {
     key: "AUTO_ADVANCE",
@@ -15,8 +15,8 @@ let fields = [
     type: "checkbox",
   },
   {
-    key: "MAINNET",
-    label: "Operate on Mainnet instead of Testnet (NOT RECOMMENDED)",
+    key: "PUBNET",
+    label: "Operate on Pubnet instead of Testnet (NOT RECOMMENDED)",
     value: false,
     type: "checkbox",
   },
