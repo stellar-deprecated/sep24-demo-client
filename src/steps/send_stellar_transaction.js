@@ -34,7 +34,7 @@ module.exports = {
     }
 
     const transaction = new StellarSdk.TransactionBuilder(account, {
-      fee: feeStats.p70_accepted_fee,
+      fee: feeStats.p70_accepted_fee * 2,
     })
       .addOperation(
         StellarSdk.Operation.payment({
