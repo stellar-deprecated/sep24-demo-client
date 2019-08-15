@@ -35,7 +35,7 @@ html {
   grid-column: 1;
 }
 
-.instructions-section::-webkit-scrollbar {
+.instructions-section::-webkit-scrollbar, .renderjson::-webkit-scrollbar {
   width: 0 !important;
   height: 0 !important;
 }
