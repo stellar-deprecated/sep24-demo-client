@@ -40,7 +40,7 @@
   background-color: var(--purple);
   color: white;
   border-radius: 100px;
-  padding: 13px 40px 13px 40px;
+  padding: 12px 40px;
   transition: background-color 0.2s ease-out, color 0.2s ease-out,
     border 0.2s ease-out;
   display: flex;
@@ -69,6 +69,7 @@
 }
 
 .button--ghost {
+  padding: 10px 38px;
   background-color: transparent;
   color: var(--black-70);
   border: 2px solid var(--black-20);

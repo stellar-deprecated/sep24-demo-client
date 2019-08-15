@@ -48,7 +48,7 @@
   font-weight: 500;
 }
 
-#mainnet-disclaimer {
+#pubnet-disclaimer {
   font-size: 0.875rem;
   text-align: center;
   position: fixed;
@@ -61,15 +61,10 @@
   display: none;
 }
 
-#mainnet-disclaimer.visible {
+#pubnet-disclaimer.visible {
   display: block;
 }
 
 iframe {
   border: 0;
-}
-
-::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
 }
