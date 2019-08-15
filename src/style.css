@@ -68,8 +68,3 @@
 iframe {
   border: 0;
 }
-
-::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
-}
