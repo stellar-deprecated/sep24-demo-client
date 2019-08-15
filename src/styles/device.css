@@ -8,6 +8,7 @@
   border-radius: 59px;
   margin: auto;
   position: relative;
+  box-shadow: 0px 10px 45px rgba(0, 0, 0, 0.1);
 }
 
 #frame::after,
