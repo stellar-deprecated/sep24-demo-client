@@ -20,7 +20,7 @@ label {
 }
 
 input[type="text"] {
-  font-family: suisse-mono, suisse, sans-serif;
+  font-family: $mono-typeface;
   font-size: 0.875rem;
   letter-spacing: -0.05rem;
   color: $black-70;

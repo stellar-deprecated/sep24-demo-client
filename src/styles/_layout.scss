@@ -11,7 +11,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-  font-family: suisse, sans-serif;
+  font-family: $main-typeface;
 }
 
 .layout-wrapper {

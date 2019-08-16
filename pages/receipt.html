@@ -5,12 +5,25 @@
     <style></style>
   </head>
   <body>
-    <h1>Stellar Wallet</h1>
-    <h2>Success!</h2>
-    <h3>
-      Payment confirmed with external reference number
-      <span data-replace="reference_number"></span>
-    </h3>
+    <div class="container">
+      <div class="success">
+        <img class="success__icon" src="../src/assets/success.svg" />
+        <h1 class="success__title">Success!</h1>
+      </div>
+
+      <div class="card">
+        <div class="reference">
+          <p class="reference-text">
+            Payment confirmed with external reference number:
+          </p>
+          <p data-replace="reference_number" class="reference-number"></p>
+        </div>
+      </div>
+
+      <div class="receipt-buttons">
+        <div class="button">Close</div>
+      </div>
+    </div>
   </body>
   <script src="/wallet.js"></script>
 </html>
