@@ -1,8 +1,7 @@
 let fields = [
-  { key: "BRIDGE_URL", label: "URL of the TRANSFER_SERVER", value: null },
   {
-    key: "AUTH_SERVER_URL",
-    label: "URL of the WEB_AUTH_ENDPOINT",
+    key: "HOME_DOMAIN",
+    label: "Domain hosting the stellar.toml file",
     value: null,
   },
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },

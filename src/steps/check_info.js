@@ -6,9 +6,9 @@ module.exports = {
   instruction: "Check /info endpoint to see if we need to authenticate",
   action: "GET /info (SEP-0006)",
   execute: async function(state, { request, response, instruction, expect }) {
-    const BRIDGE_URL = Config.get("BRIDGE_URL");
+    const transfer_server = state.transfer_server;
     request("GET /info");
-    const result = await get(`${BRIDGE_URL}/info`);
+    const result = await get(`${transfer_server}/info`);
     response("GET /info response", result);
     expect(
       prop(result, ["withdraw", Config.get("ASSET_CODE"), "enabled"]),
@@ -17,6 +17,6 @@ module.exports = {
     instruction(
       "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
     );
-    state.interactive_url = Config.get("BRIDGE_URL") + result.url;
+    state.interactive_url = transfer_server + result.url;
   },
 };

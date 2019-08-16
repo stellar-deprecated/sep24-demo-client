@@ -10,14 +10,14 @@ module.exports = {
     { request, response, instruction, error, setDevicePage },
   ) {
     return new Promise((resolve, reject) => {
-      const BRIDGE_URL = Config.get("BRIDGE_URL");
+      const transfer_server = state.transfer_server;
       const poll = async () => {
         const transactionParams = {
           id: state.stellar_memo,
         };
         request("GET /transaction", transactionParams);
         const transactionResult = await get(
-          `${BRIDGE_URL}/transaction`,
+          `${transfer_server}/transaction`,
           transactionParams,
         );
         response("GET /transaction", transactionResult);

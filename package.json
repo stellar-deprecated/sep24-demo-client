@@ -26,7 +26,8 @@
     "dotenv-webpack": "^1.7.0",
     "lodash.get": "^4.4.2",
     "renderjson": "^1.4.0",
-    "stellar-sdk": "^2.1.1"
+    "stellar-sdk": "^2.1.1",
+    "toml": "^3.0.0"
   },
   "husky": {
     "hooks": {
