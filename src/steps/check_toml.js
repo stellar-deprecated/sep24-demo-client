@@ -16,12 +16,15 @@ module.exports = {
     const text = await resp.text();
     const information = toml.parse(text);
     response(`${HOME_DOMAIN}/.well-known/stellar.toml`, information);
-    expect(information.AUTH_SERVER, "Toml file doesn't contain an AUTH_SERVER");
+    expect(
+      information.WEB_AUTH_ENDPOINT,
+      "Toml file doesn't contain a WEB_AUTH_ENDPOINT",
+    );
     expect(
       information.TRANSFER_SERVER,
       "Toml file doesn't contain a TRANSFER_SERVER",
     );
-    state.auth_server = information.AUTH_SERVER;
+    state.auth_endpoint = information.WEB_AUTH_ENDPOINT;
     state.transfer_server = information.TRANSFER_SERVER;
   },
 };
