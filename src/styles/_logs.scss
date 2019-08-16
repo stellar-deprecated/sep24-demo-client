@@ -2,7 +2,7 @@
   overflow-wrap: break-word;
   max-width: 100%;
   font-size: 0.865rem;
-  color: var(--black-70);
+  color: $black-70;
   margin-bottom: 15px;
   padding: 7px 20px 7px 45px;
   background-repeat: no-repeat;
@@ -24,19 +24,19 @@
 
 .instruction {
   border-radius: 4px;
-  background-image: url("../assets/message.svg");
+  background-image: url("./assets/message.svg");
 }
 
 .action {
   color: #702bf5;
   border-radius: 32px;
-  background-image: url("../assets/triangle.svg");
+  background-image: url("./assets/triangle.svg");
 }
 
 .error {
-  background-image: url("../assets/error.svg");
+  background-image: url("./assets/error.svg");
   border-radius: 4px;
-  color: var(--red);
+  color: $red;
 }
 
 .detail {
@@ -50,7 +50,7 @@
 }
 
 .detail-title {
-  background-image: url("../assets/arrow-left.svg");
+  background-image: url("./assets/arrow-left.svg");
   font-size: 0.865rem;
   background-color: #474e62;
   background-repeat: no-repeat;
@@ -60,15 +60,15 @@
 }
 
 .incoming .detail-title {
-  background-image: url("../assets/arrow-left.svg");
+  background-image: url("./assets/arrow-left.svg");
 }
 
 .outgoing .detail-title {
-  background-image: url("../assets/arrow-right.svg");
+  background-image: url("./assets/arrow-right.svg");
 }
 
 .informational .detail-title {
-  background-image: url("../assets/message.svg");
+  background-image: url("./assets/message.svg");
 }
 
 .detail-body {
@@ -76,9 +76,15 @@
 }
 
 .renderjson {
+  font-family: $mono-typeface;
   margin: 0;
   overflow: scroll;
   scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
 }
 
 .renderjson a {

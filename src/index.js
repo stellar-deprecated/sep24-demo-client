@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 import * as uiActions from "./ui/ui-actions";
 
 // require("./ui/show-all-types")(uiActions);
