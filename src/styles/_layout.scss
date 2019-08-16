@@ -5,13 +5,13 @@ html {
   height: 100%;
   background: $black-5;
   box-sizing: border-box;
+  font-family: $main-typeface;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
-  font-family: suisse, sans-serif;
 }
 
 .layout-wrapper {

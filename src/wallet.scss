@@ -43,7 +43,7 @@
 
 html,
 body {
-  font-family: suisse, sans-serif;
+  font-family: $main-typeface;
   background: white;
   height: 100%;
   margin: 0;
@@ -180,6 +180,7 @@ h2 {
   border: none;
   box-sizing: border-box;
   display: block;
+  text-align: center;
   font-weight: 500;
   text-transform: uppercase;
   font-size: 1.0625rem;
@@ -261,7 +262,7 @@ h2 {
 }
 
 .sending-key {
-  font-family: suisse-mono, monospace;
+  font-family: $mono-typeface;
   margin-bottom: 8px;
 }
 
@@ -279,4 +280,44 @@ h2 {
   .active {
     margin-bottom: 25px;
   }
+}
+
+/* Receipt page */
+
+.success {
+  text-align: center;
+  margin: 90px 0 40px 0;
+}
+
+.success__icon {
+  margin-bottom: 10px;
+}
+
+.success__title {
+  font-size: 28/16 + rem;
+  color: $black-100;
+  font-weight: 500;
+}
+
+.reference {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.reference-text {
+  font-size: 14/16 + rem;
+  font-weight: 500;
+  color: $black-70;
+  padding-bottom: 12px;
+}
+
+.reference-number {
+  color: $black-100;
+  display: block;
+  font-family: $mono-typeface;
+  font-size: 24/16 + rem;
+}
+
+.receipt-buttons {
+  margin-top: 45px;
 }
