@@ -1,4 +1,4 @@
-import "./wallet.css";
+import "./wallet.scss";
 
 document.querySelectorAll("[data-send-message]").forEach((el) => {
   el.addEventListener("click", function() {
