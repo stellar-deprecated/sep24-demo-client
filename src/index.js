@@ -37,6 +37,7 @@ if (!Config.isValid()) {
  * Deposit
  * @property {string} deposit_memo - The memo we asked the anchor to send our funds with
  * @property {string} deposit_type - The memo type we asked the anchor to send our funds with
+ * @property {string} deposit_url - The more_info_url used to bring up info on the deposit
  */
 
 /**
@@ -62,7 +63,8 @@ const depositSteps = [
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
-  require("./steps/show_interactive_webapp"),
+  require("./steps/deposit/show_interactive_webapp"),
+  require("./steps/deposit/show_deposit_info"),
 ];
 
 let steps = null;
