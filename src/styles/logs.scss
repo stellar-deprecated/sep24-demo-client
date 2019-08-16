@@ -24,17 +24,17 @@
 
 .instruction {
   border-radius: 4px;
-  background-image: url("../assets/message.svg");
+  background-image: url("./assets/message.svg");
 }
 
 .action {
   color: #702bf5;
   border-radius: 32px;
-  background-image: url("../assets/triangle.svg");
+  background-image: url("./assets/triangle.svg");
 }
 
 .error {
-  background-image: url("../assets/error.svg");
+  background-image: url("./assets/error.svg");
   border-radius: 4px;
   color: var(--red);
 }
@@ -50,7 +50,7 @@
 }
 
 .detail-title {
-  background-image: url("../assets/arrow-left.svg");
+  background-image: url("./assets/arrow-left.svg");
   font-size: 0.865rem;
   background-color: #474e62;
   background-repeat: no-repeat;
@@ -60,15 +60,15 @@
 }
 
 .incoming .detail-title {
-  background-image: url("../assets/arrow-left.svg");
+  background-image: url("./assets/arrow-left.svg");
 }
 
 .outgoing .detail-title {
-  background-image: url("../assets/arrow-right.svg");
+  background-image: url("./assets/arrow-right.svg");
 }
 
 .informational .detail-title {
-  background-image: url("../assets/message.svg");
+  background-image: url("./assets/message.svg");
 }
 
 .detail-body {
