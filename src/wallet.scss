@@ -1,4 +1,4 @@
-@import "./styles/colors.scss";
+@import "./styles/variables";
 
 @font-face {
   font-display: block;
@@ -63,12 +63,12 @@ body {
 h1 {
   font-size: 1.75rem;
   font-weight: 500;
-  color: var(--black-100);
+  color: $black-100;
   margin: 0;
 }
 
 h2 {
-  color: var(--black-50);
+  color: $black-50;
   text-transform: uppercase;
   font-size: 0.9375rem;
   font-weight: 400;
@@ -99,7 +99,7 @@ h2 {
   display: block;
   width: 30px;
   height: 2px;
-  background-color: var(--black-100);
+  background-color: $black-100;
   border-radius: 9px;
 }
 
@@ -125,18 +125,18 @@ h2 {
   padding: 4px 10px;
   border-radius: 50px;
   font-weight: 500;
-  color: var(--black-60);
-}
+  color: $black-60;
 
-.tabs__item.is-selected {
-  background-color: var(--purple);
-  color: white;
+  &.is-selected {
+    background-color: $purple;
+    color: white;
+  }
 }
 
 /* Card */
 
 .card {
-  background-color: var(--black-5);
+  background-color: $black-5;
   padding: 15px;
   border-radius: 6px;
 }
@@ -156,21 +156,21 @@ h2 {
 .balance__value {
   padding-top: 5px;
   font-size: 3.187rem;
-  color: var(--purple);
+  color: $purple;
   font-weight: 500;
   display: inline-block;
 }
 
 .balance__decimals {
   font-size: 1.375rem;
-  color: var(--purple);
+  color: $purple;
   font-weight: 500;
   display: inline-block;
 }
 
 .balance__token-info {
   font-size: 1.3125rem;
-  color: var(--black-70);
+  color: $black-70;
   font-weight: 500;
 }
 
@@ -183,41 +183,41 @@ h2 {
   font-weight: 500;
   text-transform: uppercase;
   font-size: 1.0625rem;
-  background-color: var(--purple);
+  background-color: $purple;
   color: white;
   width: 100%;
   border-radius: 100px;
   padding: 13px 20px;
   transition: all 0.3s ease-out;
-}
 
-.button:focus {
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem var(--muted-purple);
-}
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem $muted-purple;
+  }
 
-.button:disabled {
-  opacity: 0.5;
-}
+  &:disabled {
+    opacity: 0.5;
+  }
 
-.button:enabled {
-  cursor: pointer;
-}
+  &:enabled {
+    cursor: pointer;
+  }
 
-.button:hover:enabled {
-  background: var(--bright-purple);
-  transform: scale(1.05);
+  &:hover:enabled {
+    background: $bright-purple;
+    transform: scale(1.05);
+  }
 }
 
 .button--outline {
   background-color: white;
-  color: var(--purple);
-  border: 2px solid var(--purple);
+  color: $purple;
+  border: 2px solid $purple;
   padding: 9px 16px;
-}
 
-.button--outline:disabled {
-  opacity: 0.3;
+  &:disabled {
+    opacity: 0.3;
+  }
 }
 
 /* Wallet page */
@@ -230,11 +230,11 @@ h2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
 
-.actions__secondary .button {
-  width: 48%;
-  display: inline-block;
+  .button {
+    width: 48%;
+    display: inline-block;
+  }
 }
 
 /* Confirmation page */
@@ -266,7 +266,7 @@ h2 {
 }
 
 .sending-anchor-domain {
-  color: var(--green);
+  color: $green;
   font-size: 0.875rem;
   background-image: url("./assets/padlock.svg");
   background-repeat: no-repeat;
@@ -275,6 +275,8 @@ h2 {
   padding-left: 20px;
 }
 
-.send-confirmation-buttons .active {
-  margin-bottom: 25px;
+.send-confirmation-buttons {
+  .active {
+    margin-bottom: 25px;
+  }
 }

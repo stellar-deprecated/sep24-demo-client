@@ -2,7 +2,7 @@
   overflow-wrap: break-word;
   max-width: 100%;
   font-size: 0.865rem;
-  color: var(--black-70);
+  color: $black-70;
   margin-bottom: 15px;
   padding: 7px 20px 7px 45px;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 .error {
   background-image: url("./assets/error.svg");
   border-radius: 4px;
-  color: var(--red);
+  color: $red;
 }
 
 .detail {
@@ -79,6 +79,11 @@
   margin: 0;
   overflow: scroll;
   scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
 }
 
 .renderjson a {
