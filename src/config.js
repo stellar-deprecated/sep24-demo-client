@@ -118,10 +118,12 @@ const installUI = (panel) => {
 
 const get = (key) => {
   const field = fields.find((f) => f.key === key);
-  if (
-    !field.optional &&
-    (!field || !(field.value || field.type == "checkbox"))
-  ) {
+  let success = true;
+
+  if (!field) {
+    throw "Unknown configuration key " + key;
+  }
+  if (!field.optional && !(field.value || field.type == "checkbox")) {
     throw "Missing required config for " + key;
   }
   if (field.type == "checkbox") return field.value;
