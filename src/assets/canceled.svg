@@ -1,0 +1,8 @@
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Confirmed-icon-Copy" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="x" transform="translate(1.500000, 1.500000)" stroke="#D0021B" stroke-width="1.5">
+            <path d="M9,0 L0,9" id="Path"></path>
+            <path d="M0,0 L9,9" id="Path"></path>
+        </g>
+    </g>
+</svg>

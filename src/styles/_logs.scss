@@ -50,7 +50,6 @@
 }
 
 .detail-title {
-  background-image: url("./assets/arrow-left.svg");
   font-size: 0.865rem;
   background-color: #474e62;
   background-repeat: no-repeat;
@@ -68,7 +67,7 @@
 }
 
 .informational .detail-title {
-  background-image: url("./assets/message.svg");
+  padding-left: 20px;
 }
 
 .detail-body {
