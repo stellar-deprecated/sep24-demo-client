@@ -118,8 +118,6 @@ const installUI = (panel) => {
 
 const get = (key) => {
   const field = fields.find((f) => f.key === key);
-  let success = true;
-
   if (!field) {
     throw "Unknown configuration key " + key;
   }
