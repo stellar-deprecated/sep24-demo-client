@@ -11,7 +11,7 @@ module.exports = {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
-    const BRIDGE_URL = Config.get("BRIDGE_URL");
+    const transfer_server = state.transfer_server;
 
     state.deposit_memo = crypto.randomBytes(64).toString("base64");
     state.deposit_memo_type;
@@ -26,7 +26,7 @@ module.exports = {
     };
     request("GET /deposit", params);
     // Expect this to fail with 403
-    const result = await get(`${BRIDGE_URL}/deposit`, params, {
+    const result = await get(`${transfer_server}/deposit`, params, {
       headers: {
         Authorization: `Bearer ${state.token}`,
       },

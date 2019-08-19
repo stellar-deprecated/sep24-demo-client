@@ -8,7 +8,7 @@ module.exports = {
   action: "GET /auth (SEP-0010)",
   execute: async function(state, { request, response, instruction, expect }) {
     const USER_SK = Config.get("USER_SK");
-    const AUTH_URL = Config.get("AUTH_SERVER_URL");
+    const AUTH_URL = state.auth_endpoint;
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const params = { account: pk };
     request("GET /auth", params);

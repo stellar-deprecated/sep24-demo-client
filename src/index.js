@@ -25,6 +25,8 @@ if (!Config.isValid()) {
 /**
  * State maintained between steps
  * @typedef {Object} State
+ * @property {string} auth_server - URL hosting the SEP10 auth server
+ * @property {string} transfer_server - URL hosting the SEP6 transfer server
  * @property {string} interactive_url - URL hosting the interactive webapp step
  * @property {string} challenge_transaction - XDR Representation of Stellar challenge transaction signed by server only
  * @property {Object} signed_challenge_tx - Stellar transaction challenge signed by both server and client
@@ -45,6 +47,7 @@ if (!Config.isValid()) {
 const state = {};
 
 const withdrawSteps = [
+  require("./steps/check_toml"),
   require("./steps/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
