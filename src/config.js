@@ -3,7 +3,21 @@ let fields = [
     key: "HOME_DOMAIN",
     label: "Domain hosting the stellar.toml file",
     value: null,
+    optional: true,
   },
+  {
+    key: "TRANSFER_SERVER",
+    label: "(OPTIONAL) Override the transfer server url",
+    value: null,
+    optional: true,
+  },
+  {
+    key: "WEB_AUTH_ENDPOINT",
+    label: "(OPTIONAL) Override the web auth SEP10 url",
+    value: null,
+    optional: true,
+  },
+
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
@@ -104,7 +118,10 @@ const installUI = (panel) => {
 
 const get = (key) => {
   const field = fields.find((f) => f.key === key);
-  if (!field || !(field.value || field.type == "checkbox")) {
+  if (!field) {
+    throw "Unknown configuration key " + key;
+  }
+  if (!field.optional && !(field.value || field.type == "checkbox")) {
     throw "Missing required config for " + key;
   }
   if (field.type == "checkbox") return field.value;
@@ -112,7 +129,7 @@ const get = (key) => {
 };
 
 const isValid = () => {
-  return fields.every((f) => !!f.value || f.type === "checkbox");
+  return fields.every((f) => !!f.value || f.type === "checkbox" || f.optional);
 };
 
 module.exports = {
