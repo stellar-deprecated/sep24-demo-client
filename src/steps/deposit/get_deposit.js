@@ -26,7 +26,11 @@ module.exports = {
     };
     request("GET /deposit", params);
     // Expect this to fail with 403
-    const result = await get(`${transfer_server}/deposit`, params);
+    const result = await get(`${transfer_server}/deposit`, params, {
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    });
     response("GET /deposit", result);
     expect(
       result.type === "interactive_customer_info_needed",

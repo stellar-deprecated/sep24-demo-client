@@ -19,6 +19,11 @@ module.exports = {
         const transactionResult = await get(
           `${transfer_server}/transaction`,
           transactionParams,
+          {
+            headers: {
+              Authorization: `Bearer ${state.token}`,
+            },
+          },
         );
         response("GET /transaction", transactionResult);
         if (transactionResult.transaction.status === "completed") {

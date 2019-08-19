@@ -54,6 +54,7 @@ body {
 *:after {
   box-sizing: inherit;
   margin: 0;
+  user-select: none;
 }
 
 .container {
@@ -78,7 +79,7 @@ h2 {
 /* Header */
 
 .header {
-  padding: 50px 20px;
+  padding: 40px 20px 30px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -116,7 +117,7 @@ h2 {
 .tabs {
   display: flex;
   flex-direction: row;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .tabs__item {
@@ -147,29 +148,29 @@ h2 {
 }
 
 .card--balance {
-  padding: 30px 30px 25px 30px;
-  margin-bottom: 40px;
+  padding: 20px 30px 20px 30px;
+  margin-bottom: 20px;
 }
 
 /* Balance */
 
 .balance__value {
   padding-top: 5px;
-  font-size: 3.187rem;
+  font-size: 28/16 + rem;
   color: $purple;
   font-weight: 500;
   display: inline-block;
 }
 
 .balance__decimals {
-  font-size: 1.375rem;
+  font-size: 18/16 + rem;
   color: $purple;
   font-weight: 500;
   display: inline-block;
 }
 
 .balance__token-info {
-  font-size: 1.3125rem;
+  font-size: 1rem;
   color: $black-70;
   font-weight: 500;
 }
@@ -183,12 +184,12 @@ h2 {
   text-align: center;
   font-weight: 500;
   text-transform: uppercase;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   background-color: $purple;
   color: white;
   width: 100%;
   border-radius: 100px;
-  padding: 13px 20px;
+  padding: 11px 20px;
   transition: all 0.3s ease-out;
 
   &:focus {
@@ -223,19 +224,119 @@ h2 {
 
 /* Wallet page */
 
-.actions > * {
-  margin-bottom: 20px;
+.actions {
+  margin-bottom: 40px;
 }
 
-.actions__secondary {
+.actions__row {
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   .button {
     width: 48%;
+  }
+}
+
+.actions__secondary {
+  .button {
     display: inline-block;
   }
+}
+
+.transactions__list {
+  margin-top: 10px;
+}
+
+.transaction {
+  cursor: pointer;
+  padding: 10px 5px 10px 10px;
+  border-bottom: 1px solid $black-5;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 0.25s ease-out;
+
+  &:hover {
+    border-color: transparent;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: scale(1.03);
+    background-color: $black-5;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.transaction__status-icon {
+  flex-grow: 0;
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  .transaction--pending & {
+    background-image: url("./assets/clock.svg");
+  }
+
+  .transaction--success & {
+    background-image: url("./assets/check.svg");
+  }
+
+  .transaction--canceled & {
+    background-image: url("./assets/canceled.svg");
+  }
+}
+
+.transaction__details {
+  flex-grow: 1;
+}
+
+.transation__type {
+  color: $black-90;
+  font-size: 13/16 + rem;
+  padding-bottom: 3px;
+}
+
+.transaction__status {
+  color: $black-60;
+  font-size: 12/16 + rem;
+}
+
+.transaction__value {
+  flex-grow: 1;
+}
+
+.transaction__amount {
+  color: $black-100;
+  font-size: 13/16 + rem;
+  font-weight: 500;
+  text-align: right;
+  padding-bottom: 3px;
+}
+
+.transaction_token {
+  color: $black-70;
+  font-size: 12/16 + rem;
+  text-align: right;
+}
+
+.transation__chevron-icon {
+  flex-grow: 0;
+  display: block;
+  margin-left: 10px;
+  width: 9px;
+  height: 9px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("./assets/chevron-right.svg");
 }
 
 /* Confirmation page */
