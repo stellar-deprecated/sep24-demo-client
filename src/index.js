@@ -39,6 +39,7 @@ if (!Config.isValid()) {
  * Deposit
  * @property {string} deposit_memo - The memo we asked the anchor to send our funds with
  * @property {string} deposit_type - The memo type we asked the anchor to send our funds with
+ * @property {string} deposit_url - The more_info_url used to bring up info on the deposit
  */
 
 /**
@@ -52,24 +53,29 @@ const withdrawSteps = [
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
-  require("./steps/get_withdraw"),
-  require("./steps/show_interactive_webapp"),
-  require("./steps/confirm_payment"),
-  require("./steps/send_stellar_transaction"),
-  require("./steps/poll_for_success"),
+  require("./steps/withdraw/get_withdraw"),
+  require("./steps/withdraw/show_interactive_webapp"),
+  require("./steps/withdraw/confirm_payment"),
+  require("./steps/withdraw/send_stellar_transaction"),
+  require("./steps/withdraw/poll_for_success"),
 ];
 
 const depositSteps = [
+  require("./steps/check_toml"),
   require("./steps/deposit/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
-  require("./steps/show_interactive_webapp"),
+  require("./steps/deposit/show_interactive_webapp"),
+  require("./steps/deposit/show_deposit_info"),
 ];
 
 let steps = null;
 
+uiActions.instruction(
+  "Withdraw and deposit are available for trusted assets in the wallet",
+);
 uiActions.setLoading(true, "Waiting for user...");
 uiActions.waitForPageMessage("pages/wallet.html").then((message) => {
   uiActions.setLoading(false);

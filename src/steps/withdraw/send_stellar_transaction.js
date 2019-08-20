@@ -1,6 +1,6 @@
 const StellarSdk = require("stellar-sdk");
-const Config = require("../config");
-const get = require("../util/get");
+const Config = require("src/config");
+const get = require("src/util/get");
 
 module.exports = {
   instruction:
