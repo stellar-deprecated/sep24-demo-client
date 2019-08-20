@@ -11,33 +11,35 @@ module.exports = {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
-    const BRIDGE_URL = Config.get("BRIDGE_URL");
+    const transfer_server = state.transfer_server;
 
     state.deposit_memo = crypto.randomBytes(64).toString("base64");
     state.deposit_memo_type;
     instruction(
-      `We've created the deposit memo ${
-        state.deposit_memo
-      } to listen for a successful deposit`
+      `We've created the deposit memo ${state.deposit_memo} to listen for a successful deposit`,
     );
     const params = {
       asset_code: ASSET_CODE,
       account: pk,
       memo: state.deposit_memo,
-      memo_type: state.deposit_memo_type
+      memo_type: state.deposit_memo_type,
     };
     request("GET /deposit", params);
     // Expect this to fail with 403
-    const result = await get(`${BRIDGE_URL}/deposit`, params);
+    const result = await get(`${transfer_server}/deposit`, params, {
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    });
     response("GET /deposit", result);
     expect(
       result.type === "interactive_customer_info_needed",
-      `Expected interactive customer needed, received ${result.type}`
+      `Expected interactive customer needed, received ${result.type}`,
     );
     instruction(
       "GET /deposit tells us we need to collect info interactively.  The URL for the interactive portion is " +
-        result.url
+        result.url,
     );
     state.interactive_url = result.url;
-  }
+  },
 };

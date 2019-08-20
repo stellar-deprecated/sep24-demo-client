@@ -10,17 +10,20 @@ module.exports = {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
-    const BRIDGE_URL = Config.get("BRIDGE_URL");
+    const transfer_server = state.transfer_server;
     const withdrawType = "cash";
     const params = {
       type: withdrawType,
       asset_code: ASSET_CODE,
       account: pk,
-      jwt: state.token,
     };
     request("GET /withdraw", params);
     // Expect this to fail with 403
-    const result = await get(`${BRIDGE_URL}/withdraw`, params);
+    const result = await get(`${transfer_server}/withdraw`, params, {
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    });
     response("GET /withdraw", result);
     instruction(
       "GET /withdraw tells us we need to collect info interactively.  The URL for the interactive portion is " +
