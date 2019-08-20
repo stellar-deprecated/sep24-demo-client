@@ -18,9 +18,7 @@
         <div class="tabs__item">EUR</div>
         <div class="tabs__item">BTC</div>
       </div>
-    </div>
 
-    <div class="container">
       <div class="card card--balance">
         <h2>Available Balance</h2>
         <div class="balance">
@@ -29,29 +27,73 @@
           <div class="balance__token-info">USD @ Anchor</div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
       <div class="actions">
-        <div class="actions__secondary">
+        <div class="actions__row actions__secondary">
           <button class="button button--outline" disabled>Send</button>
           <button class="button button--outline" disabled>Receive</button>
         </div>
-        <button
-          data-send-message="start-deposit"
-          class="button"
-          id="withdraw-button"
-        >
-          Deposit
-        </button>
-        <button
-          data-send-message="start-withdraw"
-          class="button"
-          id="withdraw-button"
-        >
-          Withdraw
-        </button>
+        <div class="actions__row">
+          <button
+            data-send-message="start-deposit"
+            class="button"
+            id="withdraw-button"
+          >
+            Deposit
+          </button>
+          <button
+            data-send-message="start-withdraw"
+            class="button"
+            id="withdraw-button"
+          >
+            Withdraw
+          </button>
+        </div>
       </div>
+
+      <!-- <div class="transactions">
+        <h2>Recent transactions</h2>
+        <div class="transactions__list">
+          <div class="transaction transaction--success">
+            <i class="transaction__status-icon"></i>
+            <div class="transaction__details">
+              <div class="transation__type">Withdrawal</div>
+              <div class="transaction__status">Pending</div>
+            </div>
+            <div class="transaction__value">
+              <div class="transaction__amount">100.00</div>
+              <div class="transaction_token">USD @ Anchor</div>
+            </div>
+            <i class="transation__chevron-icon"></i>
+          </div>
+
+          <div class="transaction transaction--success">
+            <i class="transaction__status-icon"></i>
+            <div class="transaction__details">
+              <div class="transation__type">Deposit</div>
+              <div class="transaction__status">Completed</div>
+            </div>
+            <div class="transaction__value">
+              <div class="transaction__amount">500.00</div>
+              <div class="transaction_token">USD @ Anchor</div>
+            </div>
+            <i class="transation__chevron-icon"></i>
+          </div>
+
+          <div class="transaction transaction--canceled">
+            <i class="transaction__status-icon"></i>
+            <div class="transaction__details">
+              <div class="transation__type">Withdrawal</div>
+              <div class="transaction__status">Canceled</div>
+            </div>
+            <div class="transaction__value">
+              <div class="transaction__amount">199.90</div>
+              <div class="transaction_token">USD @ Anchor</div>
+            </div>
+            <i class="transation__chevron-icon"></i>
+          </div>
+        </div>
+      </div> -->
     </div>
 
     <script src="/wallet.js"></script>

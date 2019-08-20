@@ -12,28 +12,33 @@
   pointer-events: none;
   transition: all 0.3s ease-out;
   z-index: 10;
-}
 
-.modal.visible {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: inherit;
-}
+  &::before {
+    content: "";
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 
-.modal.visible::before {
-  opacity: 1;
-  transition: opacity 0.2s ease-out;
-}
+  &.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: inherit;
 
-.modal::before {
-  content: "";
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    &::before {
+      opacity: 1;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .modal__window {
+      opacity: 1;
+      transform: translate(0, 0px);
+    }
+  }
 }
 
 .modal__window {
@@ -43,17 +48,12 @@
   max-height: 95%;
   padding: 35px 30px 15px 40px;
   min-width: 650px;
-  background: var(--light-yellow);
+  background: $light-yellow;
   border-radius: 5px;
   z-index: 11;
   transform: translate(0, -100px);
   opacity: 0;
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-}
-
-.modal.visible .modal__window {
-  opacity: 1;
-  transform: translate(0, 0px);
 }
 
 .modal__close {
@@ -68,10 +68,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.modal__close:hover {
-  background-color: var(--black-20);
+  &:hover {
+    background-color: $black-20;
+  }
 }
 
 .modal__title {
@@ -85,14 +85,14 @@
 }
 
 .modal__footer {
-  border-top: 1px solid var(--black-20);
+  border-top: 1px solid $black-20;
   display: flex;
   align-items: row;
   justify-content: flex-end;
   padding-top: 15px;
   text-align: center;
-}
 
-.modal__footer > * {
-  margin-left: 20px;
+  > * {
+    margin-left: 20px;
+  }
 }

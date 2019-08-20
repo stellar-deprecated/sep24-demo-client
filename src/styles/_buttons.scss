@@ -1,0 +1,113 @@
+#action-button {
+  padding: 12px 48px 12px 60px;
+  background-image: url("./assets/next-arrow.svg");
+  background-position: 20px center;
+
+  &:not(.loading) {
+    animation: pulse 1.5s infinite;
+    animation-delay: 0.5s;
+  }
+
+  &:hover {
+    animation: none;
+    cursor: pointer;
+  }
+
+  &.loading {
+    background: $muted-purple;
+    padding-left: 38px;
+
+    &::before {
+      content: "";
+      display: block;
+      margin-right: 10px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50px;
+      border: 3px solid white;
+      border-left-color: rgba(255, 255, 255, 0.3);
+      animation: rotate 2s linear infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  0% {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(125, 0, 255, 0.5),
+      0 0 0 0px rgba(125, 0, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 40px rgba(125, 0, 255, 0), 0 0 0 20px rgba(125, 0, 255, 0);
+  }
+}
+
+.button {
+  display: inline-block;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 500;
+  font-size: 1rem;
+  background-color: $purple;
+  color: white;
+  border-radius: 100px;
+  padding: 12px 40px;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out,
+    border 0.2s ease-out;
+  display: flex;
+  background-repeat: no-repeat;
+  align-items: center;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem $muted-purple;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: $bright-purple;
+  }
+}
+
+.button--small {
+  font-size: 0.9375rem;
+  padding: 7px 20px 8px 20px;
+}
+
+.button--ghost {
+  padding: 10px 38px;
+  background-color: transparent;
+  color: $black-70;
+  border: 2px solid $black-20;
+
+  &:hover {
+    color: $black-90;
+    background-color: transparent;
+    border-color: $black-70;
+  }
+}
+
+.button--outline {
+  background-color: transparent;
+  color: $purple;
+  border: 2px solid $purple;
+  background-color: white;
+  &:hover {
+    background-color: $muted-purple;
+  }
+}

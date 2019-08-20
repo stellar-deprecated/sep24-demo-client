@@ -1,11 +1,11 @@
-@import "./styles/colors.css";
-@import "./styles/buttons.css";
-@import "./styles/device.css";
-@import "./styles/logs.css";
-@import "./styles/layout.css";
-@import "./styles/modal.css";
-@import "./styles/form.css";
-@import "./styles/icon.css";
+@import "./styles/variables";
+@import "./styles/buttons";
+@import "./styles/device";
+@import "./styles/logs";
+@import "./styles/layout";
+@import "./styles/modal";
+@import "./styles/form";
+@import "./styles/icon";
 
 @font-face {
   font-display: block;
@@ -55,14 +55,14 @@
   top: 0;
   left: 0;
   right: 0;
-  background: var(--red);
+  background: $red;
   color: white;
   padding: 8px 16px;
   display: none;
-}
 
-#pubnet-disclaimer.visible {
-  display: block;
+  &.visible {
+    display: block;
+  }
 }
 
 iframe {

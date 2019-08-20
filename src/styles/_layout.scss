@@ -3,15 +3,15 @@ html {
   margin: 0;
   width: 100%;
   height: 100%;
-  background: var(--black-5);
+  background: $black-5;
   box-sizing: border-box;
+  font-family: $main-typeface;
 }
 
 *,
 *:before,
 *:after {
   box-sizing: inherit;
-  font-family: suisse, sans-serif;
 }
 
 .layout-wrapper {
@@ -33,12 +33,12 @@ html {
   overflow: auto;
   grid-row: 1;
   grid-column: 1;
-}
+  scrollbar-width: none;
 
-.instructions-section::-webkit-scrollbar,
-.renderjson::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
 }
 
 .instructions-container {
@@ -57,7 +57,7 @@ html {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row: 2;
-  border-top: 1px solid var(--black-20);
+  border-top: 1px solid $black-20;
   background-color: white;
   display: flex;
   flex-direction: row;
