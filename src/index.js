@@ -15,6 +15,10 @@ Config.listen(() => {
     disclaimer.classList.remove("visible");
     StellarSdk.Network.useTestNetwork();
   }
+  console.log(
+    "Wallet Public Key: " +
+      StellarSdk.Keypair.fromSecret(Config.get("USER_SK")).publicKey(),
+  );
 });
 
 Config.installUI(document.querySelector("#config-panel"));
@@ -37,6 +41,7 @@ if (!Config.isValid()) {
  * @property {string} external_transaction_id - The reference identifier needed to retrieve or confirm the withdrawal
  *
  * Deposit
+ * @property {string} asset_issuer - The public key of the asset issuer that we expect a deposit from
  * @property {string} deposit_memo - The memo we asked the anchor to send our funds with
  * @property {string} deposit_type - The memo type we asked the anchor to send our funds with
  * @property {string} deposit_url - The more_info_url used to bring up info on the deposit
@@ -62,6 +67,7 @@ const withdrawSteps = [
 
 const depositSteps = [
   require("./steps/check_toml"),
+  require("./steps/deposit/add_trustline"),
   require("./steps/deposit/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
