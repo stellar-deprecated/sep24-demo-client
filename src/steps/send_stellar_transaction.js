@@ -35,6 +35,7 @@ module.exports = {
 
     const transaction = new StellarSdk.TransactionBuilder(account, {
       fee: feeStats.p70_accepted_fee * 2,
+      networkPassphrase: state.network,
     })
       .addOperation(
         StellarSdk.Operation.payment({

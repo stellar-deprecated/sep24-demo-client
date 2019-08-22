@@ -1,30 +1,13 @@
 import "./style.scss";
 import * as uiActions from "./ui/ui-actions";
 
-// require("./ui/show-all-types")(uiActions);
-
 const Config = require("./config");
 const StellarSdk = require("stellar-sdk");
-
-Config.listen(() => {
-  const disclaimer = document.getElementById("pubnet-disclaimer");
-  if (Config.get("PUBNET")) {
-    disclaimer.classList.add("visible");
-    StellarSdk.Network.usePublicNetwork();
-  } else {
-    disclaimer.classList.remove("visible");
-    StellarSdk.Network.useTestNetwork();
-  }
-});
-
-Config.installUI(document.querySelector("#config-panel"));
-if (!Config.isValid()) {
-  uiActions.showConfig();
-}
 
 /**
  * State maintained between steps
  * @typedef {Object} State
+ * @property {StellarSdk.Network} network - Stellar network to operate on
  * @property {string} auth_server - URL hosting the SEP10 auth server
  * @property {string} transfer_server - URL hosting the SEP6 transfer server
  * @property {string} interactive_url - URL hosting the interactive webapp step
@@ -45,6 +28,22 @@ if (!Config.isValid()) {
  * @type State
  */
 const state = {};
+
+Config.listen(() => {
+  const disclaimer = document.getElementById("pubnet-disclaimer");
+  if (Config.get("PUBNET")) {
+    disclaimer.classList.add("visible");
+    state.network = StellarSdk.Networks.PUBLIC;
+  } else {
+    disclaimer.classList.remove("visible");
+    state.network = StellarSdk.Networks.TESTNET;
+  }
+});
+
+Config.installUI(document.querySelector("#config-panel"));
+if (!Config.isValid()) {
+  uiActions.showConfig();
+}
 
 const withdrawSteps = [
   require("./steps/check_toml"),
