@@ -9,6 +9,7 @@ module.exports = {
   execute: async function(state, { request, expect }) {
     const USER_SK = Config.get("USER_SK");
     const HORIZON_URL = Config.get("HORIZON_URL");
+    const ASSET_CODE = Config.get("ASSET_CODE");
     const pk = StellarSdk.Keypair.fromSecret(USER_SK).publicKey();
     request("Sending the payment using the following anchor account info", {
       address: state.anchors_stellar_address,
@@ -33,13 +34,15 @@ module.exports = {
       );
     }
 
+    const asset = new StellarSdk.Asset(ASSET_CODE, state.asset_issuer);
+
     const transaction = new StellarSdk.TransactionBuilder(account, {
       fee: feeStats.p70_accepted_fee * 2,
     })
       .addOperation(
         StellarSdk.Operation.payment({
           destination: state.anchors_stellar_address,
-          asset: StellarSdk.Asset.native(),
+          asset: asset,
           amount: "100", // TODO send amount through
         }),
       )

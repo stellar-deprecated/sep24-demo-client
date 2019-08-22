@@ -10,9 +10,14 @@ module.exports = {
     let HOME_DOMAIN = Config.get("HOME_DOMAIN");
     let WEB_AUTH_OVERRIDE = Config.get("WEB_AUTH_ENDPOINT");
     let TRANSFER_SERVER_OVERRIDE = Config.get("TRANSFER_SERVER");
+    let ASSET_ISSUER_OVERRIDE = Config.get("ASSET_ISSUER");
+    const ASSET_CODE = Config.get("ASSET_CODE");
     expect(
-      HOME_DOMAIN || (WEB_AUTH_OVERRIDE && TRANSFER_SERVER_OVERRIDE),
-      "Config needs either a HOME_DOMAIN or a WEB_AUTH_ENDPOINT and TRANSFER_SERVER",
+      HOME_DOMAIN ||
+        (WEB_AUTH_OVERRIDE &&
+          TRANSFER_SERVER_OVERRIDE &&
+          ASSET_ISSUER_OVERRIDE),
+      "Config needs either a HOME_DOMAIN or a WEB_AUTH_ENDPOINT + TRANSFER_SERVER + ASSET_ISSUER",
     );
     if (HOME_DOMAIN) {
       if (HOME_DOMAIN.indexOf("http") != 0) {
@@ -31,6 +36,18 @@ module.exports = {
         information.TRANSFER_SERVER,
         "Toml file doesn't contain a TRANSFER_SERVER",
       );
+      expect(information.CURRENCIES, "Toml file doesn't contain CURRENCIES");
+      const asset = information.CURRENCIES.find((c) => c.code === ASSET_CODE);
+      expect(
+        asset,
+        "Toml file doesn't contain a currency entry for " + ASSET_CODE,
+      );
+      expect(
+        asset.issuer && asset.issuer.length == 56,
+        "Toml file asset doesn't contain a valid 56 character issuer",
+      );
+
+      state.asset_issuer = asset && asset.issuer;
       state.auth_endpoint = information.WEB_AUTH_ENDPOINT;
       state.transfer_server = information.TRANSFER_SERVER;
     }
@@ -40,6 +57,10 @@ module.exports = {
         "Overriding TOMLs WEB_AUTH_ENDPOINT via config: " + WEB_AUTH_OVERRIDE,
       );
       state.auth_endpoint = WEB_AUTH_OVERRIDE;
+    } else {
+      instruction(
+        "Received WEB_AUTH_ENDPOINT from TOML: " + state.auth_endpoint,
+      );
     }
 
     if (TRANSFER_SERVER_OVERRIDE) {
@@ -48,6 +69,19 @@ module.exports = {
           TRANSFER_SERVER_OVERRIDE,
       );
       state.transfer_server = TRANSFER_SERVER_OVERRIDE;
+    } else {
+      instruction(
+        "Received TRANSFER_SERVER from TOML: " + state.transfer_server,
+      );
+    }
+
+    if (ASSET_ISSUER_OVERRIDE) {
+      instruction(
+        "Overriding TOMLs asset issuer via config: " + ASSET_ISSUER_OVERRIDE,
+      );
+      state.asset_issuer = ASSET_ISSUER_OVERRIDE;
+    } else {
+      instruction("Received asset issuer from TOML: " + state.asset_issuer);
     }
   },
 };

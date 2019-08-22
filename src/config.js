@@ -22,6 +22,12 @@ let fields = [
   { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
   {
+    key: "ASSET_ISSUER",
+    label: "(OPTIONAL) Override the public key of asset issuer",
+    value: null,
+    optional: true,
+  },
+  {
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
     value: false,
