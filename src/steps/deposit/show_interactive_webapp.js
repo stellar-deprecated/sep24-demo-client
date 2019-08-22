@@ -1,4 +1,4 @@
-const Config = require("../config");
+const Config = require("src/config");
 const StellarSdk = require("stellar-sdk");
 
 module.exports = {
@@ -32,9 +32,7 @@ module.exports = {
           }
           if (e.data.type === "success") {
             response("postMessage success", e.data);
-            state.anchors_stellar_address = e.data.withdraw_anchor_account;
-            state.stellar_memo = e.data.withdraw_memo;
-            state.stellar_memo_type = e.data.withdraw_memo_type;
+            state.deposit_url = e.data.more_info_url;
             resolve();
           }
         },
