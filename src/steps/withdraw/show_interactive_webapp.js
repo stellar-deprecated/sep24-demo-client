@@ -1,4 +1,4 @@
-const Config = require("../config");
+const Config = require("src/config");
 const StellarSdk = require("stellar-sdk");
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
   action: "Launch interactive portion",
   execute: async function(
     state,
-    { response, action, instruction, setDevicePage },
+    { response, action, instruction, setDevicePage, expect },
   ) {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
@@ -32,6 +32,18 @@ module.exports = {
           }
           if (e.data.type === "success") {
             response("postMessage success", e.data);
+            expect(
+              e.data.withdraw_anchor_account,
+              "withdraw_anchor_account undefined in postMessage success",
+            );
+            expect(
+              e.data.withdraw_memo,
+              "withdraw_memo undefined in postMessage success",
+            );
+            expect(
+              e.data.withdraw_memo_type,
+              "withdraw_memo_type undefined in postMessage success",
+            );
             state.anchors_stellar_address = e.data.withdraw_anchor_account;
             state.stellar_memo = e.data.withdraw_memo;
             state.stellar_memo_type = e.data.withdraw_memo_type;

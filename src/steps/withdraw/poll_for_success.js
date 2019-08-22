@@ -1,5 +1,5 @@
-const get = require("../util/get");
-const Config = require("../config");
+const get = require("src/util/get");
+const Config = require("src/config");
 
 // TODO should this poll?
 module.exports = {

@@ -15,6 +15,10 @@ Config.listen(() => {
     disclaimer.classList.remove("visible");
     StellarSdk.Network.useTestNetwork();
   }
+  //console.log(
+  //  "Wallet Public Key: " +
+  //    StellarSdk.Keypair.fromSecret(Config.get("USER_SK")).publicKey(),
+  //);
 });
 
 Config.installUI(document.querySelector("#config-panel"));
@@ -37,8 +41,10 @@ if (!Config.isValid()) {
  * @property {string} external_transaction_id - The reference identifier needed to retrieve or confirm the withdrawal
  *
  * Deposit
+ * @property {string} asset_issuer - The public key of the asset issuer that we expect a deposit from
  * @property {string} deposit_memo - The memo we asked the anchor to send our funds with
  * @property {string} deposit_type - The memo type we asked the anchor to send our funds with
+ * @property {string} deposit_url - The more_info_url used to bring up info on the deposit
  */
 
 /**
@@ -52,24 +58,30 @@ const withdrawSteps = [
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
-  require("./steps/get_withdraw"),
-  require("./steps/show_interactive_webapp"),
-  require("./steps/confirm_payment"),
-  require("./steps/send_stellar_transaction"),
-  require("./steps/poll_for_success"),
+  require("./steps/withdraw/get_withdraw"),
+  require("./steps/withdraw/show_interactive_webapp"),
+  require("./steps/withdraw/confirm_payment"),
+  require("./steps/withdraw/send_stellar_transaction"),
+  require("./steps/withdraw/poll_for_success"),
 ];
 
 const depositSteps = [
+  require("./steps/check_toml"),
+  require("./steps/deposit/add_trustline"),
   require("./steps/deposit/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
-  require("./steps/show_interactive_webapp"),
+  require("./steps/deposit/show_interactive_webapp"),
+  require("./steps/deposit/show_deposit_info"),
 ];
 
 let steps = null;
 
+uiActions.instruction(
+  "Withdraw and deposit are available for trusted assets in the wallet",
+);
 uiActions.setLoading(true, "Waiting for user...");
 uiActions.waitForPageMessage("pages/wallet.html").then((message) => {
   uiActions.setLoading(false);
