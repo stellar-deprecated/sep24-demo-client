@@ -18,7 +18,7 @@ Config.listen(() => {
   //console.log(
   //  "Wallet Public Key: " +
   //    StellarSdk.Keypair.fromSecret(Config.get("USER_SK")).publicKey(),
-  );
+  //);
 });
 
 Config.installUI(document.querySelector("#config-panel"));
