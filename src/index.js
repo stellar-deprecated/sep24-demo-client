@@ -15,9 +15,9 @@ Config.listen(() => {
     disclaimer.classList.remove("visible");
     StellarSdk.Network.useTestNetwork();
   }
-  console.log(
-    "Wallet Public Key: " +
-      StellarSdk.Keypair.fromSecret(Config.get("USER_SK")).publicKey(),
+  //console.log(
+  //  "Wallet Public Key: " +
+  //    StellarSdk.Keypair.fromSecret(Config.get("USER_SK")).publicKey(),
   );
 });
 
