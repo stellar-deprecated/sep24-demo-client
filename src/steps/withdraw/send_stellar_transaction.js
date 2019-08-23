@@ -38,12 +38,13 @@ module.exports = {
 
     const transaction = new StellarSdk.TransactionBuilder(account, {
       fee: feeStats.p70_accepted_fee * 2,
+      networkPassphrase: state.network,
     })
       .addOperation(
         StellarSdk.Operation.payment({
           destination: state.anchors_stellar_address,
           asset: asset,
-          amount: "100", // TODO send amount through
+          amount: state.withdraw_amount,
         }),
       )
       .addMemo(memo)
