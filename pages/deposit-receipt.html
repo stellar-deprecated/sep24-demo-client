@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style></style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="success">
+        <img class="success__icon" src="../src/assets/success.svg" />
+        <h1 class="success__title">Success!</h1>
+      </div>
+
+      <div class="card">
+        <div class="reference">
+          <p class="reference-text">
+            A deposit of <span data-replace="amount"></span> has been received
+            in your Wallet account. This is your anchor transaction number:
+          </p>
+          <p data-replace="reference_number" class="reference-number"></p>
+        </div>
+      </div>
+
+      <div class="receipt-buttons">
+        <div class="button">Close</div>
+      </div>
+    </div>
+  </body>
+  <script src="/wallet.js"></script>
+</html>

@@ -48,6 +48,7 @@ if (!Config.isValid()) {
 const state = {};
 
 const withdrawSteps = [
+  require("./steps/initial"),
   require("./steps/check_toml"),
   require("./steps/check_info"),
   require("./steps/SEP10/start"),
@@ -61,14 +62,15 @@ const withdrawSteps = [
 ];
 
 const depositSteps = [
-  require("./steps/check_toml"),
+  require("./steps/initial"),
+  // require("./steps/check_toml"),
   require("./steps/deposit/check_info"),
-  require("./steps/SEP10/start"),
-  require("./steps/SEP10/sign"),
-  require("./steps/SEP10/send"),
+  // require("./steps/SEP10/start"),
+  // require("./steps/SEP10/sign"),
+  // require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
   require("./steps/deposit/show_interactive_webapp"),
-  require("./steps/deposit/show_deposit_info"),
+  require("./steps/deposit/poll_transaction_status"),
 ];
 
 let steps = null;

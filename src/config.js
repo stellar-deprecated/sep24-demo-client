@@ -20,7 +20,14 @@ let fields = [
 
   { key: "USER_SK", label: "Stellar wallet secret key", value: null },
   { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
-  { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
+  { key: "ASSET_CODE", label: "Asset code to deposit/withdraw", value: null },
+  {
+    key: "ASSET_ISSUER_KEY",
+    label:
+      "(OPTIONAL) Asset Issuer's Public Key. Please provide this for full deposit flow.",
+    value: null,
+    optional: true,
+  },
   {
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
