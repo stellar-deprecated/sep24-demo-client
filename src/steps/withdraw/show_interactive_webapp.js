@@ -21,7 +21,23 @@ module.exports = {
       window.addEventListener(
         "message",
         function(e) {
-          if (e.data.status === "pending_user_transfer_start") {
+          let transaction = e.data.transaction;
+          // Support older clients for now
+          if (
+            e.data.type === "success" ||
+            e.data.status === "pending_user_transfer_start"
+          ) {
+            expect(
+              false,
+              "postMessage response should have the transaction in a transaction property, not top level.  Use the @stellar/anchor-transfer-utils helper to make this easier.",
+            );
+            transaction = e.data;
+          }
+          if (transaction) {
+            expect(
+              transaction.status === "pending_user_transfer_start",
+              "Unknown transaction status: " + transaction.status,
+            );
             response("postMessage: Interactive webapp completed", e.data);
             expect(
               e.data.withdraw_anchor_account,
