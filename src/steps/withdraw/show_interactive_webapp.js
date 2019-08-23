@@ -21,17 +21,8 @@ module.exports = {
       window.addEventListener(
         "message",
         function(e) {
-          if (e.data.type === "log") {
-            instruction(e.data.message);
-          }
-          if (e.data.type === "log-object") {
-            response("postMessage", JSON.parse(e.data.obj));
-          }
-          if (e.data.type === "instruction") {
-            instruction(e.data.message);
-          }
-          if (e.data.type === "success") {
-            response("postMessage success", e.data);
+          if (e.data.status === "pending_user_transfer_start") {
+            response("postMessage: Interactive webapp completed", e.data);
             expect(
               e.data.withdraw_anchor_account,
               "withdraw_anchor_account undefined in postMessage success",
@@ -48,6 +39,15 @@ module.exports = {
             state.stellar_memo = e.data.withdraw_memo;
             state.stellar_memo_type = e.data.withdraw_memo_type;
             resolve();
+          }
+          if (e.data.type === "log") {
+            instruction(e.data.message);
+          }
+          if (e.data.type === "log-object") {
+            response("postMessage", JSON.parse(e.data.obj));
+          }
+          if (e.data.type === "instruction") {
+            instruction(e.data.message);
           }
         },
         false,
