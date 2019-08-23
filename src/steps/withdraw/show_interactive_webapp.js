@@ -21,6 +21,42 @@ module.exports = {
       window.addEventListener(
         "message",
         function(e) {
+          let transaction = e.data.transaction;
+          // Support older clients for now
+          if (
+            e.data.type === "success" ||
+            e.data.status === "pending_user_transfer_start"
+          ) {
+            expect(
+              false,
+              "postMessage response should have the transaction in a transaction property, not top level.  Use the @stellar/anchor-transfer-utils helper to make this easier.",
+            );
+            transaction = e.data;
+          }
+          if (transaction) {
+            expect(
+              transaction.status === "pending_user_transfer_start",
+              "Unknown transaction status: " + transaction.status,
+            );
+            response("postMessage: Interactive webapp completed", transaction);
+            expect(
+              transaction.withdraw_anchor_account,
+              "withdraw_anchor_account undefined in postMessage success",
+            );
+            expect(
+              transaction.withdraw_memo,
+              "withdraw_memo undefined in postMessage success",
+            );
+            expect(
+              transaction.withdraw_memo_type,
+              "withdraw_memo_type undefined in postMessage success",
+            );
+            state.anchors_stellar_address = transaction.withdraw_anchor_account;
+            state.stellar_memo = transaction.withdraw_memo;
+            state.stellar_memo_type = transaction.withdraw_memo_type;
+            state.withdraw_amount = transaction.amount_in;
+            resolve();
+          }
           if (e.data.type === "log") {
             instruction(e.data.message);
           }
@@ -29,26 +65,6 @@ module.exports = {
           }
           if (e.data.type === "instruction") {
             instruction(e.data.message);
-          }
-          if (e.data.type === "success") {
-            response("postMessage success", e.data);
-            expect(
-              e.data.withdraw_anchor_account,
-              "withdraw_anchor_account undefined in postMessage success",
-            );
-            expect(
-              e.data.withdraw_memo,
-              "withdraw_memo undefined in postMessage success",
-            );
-            expect(
-              e.data.withdraw_memo_type,
-              "withdraw_memo_type undefined in postMessage success",
-            );
-            state.anchors_stellar_address = e.data.withdraw_anchor_account;
-            state.stellar_memo = e.data.withdraw_memo;
-            state.stellar_memo_type = e.data.withdraw_memo_type;
-            state.withdraw_amount = e.data.amount_in;
-            resolve();
           }
         },
         false,
