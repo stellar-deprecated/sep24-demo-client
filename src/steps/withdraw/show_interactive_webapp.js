@@ -47,6 +47,7 @@ module.exports = {
             state.anchors_stellar_address = e.data.withdraw_anchor_account;
             state.stellar_memo = e.data.withdraw_memo;
             state.stellar_memo_type = e.data.withdraw_memo_type;
+            state.withdraw_amount = e.data.amount_in;
             resolve();
           }
         },
