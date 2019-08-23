@@ -38,23 +38,23 @@ module.exports = {
               transaction.status === "pending_user_transfer_start",
               "Unknown transaction status: " + transaction.status,
             );
-            response("postMessage: Interactive webapp completed", e.data);
+            response("postMessage: Interactive webapp completed", transaction);
             expect(
-              e.data.withdraw_anchor_account,
+              transaction.withdraw_anchor_account,
               "withdraw_anchor_account undefined in postMessage success",
             );
             expect(
-              e.data.withdraw_memo,
+              transaction.withdraw_memo,
               "withdraw_memo undefined in postMessage success",
             );
             expect(
-              e.data.withdraw_memo_type,
+              transaction.withdraw_memo_type,
               "withdraw_memo_type undefined in postMessage success",
             );
-            state.anchors_stellar_address = e.data.withdraw_anchor_account;
-            state.stellar_memo = e.data.withdraw_memo;
-            state.stellar_memo_type = e.data.withdraw_memo_type;
-            state.withdraw_amount = e.data.amount_in;
+            state.anchors_stellar_address = transaction.withdraw_anchor_account;
+            state.stellar_memo = transaction.withdraw_memo;
+            state.stellar_memo_type = transaction.withdraw_memo_type;
+            state.withdraw_amount = transaction.amount_in;
             resolve();
           }
           if (e.data.type === "log") {
