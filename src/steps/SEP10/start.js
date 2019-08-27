@@ -6,6 +6,7 @@ module.exports = {
   instruction:
     "Start the SEP-0010 flow to authenticate the wallet's Stellar account",
   action: "GET /auth (SEP-0010)",
+  shouldSkip: (state) => !state.authentication_required,
   execute: async function(state, { request, response, instruction, expect }) {
     const USER_SK = Config.get("USER_SK");
     const AUTH_URL = state.auth_endpoint;

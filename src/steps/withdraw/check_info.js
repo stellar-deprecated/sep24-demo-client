@@ -1,5 +1,5 @@
-const Config = require("../config");
-const get = require("../util/get");
+const Config = require("src/config");
+const get = require("src/util/get");
 const prop = require("lodash.get");
 
 module.exports = {
@@ -14,9 +14,19 @@ module.exports = {
       prop(result, ["withdraw", Config.get("ASSET_CODE"), "enabled"]),
       `${Config.get("ASSET_CODE")} is not enabled for withdraw`,
     );
-    instruction(
-      "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
-    );
+    state.authentication_required = prop(result, [
+      "deposit",
+      Config.get("ASSET_CODE"),
+      "authentication_required",
+    ]);
+    if (state.authentication_required) {
+      instruction(
+        "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
+      );
+    } else {
+      instruction("Withdraw is enabled with no authentication required");
+    }
+
     state.interactive_url = transfer_server + result.url;
   },
 };
