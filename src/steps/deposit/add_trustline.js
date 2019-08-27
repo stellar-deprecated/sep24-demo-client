@@ -22,6 +22,7 @@ module.exports = {
     console.log(asset);
     const transaction = new StellarSdk.TransactionBuilder(account, {
       fee: feeStats.p70_accepted_fee,
+      networkPassphrase: state.network,
     })
       .addOperation(
         StellarSdk.Operation.changeTrust({
