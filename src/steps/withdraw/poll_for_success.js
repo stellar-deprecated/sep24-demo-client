@@ -28,7 +28,7 @@ module.exports = {
         response("GET /transaction", transactionResult);
         if (transactionResult.transaction.status === "completed") {
           state.external_transaction_id =
-            transactionResult.transaction.externalTransactionId;
+            transactionResult.transaction.external_transaction_id;
           instruction(
             "Success!  You can pick up your cash at a storefront with reference number " +
               state.external_transaction_id,
