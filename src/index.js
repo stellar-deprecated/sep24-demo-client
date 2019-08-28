@@ -8,12 +8,21 @@ const StellarSdk = require("stellar-sdk");
  * State maintained between steps
  * @typedef {Object} State
  * @property {StellarSdk.Network} network - Stellar network to operate on
+ *
+ * From stellar.toml
  * @property {string} auth_server - URL hosting the SEP10 auth server
  * @property {string} transfer_server - URL hosting the SEP6 transfer server
+ *
+ * From /info
  * @property {string} interactive_url - URL hosting the interactive webapp step
+ * @property {boolean} authentication_required - Whether SEP10 authentication is required
+ *
+ * SEP10
  * @property {string} challenge_transaction - XDR Representation of Stellar challenge transaction signed by server only
  * @property {Object} signed_challenge_tx - Stellar transaction challenge signed by both server and client
  * @property {string} token - JWT token representing authentication with stellar address from SEP10
+ *
+ * Withdraw
  * @property {string} anchors_stellar_address - Address that the anchor will be expecting payment on for the in-flight transaction
  * @property {string} stellar_memo_type - Memo type for the stellar transaction to specify the anchor's transaction
  * @property {string} stellar_memo - Memo required for the specified stellar transaction
@@ -50,7 +59,7 @@ if (!Config.isValid()) {
 
 const withdrawSteps = [
   require("./steps/check_toml"),
-  require("./steps/check_info"),
+  require("./steps/withdraw/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
@@ -102,6 +111,13 @@ const runStep = (step) => {
   if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
 };
 
+const nextActiveStep = () => {
+  while (steps[0].shouldSkip && steps[0].shouldSkip(state)) {
+    steps.splice(0, 1);
+  }
+  return steps[0];
+};
+
 const next = async () => {
   if (currentStep && currentStep.execute) {
     uiActions.setLoading(true);
@@ -118,9 +134,9 @@ const next = async () => {
       throw e;
     }
 
-    uiActions.setLoading(false, steps[0].action);
+    uiActions.setLoading(false, nextActiveStep().action);
   }
-  runStep(steps[0]);
+  runStep(nextActiveStep());
 };
 
 uiActions.onNext(next);

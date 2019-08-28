@@ -5,6 +5,7 @@ module.exports = {
   instruction:
     "We've received a challenge transaction from the server that we need the client to sign with our Stellar account.",
   action: "Sign Challenge (SEP-0010)",
+  shouldSkip: (state) => !state.authentication_required,
   execute: async function(state, { logObject }) {
     const USER_SK = Config.get("USER_SK");
     const challenge_xdr = state.challenge_transaction;
