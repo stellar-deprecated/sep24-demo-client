@@ -26,30 +26,34 @@ module.exports = {
       request(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const resp = await fetch(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const text = await resp.text();
-      const information = toml.parse(text);
-      response(`${HOME_DOMAIN}/.well-known/stellar.toml`, information);
-      expect(
-        information.WEB_AUTH_ENDPOINT,
-        "Toml file doesn't contain a WEB_AUTH_ENDPOINT",
-      );
-      expect(
-        information.TRANSFER_SERVER,
-        "Toml file doesn't contain a TRANSFER_SERVER",
-      );
-      expect(information.CURRENCIES, "Toml file doesn't contain CURRENCIES");
-      const asset = information.CURRENCIES.find((c) => c.code === ASSET_CODE);
-      expect(
-        asset,
-        "Toml file doesn't contain a currency entry for " + ASSET_CODE,
-      );
-      expect(
-        asset.issuer && asset.issuer.length == 56,
-        "Toml file asset doesn't contain a valid 56 character issuer",
-      );
+      response(`${HOME_DOMAIN}/.well-known/stellar.toml`, text);
+      try {
+        const information = toml.parse(text);
+        expect(
+          information.WEB_AUTH_ENDPOINT,
+          "Toml file doesn't contain a WEB_AUTH_ENDPOINT",
+        );
+        expect(
+          information.TRANSFER_SERVER,
+          "Toml file doesn't contain a TRANSFER_SERVER",
+        );
+        expect(information.CURRENCIES, "Toml file doesn't contain CURRENCIES");
+        const asset = information.CURRENCIES.find((c) => c.code === ASSET_CODE);
+        expect(
+          asset,
+          "Toml file doesn't contain a currency entry for " + ASSET_CODE,
+        );
+        expect(
+          asset.issuer && asset.issuer.length == 56,
+          "Toml file asset doesn't contain a valid 56 character issuer",
+        );
 
-      state.asset_issuer = asset && asset.issuer;
-      state.auth_endpoint = information.WEB_AUTH_ENDPOINT;
-      state.transfer_server = information.TRANSFER_SERVER;
+        state.asset_issuer = asset && asset.issuer;
+        state.auth_endpoint = information.WEB_AUTH_ENDPOINT;
+        state.transfer_server = information.TRANSFER_SERVER;
+      } catch (e) {
+        expect(false, "stellar.toml is not a valid TOML file");
+      }
     }
 
     if (WEB_AUTH_OVERRIDE) {
