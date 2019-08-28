@@ -7,7 +7,7 @@ module.exports = {
   action: "Launch interactive portion",
   execute: async function(
     state,
-    { response, action, instruction, setDevicePage },
+    { response, action, instruction, expect, setDevicePage },
   ) {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
