@@ -26,6 +26,7 @@ module.exports = {
       request(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const resp = await fetch(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const text = await resp.text();
+      console.log(text);
       response(`${HOME_DOMAIN}/.well-known/stellar.toml`, text);
       try {
         const information = toml.parse(text);
