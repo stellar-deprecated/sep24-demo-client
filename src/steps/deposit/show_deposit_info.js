@@ -18,26 +18,6 @@ module.exports = {
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
       setDevicePage(url);
-      window.addEventListener(
-        "message",
-        function(e) {
-          if (e.data.type === "log") {
-            instruction(e.data.message);
-          }
-          if (e.data.type === "log-object") {
-            response("postMessage", JSON.parse(e.data.obj));
-          }
-          if (e.data.type === "instruction") {
-            instruction(e.data.message);
-          }
-          if (e.data.type === "success") {
-            response("postMessage success", e.data);
-            state.deposit_url = e.data.more_info_url;
-            resolve();
-          }
-        },
-        false,
-      );
     });
   },
 };

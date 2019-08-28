@@ -21,6 +21,29 @@ module.exports = {
       window.addEventListener(
         "message",
         function(e) {
+          let transaction = e.data.transaction;
+          // Support older clients for now
+          if (e.data.type === "success" || e.data.status === "completed") {
+            expect(
+              false,
+              "postMessage response should have the transaction in a transaction property, not top level.  Use the @stellar/anchor-transfer-utils helper to make this easier.",
+            );
+            transaction = e.data;
+          }
+          if (transaction) {
+            expect(
+              transaction.status === "completed" ||
+                transaction.status === "pending_external",
+              "Unknown transaction status: " + transaction.status,
+            );
+            response("postMessage: Interactive webapp completed", transaction);
+            expect(
+              transaction.more_info_url || transaction.external_transaction_id,
+              "postMessage callback must contain a more_info_url or external_transaction_id",
+            );
+            state.deposit_url = transaction.more_info_url;
+            resolve();
+          }
           if (e.data.type === "log") {
             instruction(e.data.message);
           }
@@ -29,11 +52,6 @@ module.exports = {
           }
           if (e.data.type === "instruction") {
             instruction(e.data.message);
-          }
-          if (e.data.type === "success") {
-            response("postMessage success", e.data);
-            state.deposit_url = e.data.more_info_url;
-            resolve();
           }
         },
         false,
