@@ -26,10 +26,9 @@ module.exports = {
       request(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const resp = await fetch(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const text = await resp.text();
-      console.log(text);
-      response(`${HOME_DOMAIN}/.well-known/stellar.toml`, text);
       try {
         const information = toml.parse(text);
+        response(`${HOME_DOMAIN}/.well-known/stellar.toml`, information);
         expect(
           information.WEB_AUTH_ENDPOINT,
           "Toml file doesn't contain a WEB_AUTH_ENDPOINT",
@@ -53,6 +52,7 @@ module.exports = {
         state.auth_endpoint = information.WEB_AUTH_ENDPOINT;
         state.transfer_server = information.TRANSFER_SERVER;
       } catch (e) {
+        response(`${HOME_DOMAIN}/.well-known/stellar.toml`, text);
         expect(false, "stellar.toml is not a valid TOML file");
       }
     }
