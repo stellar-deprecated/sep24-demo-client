@@ -92,8 +92,6 @@ module.exports = {
     if (state.transfer_server)
       state.transfer_server = state.transfer_server.replace(/\/$/, "");
     if (state.auth_endpoint)
-      state.transfer_server = state.transfer_server.replace(/\/$/, "");
-    if (state.transfer_server)
-      state.transfer_server = state.transfer_server.replace(/\/$/, "");
+      state.auth_endpoint = state.auth_endpoint.replace(/\/$/, "");
   },
 };
