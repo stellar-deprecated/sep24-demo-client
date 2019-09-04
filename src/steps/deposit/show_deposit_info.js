@@ -14,9 +14,7 @@ module.exports = {
       const urlBuilder = new URL(state.deposit_url);
       urlBuilder.searchParams.set("jwt", state.token);
       const url = urlBuilder.toString();
-      action(
-        `Launching interactive webapp at ${url} and watching for postMessage callback`,
-      );
+      action(`Showing the receipt for deposit at ${url}`);
       setDevicePage(url);
     });
   },
