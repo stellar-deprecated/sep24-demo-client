@@ -50,6 +50,14 @@ Config.listen(() => {
     disclaimer.classList.remove("visible");
     state.network = StellarSdk.Networks.TESTNET;
   }
+  try {
+    const sk = Config.get("USER_SK");
+    const pair = StellarSdk.Keypair.fromSecret(sk);
+    console.log("Wallet address: ", pair.publicKey());
+  } catch (e) {
+    console.log("No wallet address yet");
+    // do nothing if secret key isn't here yet
+  }
 });
 
 Config.installUI(document.querySelector("#config-panel"));
