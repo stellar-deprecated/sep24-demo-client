@@ -45,7 +45,7 @@ module.exports = {
           "Toml file doesn't contain a currency entry for " + ASSET_CODE,
         );
         expect(
-          asset.issuer && asset.issuer.length == 56,
+          asset && asset.issuer && asset.issuer.length == 56,
           "Toml file asset doesn't contain a valid 56 character issuer",
         );
 
