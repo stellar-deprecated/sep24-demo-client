@@ -43,9 +43,12 @@ module.exports = {
           }
           resolve();
         } else if (
-          ["pending_external", "pending_anchor", "pending_stellar"].indexOf(
-            transactionResult.transaction.status,
-          ) != -1
+          [
+            "pending_external",
+            "pending_anchor",
+            "pending_stellar",
+            "pending_user_transfer_start",
+          ].indexOf(transactionResult.transaction.status) != -1
         ) {
           instruction(
             `Status is ${transactionResult.transaction.status}, lets retry in 2s`,
