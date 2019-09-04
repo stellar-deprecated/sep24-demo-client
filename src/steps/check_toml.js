@@ -23,6 +23,7 @@ module.exports = {
       if (HOME_DOMAIN.indexOf("http") != 0) {
         HOME_DOMAIN = "https://" + HOME_DOMAIN;
       }
+      HOME_DOMAIN = HOME_DOMAIN.replace(/\/$/, "");
       request(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const resp = await fetch(`${HOME_DOMAIN}/.well-known/stellar.toml`);
       const text = await resp.text();
@@ -88,5 +89,11 @@ module.exports = {
     } else {
       instruction("Received asset issuer from TOML: " + state.asset_issuer);
     }
+    if (state.transfer_server)
+      state.transfer_server = state.transfer_server.replace(/\/$/, "");
+    if (state.auth_endpoint)
+      state.transfer_server = state.transfer_server.replace(/\/$/, "");
+    if (state.transfer_server)
+      state.transfer_server = state.transfer_server.replace(/\/$/, "");
   },
 };
