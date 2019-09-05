@@ -68,6 +68,13 @@ const setLoading = (loading, loadingMessage) => {
   }
 };
 
+const finish = () => {
+  actionButton.textContent = "Finished!";
+  actionButton.disabled = true;
+  actionButton.classList.remove("loading");
+  actionButton.classList.add("finished");
+};
+
 /*
  * Assertions to ensure things are going correctly,
  * and to bail early if not.  Currently just shows
@@ -113,6 +120,7 @@ module.exports = {
 
   onNext,
   setLoading,
+  finish,
 
   showConfig,
   setDevicePage,

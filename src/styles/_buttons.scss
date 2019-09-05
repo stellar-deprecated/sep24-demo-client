@@ -29,6 +29,12 @@
       animation: rotate 2s linear infinite;
     }
   }
+
+  &.finished {
+    background: $muted-purple;
+    animation: none;
+    padding-left: 48px;
+  }
 }
 
 @keyframes rotate {
