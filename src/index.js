@@ -110,7 +110,7 @@ uiActions.waitForPageMessage("pages/wallet.html").then((message) => {
 let currentStep = null;
 const runStep = (step) => {
   if (!step) {
-    uiActions.setLoading(true, "Finished");
+    uiActions.finish();
     return;
   }
   uiActions.setDevicePage(step.devicePage || "pages/loader.html");
@@ -120,6 +120,7 @@ const runStep = (step) => {
 };
 
 const nextActiveStep = () => {
+  if (steps.length == 0) return null;
   while (steps[0].shouldSkip && steps[0].shouldSkip(state)) {
     steps.splice(0, 1);
   }
@@ -141,8 +142,9 @@ const next = async () => {
       uiActions.setLoading(false);
       throw e;
     }
-
-    uiActions.setLoading(false, nextActiveStep().action);
+    const nextStep = nextActiveStep();
+    const nextAction = nextStep && nextStep.action;
+    uiActions.setLoading(false, nextAction);
   }
   runStep(nextActiveStep());
 };
