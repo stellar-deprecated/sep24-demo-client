@@ -6,7 +6,7 @@ module.exports = {
   instruction:
     "In order to find out whether we need to enter the interactive or non-interactive flow, check the /withdraw endpoint",
   action: "GET /withdraw (SEP-0006)",
-  execute: async function(state, { request, response, instruction }) {
+  execute: async function(state, { request, response, instruction, expect }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
@@ -25,6 +25,11 @@ module.exports = {
       },
     });
     response("GET /withdraw", result);
+    expect(
+      result.type == "interactive_customer_info_needed",
+      "The only supported type is interactive_customer_info_needed",
+    );
+    expect(result.url, "An interactive webapp URL is required");
     instruction(
       "GET /withdraw tells us we need to collect info interactively.  The URL for the interactive portion is " +
         result.url,
