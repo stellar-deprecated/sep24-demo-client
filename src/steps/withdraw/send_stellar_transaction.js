@@ -17,7 +17,17 @@ module.exports = {
       memo_type: state.stellar_memo_type,
     });
     const server = new StellarSdk.Server(HORIZON_URL);
-    const account = await server.loadAccount(pk);
+    let account;
+    try {
+      account = await server.loadAccount(pk);
+    } catch (e) {
+      expect(
+        false,
+        "Account could not be found.  Has this account been created yet: " + pk,
+      );
+      return;
+    }
+
     const feeStats = await get(`${HORIZON_URL}/fee_stats`);
     let memo;
     try {
@@ -51,6 +61,17 @@ module.exports = {
       .setTimeout(30)
       .build();
     transaction.sign(StellarSdk.Keypair.fromSecret(USER_SK));
-    await server.submitTransaction(transaction);
+    try {
+      await server.submitTransaction(transaction);
+    } catch (e) {
+      const data = e.response.data;
+      const status = data.status;
+      const txStatus = data.extras.result_codes.transaction;
+      const codes = data.extras.result_codes.operations.join(", ");
+      expect(
+        false,
+        `Sending transaction failed with error code ${status}: ${txStatus}, ${codes}`,
+      );
+    }
   },
 };
