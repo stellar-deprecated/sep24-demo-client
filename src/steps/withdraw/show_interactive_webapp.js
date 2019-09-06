@@ -41,20 +41,25 @@ module.exports = {
             response("postMessage: Interactive webapp completed", transaction);
             expect(
               transaction.withdraw_anchor_account,
-              "withdraw_anchor_account undefined in postMessage success",
+              "withdraw_anchor_account undefined in postMessage callback",
             );
             expect(
               transaction.withdraw_memo,
-              "withdraw_memo undefined in postMessage success",
+              "withdraw_memo undefined in postMessage callback",
             );
             expect(
               transaction.withdraw_memo_type,
-              "withdraw_memo_type undefined in postMessage success",
+              "withdraw_memo_type undefined in postMessage callback.",
+            );
+            expect(
+              transaction.id,
+              "id is undefined in postMessage callback.  Falling back to using memo as ID, but this will be removed shortly.  Please send an explicit id field.",
             );
             state.anchors_stellar_address = transaction.withdraw_anchor_account;
             state.stellar_memo = transaction.withdraw_memo;
             state.stellar_memo_type = transaction.withdraw_memo_type;
             state.withdraw_amount = transaction.amount_in;
+            state.transaction_id = transaction.id || state.stellar_memo;
             resolve();
           }
           if (e.data.type === "log") {
