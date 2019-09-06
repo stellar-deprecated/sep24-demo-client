@@ -22,6 +22,9 @@ const StellarSdk = require("stellar-sdk");
  * @property {Object} signed_challenge_tx - Stellar transaction challenge signed by both server and client
  * @property {string} token - JWT token representing authentication with stellar address from SEP10
  *
+ * Deposit/withdraw
+ * @property {string} transaction_id - Anchor identifier for transaction
+ *
  * Withdraw
  * @property {string} anchors_stellar_address - Address that the anchor will be expecting payment on for the in-flight transaction
  * @property {string} stellar_memo_type - Memo type for the stellar transaction to specify the anchor's transaction

@@ -55,6 +55,7 @@ module.exports = {
             state.stellar_memo = transaction.withdraw_memo;
             state.stellar_memo_type = transaction.withdraw_memo_type;
             state.withdraw_amount = transaction.amount_in;
+            state.transaction_id = transaction.id;
             resolve();
           }
           if (e.data.type === "log") {
