@@ -67,10 +67,11 @@ module.exports = {
       const data = e.response.data;
       const status = data.status;
       const txStatus = data.extras.result_codes.transaction;
-      const codes = data.extras.result_codes.operations.join(", ");
+      const codes = data.extras.result_codes.operations;
+      const codesList = codes ? codes.join(", ") : "";
       expect(
         false,
-        `Sending transaction failed with error code ${status}: ${txStatus}, ${codes}`,
+        `Sending transaction failed with error code ${status}: ${txStatus}, ${codesList}`,
       );
     }
   },
