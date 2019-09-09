@@ -7,7 +7,7 @@ module.exports = {
   action: "GET /transaction (SEP6)",
   execute: async function(
     state,
-    { request, response, instruction, error, setDevicePage },
+    { request, response, instruction, error, expect, setDevicePage },
   ) {
     return new Promise((resolve, reject) => {
       const transfer_server = state.transfer_server;
@@ -27,6 +27,11 @@ module.exports = {
         );
         response("GET /transaction", transactionResult);
         if (transactionResult.transaction.status === "completed") {
+          expect(
+            transactionResult.transaction.external_transaction_id ||
+              transactionResult.transaction.more_info_url,
+            "Provide a more_info_url or external_transaction_id to show proper results",
+          );
           state.external_transaction_id =
             transactionResult.transaction.external_transaction_id;
           instruction(
