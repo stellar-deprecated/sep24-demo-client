@@ -13,7 +13,7 @@ module.exports = {
       const transfer_server = state.transfer_server;
       const poll = async () => {
         const transactionParams = {
-          id: state.stellar_memo,
+          id: state.transaction_id,
         };
         request("GET /transaction", transactionParams);
         const transactionResult = await get(
