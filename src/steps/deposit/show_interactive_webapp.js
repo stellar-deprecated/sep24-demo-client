@@ -33,13 +33,14 @@ module.exports = {
           if (transaction) {
             expect(
               transaction.status === "completed" ||
-                transaction.status === "pending_external",
+                transaction.status === "pending_external" ||
+                transaction.status === "pending_user_transfer_start",
               "Unknown transaction status: " + transaction.status,
             );
             response("postMessage: Interactive webapp completed", transaction);
             expect(
-              transaction.more_info_url || transaction.external_transaction_id,
-              "postMessage callback must contain a more_info_url or external_transaction_id",
+              transaction.more_info_url,
+              "postMessage callback must contain a more_info_url with information on how to finish the deposit",
             );
             state.deposit_url = transaction.more_info_url;
             resolve();
