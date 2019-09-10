@@ -11,9 +11,7 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const transfer_server = state.transfer_server;
-    const withdrawType = "cash";
     const params = {
-      type: withdrawType,
       asset_code: ASSET_CODE,
       account: pk,
     };
