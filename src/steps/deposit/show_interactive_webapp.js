@@ -26,7 +26,7 @@ module.exports = {
           if (e.data.type === "success" || e.data.status === "completed") {
             expect(
               false,
-              "postMessage response should have the transaction in a transaction property, not top level.  Use the @stellar/anchor-transfer-utils helper to make this easier.",
+              "postMessage response should have the transaction in a transaction property, not top level.",
             );
             transaction = e.data;
           }
