@@ -13,3 +13,10 @@ document.querySelectorAll("[data-replace]").forEach((el) => {
   const key = el.getAttribute("data-replace");
   el.textContent = url.searchParams.get(key);
 });
+
+document.querySelectorAll("[data-require-param]").forEach((el) => {
+  const key = el.getAttribute("data-require-param");
+  if (!url.searchParams.get(key)) {
+    el.style.display = "none";
+  }
+});

@@ -25,6 +25,7 @@
           <div
             class="transaction transaction--pending"
             data-send-message="show-transaction"
+            data-require-param="pending"
           >
             <i class="transaction__status-icon"></i>
             <div class="transaction__details">
@@ -33,6 +34,23 @@
             </div>
             <div class="transaction__value">
               <div class="transaction__amount">100.00</div>
+              <div class="transaction_token">USD @ Anchor</div>
+            </div>
+            <i class="transation__chevron-icon"></i>
+          </div>
+
+          <div
+            class="transaction transaction--success"
+            data-send-message="show-transaction"
+            data-require-param="success"
+          >
+            <i class="transaction__status-icon"></i>
+            <div class="transaction__details">
+              <div class="transation__type">Deposit</div>
+              <div class="transaction__status">Completed</div>
+            </div>
+            <div class="transaction__value">
+              <div class="transaction__amount">500.00</div>
               <div class="transaction_token">USD @ Anchor</div>
             </div>
             <i class="transation__chevron-icon"></i>
