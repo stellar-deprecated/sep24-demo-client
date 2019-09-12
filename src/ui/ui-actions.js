@@ -86,8 +86,14 @@ const expect = (expectation, message) => {
   }
 };
 
-const showClosePanel = (show) => {
-  $("close-panel").style.display = show ? null : "none";
+const showClosePanel = (show, callback) => {
+  const panel = $("close-panel");
+  panel.style.display = show ? null : "none";
+  const cb = () => {
+    panel.removeEventListener("click", cb);
+    if (callback) callback();
+  };
+  panel.addEventListener("click", cb);
 };
 
 const setDevicePage = (src) => {
