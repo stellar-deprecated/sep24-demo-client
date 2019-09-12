@@ -34,6 +34,7 @@ module.exports = {
             expect(
               transaction.status === "completed" ||
                 transaction.status === "pending_external" ||
+                transaction.status === "pending_anchor" ||
                 transaction.status === "pending_user_transfer_start",
               "Unknown transaction status: " + transaction.status,
             );
