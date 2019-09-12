@@ -192,6 +192,10 @@ h2 {
   padding: 11px 20px;
   transition: all 0.3s ease-out;
 
+  &.loading {
+    background: $muted-purple;
+  }
+
   &:focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem $muted-purple;

@@ -90,7 +90,8 @@ const depositSteps = [
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
   require("./steps/deposit/show_interactive_webapp"),
-  require("./steps/deposit/show_deposit_info"),
+  require("./steps/deposit/show_close_button"),
+  // require("./steps/deposit/show_deposit_info"),
 ];
 
 let steps = null;
@@ -116,7 +117,6 @@ const runStep = (step) => {
     uiActions.finish();
     return;
   }
-  uiActions.setDevicePage(step.devicePage || "pages/loader.html");
   uiActions.instruction(step.instruction);
   currentStep = step;
   if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
