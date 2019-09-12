@@ -86,6 +86,10 @@ const expect = (expectation, message) => {
   }
 };
 
+const showClosePanel = (show) => {
+  $("close-panel").style.display = show ? null : "none";
+};
+
 const setDevicePage = (src) => {
   deviceFrame.src = src;
 };
@@ -125,4 +129,5 @@ module.exports = {
   showConfig,
   setDevicePage,
   waitForPageMessage,
+  showClosePanel,
 };
