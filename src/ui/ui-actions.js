@@ -90,8 +90,10 @@ const showClosePanel = (show, callback) => {
   const panel = $("close-panel");
   panel.style.display = show ? null : "none";
   const cb = () => {
-    panel.removeEventListener("click", cb);
-    if (callback) callback();
+    window.postMessage({
+      message: "close-button",
+    });
+    panel.style.display = "none";
   };
   panel.addEventListener("click", cb);
 };
