@@ -26,33 +26,43 @@ module.exports = {
         },
       );
       response("GET /transaction", transactionResult);
-      if (
-        transactionResult.transaction.status === "pending_user_transfer_start"
-      ) {
-        instruction("Still pending user transfer, try again in 5s");
-        setTimeout(poll, 5000);
-      } else if (transactionResult.transaction.status !== lastStatus) {
-        console.log(
-          "Setting last status to ",
-          transactionResult.transaction.status,
-        );
+
+      if (lastStatus !== transactionResult.transaction.status) {
         lastStatus = transactionResult.transaction.status;
+        instruction(`Status updated to ${lastStatus}`);
         state.deposit_url = transactionResult.transaction.more_info_url;
-        if (showingDepositView) setDevicePage(state.deposit_url);
+        if (showingDepositView) {
+          showDepositView();
+        }
+      }
+      if (transactionResult.transaction.status !== "completed") {
+        instruction(
+          `Still ${transactionResult.transaction.status}, try again in 5s`,
+        );
+        setTimeout(poll, 5000);
       }
     };
+
+    function showDepositView() {
+      showingDepositView = true;
+      setDevicePage(state.deposit_url);
+      showClosePanel();
+    }
+
+    function showTransactionsView() {
+      showingDepositView = false;
+      setDevicePage("pages/transactions.html?pending=true");
+    }
+
     return new Promise((resolve, reject) => {
       poll();
 
-      showClosePanel(true);
-      setDevicePage(state.deposit_url);
+      showDepositView();
       const cb = function(e) {
         if (e.data.message === "show-transaction") {
-          setDevicePage(state.deposit_url);
-          showingDepositView = true;
+          showDepositView();
         } else if (e.data.message === "close-button") {
-          showingDepositView = false;
-          setDevicePage("pages/transactions.html?pending=true");
+          showTransactionsView();
         }
       };
       window.addEventListener("message", cb);
