@@ -86,14 +86,16 @@ const expect = (expectation, message) => {
   }
 };
 
-const showClosePanel = (show, callback) => {
-  const panel = $("close-panel");
-  panel.style.display = show ? null : "none";
-  const cb = () => {
-    panel.removeEventListener("click", cb);
-    if (callback) callback();
-  };
-  panel.addEventListener("click", cb);
+const panel = $("close-panel");
+const cb = () => {
+  window.postMessage({
+    message: "close-button",
+  });
+  panel.style.display = "none";
+};
+panel.addEventListener("click", cb);
+const showClosePanel = () => {
+  panel.style.display = null;
 };
 
 const setDevicePage = (src) => {

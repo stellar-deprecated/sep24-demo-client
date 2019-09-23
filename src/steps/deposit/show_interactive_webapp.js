@@ -44,7 +44,12 @@ module.exports = {
               transaction.more_info_url,
               "postMessage callback must contain a more_info_url with information on how to finish the deposit",
             );
+            expect(
+              transaction.id,
+              "postMessage callback transaction contains no id",
+            );
             state.deposit_url = transaction.more_info_url;
+            state.transaction_id = transaction.id;
             resolve();
           }
           if (e.data.type === "log") {
