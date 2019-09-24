@@ -93,5 +93,13 @@ module.exports = {
       state.transfer_server = state.transfer_server.replace(/\/$/, "");
     if (state.auth_endpoint)
       state.auth_endpoint = state.auth_endpoint.replace(/\/$/, "");
+    expect(
+      state.transfer_server && state.transfer_server.indexOf("https://") === 0,
+      "Transfer server must be https",
+    );
+    expect(
+      state.auth_endpoint && state.auth_endpoint.indexOf("https://") === 0,
+      "WEB_AUTH_ENDPOINT must be https",
+    );
   },
 };

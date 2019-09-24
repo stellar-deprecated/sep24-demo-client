@@ -40,6 +40,11 @@ module.exports = {
       "GET /deposit tells us we need to collect info interactively.  The URL for the interactive portion is " +
         result.url,
     );
+    expect(result.url, "An interactive webapp URL is required");
+    expect(
+      result.url && result.url.indexOf("https://") === 0,
+      "Interactive URLs (and all endpoints) must be served over https",
+    );
     state.interactive_url = result.url;
   },
 };
