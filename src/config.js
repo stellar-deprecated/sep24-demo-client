@@ -28,6 +28,12 @@ let fields = [
     optional: true,
   },
   {
+    key: "EMAIL_ADDRESS",
+    label: "(OPTIONAL) Email address to pass into interactive url",
+    value: null,
+    optional: true,
+  },
+  {
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
     value: false,
