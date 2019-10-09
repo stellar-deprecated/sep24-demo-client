@@ -26,11 +26,20 @@ module.exports = {
     };
     request("GET /deposit", params);
     // Expect this to fail with 403
-    const result = await get(`${transfer_server}/deposit`, params, {
+    const url = new URL(`${transfer_server}/withdraw`);
+    Object.keys(params).forEach((key) =>
+      url.searchParams.append(key, params[key]),
+    );
+    const resp = await fetch(url, {
       headers: {
         Authorization: `Bearer ${state.token}`,
       },
     });
+    expect(
+      resp.status === 403,
+      `GET /deposit should return a 403 status code when returning interactive_customer_info_needed, received ${resp.status}`,
+    );
+    const result = await resp.json();
     response("GET /deposit", result);
     expect(
       result.type === "interactive_customer_info_needed",
