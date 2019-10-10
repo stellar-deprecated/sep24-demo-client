@@ -1,3 +1,5 @@
+let StellarSDK = require("stellar-sdk");
+
 let fields = [
   {
     key: "HOME_DOMAIN",
@@ -18,7 +20,19 @@ let fields = [
     optional: true,
   },
 
-  { key: "USER_SK", label: "Stellar wallet secret key", value: null },
+  {
+    key: "USER_SK",
+    label: "Stellar wallet secret key",
+    value: null,
+    button: {
+      text: "Generate",
+      action: (opt, input) => {
+        const pair = StellarSDK.Keypair.random();
+        opt.value = pair.secret();
+        input.value = pair.secret();
+      },
+    },
+  },
   { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
   {
@@ -113,6 +127,18 @@ const installUI = (panel) => {
     input.type = field.type || "text";
     input.placeholder = field.key;
     field.element = input;
+    if (field.button) {
+      const button = document.createElement("button");
+      button.textContent = field.button.text;
+      button.addEventListener(
+        "click",
+        function() {
+          console.log("Click", this);
+          this.button.action(this, input);
+        }.bind(field, input),
+      );
+      container.appendChild(button);
+    }
 
     container.appendChild(label);
     container.appendChild(input);
