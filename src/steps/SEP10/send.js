@@ -3,7 +3,6 @@ module.exports = {
   instruction:
     "We need to send the signed SEP10 challenge back to the server to get a JWT token to authenticate our stellar account with future actions",
   action: "Send signed response back to server",
-  shouldSkip: (state) => !state.authentication_required,
   execute: async function(state, { request, response, expect }) {
     const AUTH_URL = state.auth_endpoint;
     const transaction = state.signed_challenge_tx;

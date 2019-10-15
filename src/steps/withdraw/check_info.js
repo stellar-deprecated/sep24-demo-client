@@ -14,18 +14,9 @@ module.exports = {
       prop(result, ["withdraw", Config.get("ASSET_CODE"), "enabled"]),
       `${Config.get("ASSET_CODE")} is not enabled for withdraw`,
     );
-    state.authentication_required = prop(result, [
-      "deposit",
-      Config.get("ASSET_CODE"),
-      "authentication_required",
-    ]);
-    if (state.authentication_required) {
-      instruction(
-        "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
-      );
-    } else {
-      instruction("Withdraw is enabled with no authentication required");
-    }
+    instruction(
+      "Withdraw is enabled, and requires authentication so we should go through SEP-0010",
+    );
 
     state.interactive_url = transfer_server + result.url;
   },
