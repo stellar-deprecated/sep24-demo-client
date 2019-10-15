@@ -15,7 +15,6 @@ const StellarSdk = require("stellar-sdk");
  *
  * From /info
  * @property {string} interactive_url - URL hosting the interactive webapp step
- * @property {boolean} authentication_required - Whether SEP10 authentication is required
  *
  * SEP10
  * @property {string} challenge_transaction - XDR Representation of Stellar challenge transaction signed by server only
