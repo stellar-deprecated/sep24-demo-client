@@ -22,5 +22,6 @@ module.exports = {
     response("POST /auth", json);
     expect(json.token, "No token returned from /auth");
     state.token = json.token;
+    console.log("Token is ", state.token);
   },
 };
