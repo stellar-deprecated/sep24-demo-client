@@ -30,7 +30,9 @@ module.exports = {
       if (lastStatus !== transactionResult.transaction.status) {
         lastStatus = transactionResult.transaction.status;
         instruction(`Status updated to ${lastStatus}`);
-        state.deposit_url = transactionResult.transaction.more_info_url;
+        const urlBuilder = new URL(transactionResult.transaction.more_info_url);
+        urlBuilder.set("jwt", state.token);
+        state.deposit_url = urlBuilder.toString();
         if (showingDepositView) {
           showDepositView();
         }

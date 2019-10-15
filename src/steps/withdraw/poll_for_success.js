@@ -39,7 +39,11 @@ module.exports = {
               state.external_transaction_id,
           );
           if (transactionResult.transaction.more_info_url) {
-            setDevicePage(transactionResult.transaction.more_info_url);
+            const urlBuilder = new URL(
+              transactionResult.transaction.more_info_url,
+            );
+            urlBuilder.searchParams.set("jwt", state.token);
+            setDevicePage(urlBuilder.toString());
           } else {
             setDevicePage(
               "pages/receipt.html?reference_number=" +
