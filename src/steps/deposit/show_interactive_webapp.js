@@ -52,7 +52,9 @@ module.exports = {
               transaction.id,
               "postMessage callback transaction contains no id",
             );
-            state.deposit_url = transaction.more_info_url;
+            const urlBuilder = new URL(transaction.more_info_url);
+            urlBuilder.searchParams.set("jwt", state.token);
+            state.deposit_url = urlBuilder.toString();
             state.transaction_id = transaction.id;
             resolve();
           }

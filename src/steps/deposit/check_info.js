@@ -14,18 +14,9 @@ module.exports = {
       prop(result, ["deposit", Config.get("ASSET_CODE"), "enabled"]),
       `${Config.get("ASSET_CODE")} is not enabled for deposit`,
     );
-    state.authentication_required = prop(result, [
-      "deposit",
-      Config.get("ASSET_CODE"),
-      "authentication_required",
-    ]);
-    if (state.authentication_required) {
-      instruction(
-        "Deposit is enabled, and requires authentication so we should go through SEP-0010",
-      );
-    } else {
-      instruction("Deposit is enabled with no authentication required");
-    }
+    instruction(
+      "Deposit is enabled, and requires authentication so we should go through SEP-0010",
+    );
 
     state.interactive_url = transfer_server + result.url;
   },
