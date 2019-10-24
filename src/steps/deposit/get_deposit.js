@@ -24,6 +24,11 @@ module.exports = {
       memo: state.deposit_memo,
       memo_type: state.deposit_memo_type,
     };
+    const email = Config.get("EMAIL_ADDRESS");
+    if (email) {
+      params.email_address = Config.get("EMAIL_ADDRESS");
+    }
+
     request("GET /deposit", params);
     // Expect this to fail with 403
     const result = await get(`${transfer_server}/deposit`, params, {
