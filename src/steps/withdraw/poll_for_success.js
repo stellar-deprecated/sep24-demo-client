@@ -34,10 +34,7 @@ module.exports = {
           );
           state.external_transaction_id =
             transactionResult.transaction.external_transaction_id;
-          instruction(
-            "Success!  You can pick up your cash at a storefront with reference number " +
-              state.external_transaction_id,
-          );
+          instruction("Success!");
           if (transactionResult.transaction.more_info_url) {
             const urlBuilder = new URL(
               transactionResult.transaction.more_info_url,
