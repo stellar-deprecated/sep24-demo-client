@@ -15,6 +15,10 @@ module.exports = {
       asset_code: ASSET_CODE,
       account: pk,
     };
+    const email = Config.get("EMAIL_ADDRESS");
+    if (email) {
+      params.email_address = Config.get("EMAIL_ADDRESS");
+    }
     request("GET /withdraw", params);
     // Expect this to fail with 403
     const result = await get(`${transfer_server}/withdraw`, params, {
