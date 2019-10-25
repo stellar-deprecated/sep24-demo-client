@@ -1,5 +1,4 @@
 const Config = require("src/config");
-const prop = require("lodash.get");
 const toml = require("toml");
 
 module.exports = {
@@ -93,13 +92,16 @@ module.exports = {
       state.transfer_server = state.transfer_server.replace(/\/$/, "");
     if (state.auth_endpoint)
       state.auth_endpoint = state.auth_endpoint.replace(/\/$/, "");
-    expect(
-      state.transfer_server && state.transfer_server.indexOf("https://") === 0,
-      "Transfer server must be https",
-    );
-    expect(
-      state.auth_endpoint && state.auth_endpoint.indexOf("https://") === 0,
-      "WEB_AUTH_ENDPOINT must be https",
-    );
+    if (Config.get("PUBNET")) {
+      expect(
+        state.transfer_server &&
+          state.transfer_server.indexOf("https://") === 0,
+        "Transfer server must be https",
+      );
+      expect(
+        state.auth_endpoint && state.auth_endpoint.indexOf("https://") === 0,
+        "WEB_AUTH_ENDPOINT must be https",
+      );
+    }
   },
 };
