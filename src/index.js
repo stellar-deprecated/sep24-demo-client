@@ -82,7 +82,6 @@ const withdrawSteps = [
 
 const depositSteps = [
   require("./steps/check_toml"),
-  require("./steps/deposit/add_trustline"),
   require("./steps/deposit/check_info"),
   require("./steps/SEP10/start"),
   require("./steps/SEP10/sign"),
