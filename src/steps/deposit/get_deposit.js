@@ -41,10 +41,12 @@ module.exports = {
         result.url,
     );
     expect(result.url, "An interactive webapp URL is required");
-    expect(
-      result.url && result.url.indexOf("https://") === 0,
-      "Interactive URLs (and all endpoints) must be served over https",
-    );
+    if (Config.get("PUBNET")) {
+      expect(
+        result.url && result.url.indexOf("https://") === 0,
+        "Interactive URLs (and all endpoints) must be served over https",
+      );
+    }
     state.interactive_url = result.url;
   },
 };
