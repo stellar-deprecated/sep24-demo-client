@@ -56,6 +56,7 @@ Config.listen(() => {
     const sk = Config.get("USER_SK");
     const pair = StellarSdk.Keypair.fromSecret(sk);
     console.log("Wallet address: ", pair.publicKey());
+    console.log(`https://testnet.steexp.com/account/${pair.publicKey()}`);
   } catch (e) {
     console.log("No wallet address yet");
     // do nothing if secret key isn't here yet
@@ -135,7 +136,7 @@ const next = async () => {
       await Promise.all([
         currentStep.execute(state, uiActions),
         // Take at least a second for each step otherwise its overwhelming
-        new Promise((resolve) => setTimeout(resolve, 1000)),
+        new Promise((resolve) => setTimeout(resolve, 100)),
       ]);
       steps.splice(0, 1);
     } catch (e) {

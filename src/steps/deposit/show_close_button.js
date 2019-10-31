@@ -10,76 +10,91 @@ module.exports = {
     state,
     { request, response, expect, instruction, setDevicePage, showClosePanel },
   ) {
-    let lastStatus = "pending_user_transfer_start";
-    let showingDepositView = true;
-    const poll = async () => {
-      const transfer_server = state.transfer_server;
-      const transactionParams = {
-        id: state.transaction_id,
-      };
-      request("GET /transaction", transactionParams);
-      const transactionResult = await get(
-        `${transfer_server}/transaction`,
-        transactionParams,
-        {
-          headers: {
-            Authorization: `Bearer ${state.token}`,
-          },
-        },
-      );
-      response("GET /transaction", transactionResult);
-
-      const HORIZON_URL = Config.get("HORIZON_URL");
-      const sk = Config.get("USER_SK");
-      const pair = StellarSdk.Keypair.fromSecret(sk);
-      console.log("Wallet address: ", pair.publicKey());
-      const signersResult = await get(
-        `${HORIZON_URL}/accounts?signer=${pair.publicKey()}`,
-      );
-
-      const claimableAccount = signersResult._embedded.records[0];
-      if (claimableAccount) {
-        instruction(
-          "Found a claimable account: " + claimableAccount.account_id,
-        );
-        await claimAccount(
-          pair,
-          claimableAccount.id,
-          state.asset_issuer,
-          instruction,
-        );
-      }
-
-      if (lastStatus !== transactionResult.transaction.status) {
-        lastStatus = transactionResult.transaction.status;
-        instruction(`Status updated to ${lastStatus}`);
-        const urlBuilder = new URL(transactionResult.transaction.more_info_url);
-        urlBuilder.searchParams.set("jwt", state.token);
-        state.deposit_url = urlBuilder.toString();
-        if (showingDepositView) {
-          showDepositView();
-        }
-      }
-      if (transactionResult.transaction.status !== "completed") {
-        instruction(
-          `Still ${transactionResult.transaction.status}, try again in 5s`,
-        );
-        setTimeout(poll, 5000);
-      }
-    };
-
-    function showDepositView() {
-      showingDepositView = true;
-      setDevicePage(state.deposit_url);
-      showClosePanel();
-    }
-
-    function showTransactionsView() {
-      showingDepositView = false;
-      setDevicePage("pages/transactions.html?pending=true");
-    }
-
     return new Promise((resolve, reject) => {
+      let lastStatus = "pending_user_transfer_start";
+      let showingDepositView = true;
+      const poll = async () => {
+        const transfer_server = state.transfer_server;
+        const transactionParams = {
+          id: state.transaction_id,
+        };
+        request("GET /transaction", transactionParams);
+        const transactionResult = await get(
+          `${transfer_server}/transaction`,
+          transactionParams,
+          {
+            headers: {
+              Authorization: `Bearer ${state.token}`,
+            },
+          },
+        );
+        response("GET /transaction", transactionResult);
+
+        const HORIZON_URL = Config.get("HORIZON_URL");
+        const sk = Config.get("USER_SK");
+        const pair = StellarSdk.Keypair.fromSecret(sk);
+        const signersResult = await get(
+          `${HORIZON_URL}/accounts?signer=${pair.publicKey()}`,
+        );
+        const claimableAccount = signersResult._embedded.records.find(
+          (account) => account.id !== pair.publicKey(),
+        );
+        if (claimableAccount) {
+          instruction(
+            "Found a claimable account: " + claimableAccount.account_id,
+          );
+          console.log(
+            `Claimable Account: https://testnet.steexp.com/account/${claimableAccount.id}`,
+          );
+          const success = await claimAccount(
+            pair,
+            claimableAccount.id,
+            state.asset_issuer,
+            instruction,
+          );
+
+          if (success) {
+            instruction("Success!  Account created and assets deposited");
+            resolve();
+          } else {
+            expect(
+              false,
+              "Something went wrong in the merge process, see the console for details",
+            );
+          }
+        }
+
+        if (lastStatus !== transactionResult.transaction.status) {
+          lastStatus = transactionResult.transaction.status;
+          instruction(`Status updated to ${lastStatus}`);
+          const urlBuilder = new URL(
+            transactionResult.transaction.more_info_url,
+          );
+          urlBuilder.searchParams.set("jwt", state.token);
+          state.deposit_url = urlBuilder.toString();
+          if (showingDepositView) {
+            showDepositView();
+          }
+        }
+        if (transactionResult.transaction.status !== "completed") {
+          instruction(
+            `Still ${transactionResult.transaction.status}, try again in 5s`,
+          );
+          setTimeout(poll, 5000);
+        }
+      };
+
+      function showDepositView() {
+        showingDepositView = true;
+        setDevicePage(state.deposit_url);
+        showClosePanel();
+      }
+
+      function showTransactionsView() {
+        showingDepositView = false;
+        setDevicePage("pages/transactions.html?pending=true");
+      }
+
       poll();
 
       showDepositView();
@@ -110,9 +125,14 @@ async function claimAccount(
   const balance = claimableAccount.balances.find(
     (b) => b.asset_code === ASSET_CODE && b.asset_issuer === issuer,
   );
-  console.log(balance);
   const amount = balance.balance;
   const { p90_accepted_fee: fee } = await server.feeStats();
+  console.log(
+    "Trying to claim ",
+    claimableAccount.id,
+    " into account ",
+    mainPK,
+  );
   const builder = new StellarSdk.TransactionBuilder(claimableAccount, {
     fee,
     networkPassphrase: StellarSdk.Networks.TESTNET,
@@ -188,6 +208,11 @@ async function claimAccount(
   );
   const tx = builder.setTimeout(100).build();
   tx.sign(mainAccountPair);
-  const result = await server.submitTransaction(tx);
-  console.log("Success???", result);
+  try {
+    await server.submitTransaction(tx);
+  } catch (e) {
+    console.log("Horizon Error", e);
+    return false;
+  }
+  return true;
 }

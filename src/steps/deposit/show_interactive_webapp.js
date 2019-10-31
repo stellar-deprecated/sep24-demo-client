@@ -22,54 +22,52 @@ module.exports = {
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
       setDevicePage(url);
-      window.addEventListener(
-        "message",
-        function(e) {
-          let transaction = e.data.transaction;
-          // Support older clients for now
-          if (e.data.type === "success" || e.data.status === "completed") {
-            expect(
-              false,
-              "postMessage response should have the transaction in a transaction property, not top level.",
-            );
-            transaction = e.data;
-          }
-          if (transaction) {
-            expect(
-              transaction.status === "completed" ||
-                transaction.status === "pending_external" ||
-                transaction.status === "pending_anchor" ||
-                transaction.status === "pending_stellar" ||
-                transaction.status === "pending_user_transfer_start",
-              "Unknown transaction status: " + transaction.status,
-            );
-            response("postMessage: Interactive webapp completed", transaction);
-            expect(
-              transaction.more_info_url,
-              "postMessage callback must contain a more_info_url with information on how to finish the deposit",
-            );
-            expect(
-              transaction.id,
-              "postMessage callback transaction contains no id",
-            );
-            const urlBuilder = new URL(transaction.more_info_url);
-            urlBuilder.searchParams.set("jwt", state.token);
-            state.deposit_url = urlBuilder.toString();
-            state.transaction_id = transaction.id;
-            resolve();
-          }
-          if (e.data.type === "log") {
-            instruction(e.data.message);
-          }
-          if (e.data.type === "log-object") {
-            response("postMessage", JSON.parse(e.data.obj));
-          }
-          if (e.data.type === "instruction") {
-            instruction(e.data.message);
-          }
-        },
-        false,
-      );
+      const listener = function(e) {
+        let transaction = e.data.transaction;
+        // Support older clients for now
+        if (e.data.type === "success" || e.data.status === "completed") {
+          expect(
+            false,
+            "postMessage response should have the transaction in a transaction property, not top level.",
+          );
+          transaction = e.data;
+        }
+        if (transaction) {
+          expect(
+            transaction.status === "completed" ||
+              transaction.status === "pending_external" ||
+              transaction.status === "pending_anchor" ||
+              transaction.status === "pending_stellar" ||
+              transaction.status === "pending_user_transfer_start",
+            "Unknown transaction status: " + transaction.status,
+          );
+          response("postMessage: Interactive webapp completed", transaction);
+          expect(
+            transaction.more_info_url,
+            "postMessage callback must contain a more_info_url with information on how to finish the deposit",
+          );
+          expect(
+            transaction.id,
+            "postMessage callback transaction contains no id",
+          );
+          const urlBuilder = new URL(transaction.more_info_url);
+          urlBuilder.searchParams.set("jwt", state.token);
+          state.deposit_url = urlBuilder.toString();
+          state.transaction_id = transaction.id;
+          window.removeEventListener("message", listener);
+          resolve();
+        }
+        if (e.data.type === "log") {
+          instruction(e.data.message);
+        }
+        if (e.data.type === "log-object") {
+          response("postMessage", JSON.parse(e.data.obj));
+        }
+        if (e.data.type === "instruction") {
+          instruction(e.data.message);
+        }
+      };
+      window.addEventListener("message", listener, false);
     });
   },
 };
