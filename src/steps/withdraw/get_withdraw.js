@@ -15,6 +15,10 @@ module.exports = {
       asset_code: ASSET_CODE,
       account: pk,
     };
+    const email = Config.get("EMAIL_ADDRESS");
+    if (email) {
+      params.email_address = email;
+    }
     request("POST /transactions/withdraw/interactive", params);
     const searchParams = new URLSearchParams();
     Object.keys(params).forEach((key) => searchParams.append(key, params[key]));

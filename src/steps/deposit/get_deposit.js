@@ -23,6 +23,10 @@ module.exports = {
       memo: state.deposit_memo,
       memo_type: state.deposit_memo_type,
     };
+    const email = Config.get("EMAIL_ADDRESS");
+    if (email) {
+      params.email_address = email;
+    }
     request("POST /transactions/deposit/interactive", params);
     const searchParams = new URLSearchParams();
     Object.keys(params).forEach((key) => searchParams.append(key, params[key]));
