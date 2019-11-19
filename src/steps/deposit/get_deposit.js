@@ -13,7 +13,7 @@ module.exports = {
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const transfer_server = state.transfer_server;
 
-    state.deposit_memo = crypto.randomBytes(64).toString("base64");
+    state.deposit_memo = crypto.randomBytes(32).toString("base64");
     state.deposit_memo_type = "hash";
     instruction(
       `We've created the deposit memo ${state.deposit_memo} to listen for a successful deposit`,
