@@ -1,11 +1,12 @@
 const StellarSDK = require("stellar-sdk");
 const Config = require("src/config");
+const get = require("src/util/get");
 const crypto = require("crypto");
 
 module.exports = {
   instruction:
-    "To get the url for the interactive flow check the /transactions/deposit/interactive endpoint",
-  action: "POST /transactions/deposit/interactive (SEP-0024)",
+    "In order to find out whether we need to enter the interactive or non-interactive flow, check the /deposit endpoint",
+  action: "GET /deposit (SEP-0006)",
   execute: async function(state, { request, response, instruction, expect }) {
     const ASSET_CODE = Config.get("ASSET_CODE");
     const USER_SK = Config.get("USER_SK");
@@ -23,31 +24,20 @@ module.exports = {
       memo: state.deposit_memo,
       memo_type: state.deposit_memo_type,
     };
-    const email = Config.get("EMAIL_ADDRESS");
-    if (email) {
-      params.email_address = email;
-    }
-    request("POST /transactions/deposit/interactive", params);
-    const searchParams = new URLSearchParams();
-    Object.keys(params).forEach((key) => searchParams.append(key, params[key]));
-    const resp = await fetch(
-      `${transfer_server}/transactions/deposit/interactive`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${state.token}`,
-        },
-        body: searchParams,
+    request("GET /deposit", params);
+    // Expect this to fail with 403
+    const result = await get(`${transfer_server}/deposit`, params, {
+      headers: {
+        Authorization: `Bearer ${state.token}`,
       },
-    );
-    const result = await resp.json();
-    response("POST /transactions/deposit/interactive", result);
+    });
+    response("GET /deposit", result);
     expect(
       result.type === "interactive_customer_info_needed",
       `Expected interactive customer needed, received ${result.type}`,
     );
     instruction(
-      "POST /deposit tells us we need to collect info interactively.  The URL for the interactive portion is " +
+      "GET /deposit tells us we need to collect info interactively.  The URL for the interactive portion is " +
         result.url,
     );
     expect(result.url, "An interactive webapp URL is required");
