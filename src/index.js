@@ -92,6 +92,7 @@ const depositSteps = [
   require("./steps/SEP10/sign"),
   require("./steps/SEP10/send"),
   require("./steps/deposit/get_deposit"),
+  require("./steps/withdraw/check_transactions_endpoint"),
   require("./steps/deposit/show_interactive_webapp"),
   require("./steps/deposit/show_close_button"),
   // require("./steps/deposit/show_deposit_info"),
