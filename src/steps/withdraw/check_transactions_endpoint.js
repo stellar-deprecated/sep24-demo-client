@@ -11,21 +11,19 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const transfer_server = state.transfer_server;
-    request("GET /transactions");
-    const transactionResponse = await fetch(
-      `${transfer_server}/transactions?asset_code=${ASSET_CODE}&account=${pk}&no_older_than=${state.begin_time}`,
-      {
-        headers: {
-          Authorization: `Bearer ${state.token}`,
-        },
+    const url = `${transfer_server}/transactions?asset_code=${ASSET_CODE}&account=${pk}&no_older_than=${state.begin_time}`;
+    request("GET " + url);
+    const transactionResponse = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${state.token}`,
       },
-    );
+    });
     expect(
       transactionResponse.status === 200,
       `/transactions responded with status code ${transactionResponse.status}`,
     );
     const transactionsResult = await transactionResponse.json();
-    response("GET /transaction", transactionsResult);
+    response("GET /transactions", transactionsResult);
     expect(
       !transactionsResult.error,
       `Transactions list had error: ${transactionsResult.error}`,
