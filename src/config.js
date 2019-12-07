@@ -29,7 +29,6 @@ let fields = [
       action: async (opt, input) => {
         opt.buttonElement.textContent = "Funding";
         const pair = StellarSDK.Keypair.fromSecret(input.value);
-        console.log(pair);
         try {
           const response = await fetch(
             `https://friendbot.stellar.org?addr=${encodeURIComponent(
