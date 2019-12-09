@@ -74,14 +74,12 @@ const load = () => {
     .split("&")
     .map((entry) => entry.split("="))
     .reduce((obj, val) => {
-      console.log("VAL", val[0], val[1]);
       obj[val[0]] = val[1];
       return obj;
     }, {});
 
   fields.forEach((field) => {
     let hashValue = hashFields[field.key];
-    if (hashValue === undefined) hashValue = field.value;
     if (hashValue) hashValue = JSON.parse(decodeURI(hashValue));
     // Prefer query param but fall back to local storage
     field.value =
