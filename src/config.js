@@ -1,3 +1,5 @@
+let StellarSDK = require("stellar-sdk");
+
 let fields = [
   {
     key: "HOME_DOMAIN",
@@ -18,7 +20,33 @@ let fields = [
     optional: true,
   },
 
-  { key: "USER_SK", label: "Stellar wallet secret key", value: null },
+  {
+    key: "USER_SK",
+    label: "Stellar wallet secret key",
+    value: null,
+    button: {
+      text: "Fund",
+      action: async (opt, input) => {
+        opt.buttonElement.textContent = "Funding";
+        const pair = StellarSDK.Keypair.fromSecret(input.value);
+        try {
+          const response = await fetch(
+            `https://friendbot.stellar.org?addr=${encodeURIComponent(
+              pair.publicKey(),
+            )}`,
+          );
+          if (response.status == 200) {
+            opt.buttonElement.textContent = "Success!";
+          } else {
+            opt.buttonElement.textContent = "Couldn't create this account";
+          }
+        } catch (e) {
+          console.error("ERROR!", e);
+          opt.buttonElement.textContent = "Couldn't create this account";
+        }
+      },
+    },
+  },
   { key: "HORIZON_URL", label: "URL of the Horizon server", value: null },
   { key: "ASSET_CODE", label: "Asset code to withdraw", value: null },
   {
@@ -113,6 +141,20 @@ const installUI = (panel) => {
     input.type = field.type || "text";
     input.placeholder = field.key;
     field.element = input;
+
+    if (field.button) {
+      const button = document.createElement("button");
+      button.textContent = field.button.text;
+      button.addEventListener(
+        "click",
+        function() {
+          console.log("Click", this);
+          this.button.action(this, input);
+        }.bind(field, input),
+      );
+      container.appendChild(button);
+      field.buttonElement = button;
+    }
 
     container.appendChild(label);
     container.appendChild(input);
