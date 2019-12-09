@@ -34,6 +34,12 @@ let fields = [
     optional: true,
   },
   {
+    key: "STRICT_MODE",
+    label: "Strict Mode: Abort the flow when an error is thrown",
+    value: true,
+    type: "checkbox",
+  },
+  {
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
     value: false,
@@ -68,12 +74,14 @@ const load = () => {
     .split("&")
     .map((entry) => entry.split("="))
     .reduce((obj, val) => {
+      console.log("VAL", val[0], val[1]);
       obj[val[0]] = val[1];
       return obj;
     }, {});
 
   fields.forEach((field) => {
     let hashValue = hashFields[field.key];
+    if (hashValue === undefined) hashValue = field.value;
     if (hashValue) hashValue = JSON.parse(decodeURI(hashValue));
     // Prefer query param but fall back to local storage
     field.value =

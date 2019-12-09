@@ -3,7 +3,7 @@
   background-image: url("./assets/next-arrow.svg");
   background-position: 20px center;
 
-  &:not(.loading) {
+  &:not(.loading):not(.failed) {
     animation: pulse 1.5s infinite;
     animation-delay: 0.5s;
   }
@@ -11,6 +11,11 @@
   &:hover {
     animation: none;
     cursor: pointer;
+  }
+
+  &.failed {
+    background: $red;
+    padding-left: 42px;
   }
 
   &.loading {
