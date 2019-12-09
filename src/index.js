@@ -121,7 +121,6 @@ const runStep = (step) => {
     uiActions.finish();
     return;
   }
-
   uiActions.instruction(step.instruction);
   currentStep = step;
   if (Config.get("AUTO_ADVANCE") || step.autoStart) next();
