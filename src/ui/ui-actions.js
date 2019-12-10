@@ -1,3 +1,5 @@
+const Config = require("../config");
+
 const Renderjson = require("renderjson");
 Renderjson.set_show_to_level(1);
 
@@ -56,7 +58,17 @@ const response = (message, params) => {
   logObject(message, params, "incoming");
 };
 
+let isFailed = false;
+const setFailed = () => {
+  actionButton.disabled = true;
+  actionButton.textContent = "Failed";
+  actionButton.classList.remove("loading");
+  actionButton.classList.add("failed");
+  isFailed = true;
+};
+
 const setLoading = (loading, loadingMessage) => {
+  if (isFailed) return;
   if (loading) {
     actionButton.textContent = loadingMessage || "Waiting...";
     actionButton.disabled = true;
@@ -117,6 +129,7 @@ const waitForPageMessage = (src) => {
 
 const error = (message) => {
   addEntry(message, "error");
+  if (Config.get("STRICT_MODE")) setFailed();
 };
 
 const onNext = (cb) => actionButton.addEventListener("click", cb);
@@ -132,6 +145,7 @@ module.exports = {
 
   onNext,
   setLoading,
+  setFailed,
   finish,
 
   showConfig,

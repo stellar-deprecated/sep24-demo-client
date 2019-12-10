@@ -62,6 +62,12 @@ let fields = [
     optional: true,
   },
   {
+    key: "STRICT_MODE",
+    label: "Strict Mode: Abort the flow when an error is thrown",
+    value: true,
+    type: "checkbox",
+  },
+  {
     key: "AUTO_ADVANCE",
     label: "Automatically perform background operations",
     value: false,
