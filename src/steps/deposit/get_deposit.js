@@ -28,8 +28,8 @@ module.exports = {
       params.email_address = email;
     }
     request("POST /transactions/deposit/interactive", params);
-    const searchParams = new URLSearchParams();
-    Object.keys(params).forEach((key) => searchParams.append(key, params[key]));
+    const formData = new FormData();
+    Object.keys(params).forEach((key) => formData.append(key, params[key]));
     const resp = await fetch(
       `${transfer_server}/transactions/deposit/interactive`,
       {
@@ -37,7 +37,7 @@ module.exports = {
         headers: {
           Authorization: `Bearer ${state.token}`,
         },
-        body: searchParams,
+        body: formData,
       },
     );
     const result = await resp.json();
