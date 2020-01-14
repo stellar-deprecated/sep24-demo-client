@@ -34,10 +34,10 @@ function downloadFile(filename, text) {
 
 downloadLogsButton.addEventListener("click", () => {
   logsOutputText = ``;
-  errorsCount = 0;
+  errorsList = [];
   logsList.forEach(function(entry) {
     if (entry.className == "error") {
-      errorsCount += 1;
+      errorsList.push(entry.message);
     }
     if (entry.params) {
       logsOutputText += `**${entry.className}:** ${
@@ -49,9 +49,16 @@ downloadLogsButton.addEventListener("click", () => {
   });
 
   fileHeader = `# ${new Date()}\n`;
-  fileHeader += `# Number of Errors: ${errorsCount}\n`;
-  fileHeader += "----------------------\n\n";
-
+  if (errorsList.length == 0) {
+    fileHeader += `# No errors were logged`;  
+  } else {
+    fileHeader += `# Number of Errors: ${errorsList.length}\n`;
+    errorsList.forEach(function(entry) {
+      fileHeader += `    ${entry}\n`
+    });
+  }
+  fileHeader += "\n----------------------\n\n";
+  
   fileName = `demo-client-logs- + ${Date.now()}.md`;
   downloadFile(fileName, fileHeader + logsOutputText);
 });
