@@ -59,9 +59,22 @@ downloadLogsButton.addEventListener("click", () => {
   }
   fileHeader += "\n----------------------\n\n";
   
+  fileContent = fileHeader + logsOutputText
+  fileContent += `\n\n# Document Hash: ${fileContent.hashCode()}`
+
   fileName = `demo-client-logs- + ${Date.now()}.md`;
-  downloadFile(fileName, fileHeader + logsOutputText);
+  downloadFile(fileName, fileContent);
 });
+
+String.prototype.hashCode = function() {
+  var hash = 0;
+  for (var i = 0; i < this.length; i++) {
+      var char = this.charCodeAt(i);
+      hash = ((hash<<5)-hash)+char;
+      hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
+}
 
 const showConfig = () => {
   configPanel.classList.add("visible");
