@@ -11,10 +11,70 @@ const actionButton = $("action-button");
 const configButton = $("config-button");
 const configPanel = $("config-panel");
 const deviceFrame = $("device-frame");
+const downloadLogsButton = $("download-logs-button");
+
+var logsList = [];
 
 configButton.addEventListener("click", () => {
   configPanel.classList.toggle("visible");
 });
+
+function downloadFile(filename, text) {
+  var element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:text/plain;charset=utf-8," + encodeURIComponent(text),
+  );
+  element.setAttribute("download", filename);
+  element.style.display = "none";
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
+downloadLogsButton.addEventListener("click", () => {
+  logsOutputText = ``;
+  errorsList = [];
+  logsList.forEach(function(entry) {
+    if (entry.className == "error") {
+      errorsList.push(entry.message);
+    }
+    if (entry.params) {
+      logsOutputText += `**${entry.className}:** ${
+        entry.message
+      }\n ${JSON.stringify(entry.params, null, 4)} \n\n`;
+    } else {
+      logsOutputText += `**${entry.className}:** ${entry.message}\n\n`;
+    }
+  });
+
+  fileHeader = `# ${new Date()}\n`;
+  if (errorsList.length == 0) {
+    fileHeader += `# No errors were logged`;  
+  } else {
+    fileHeader += `# Number of Errors: ${errorsList.length}\n`;
+    errorsList.forEach(function(entry) {
+      fileHeader += `    ${entry}\n`
+    });
+  }
+  fileHeader += "\n----------------------\n\n";
+  
+  fileContent = fileHeader + logsOutputText
+  fileContent += `\n\n# Document Hash: ${fileContent.hashCode()}`
+
+  fileName = `demo-client-logs- + ${Date.now()}.md`;
+  downloadFile(fileName, fileContent);
+});
+
+String.prototype.hashCode = function() {
+  var hash = 0;
+  for (var i = 0; i < this.length; i++) {
+      var char = this.charCodeAt(i);
+      hash = ((hash<<5)-hash)+char;
+      hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
+}
 
 const showConfig = () => {
   configPanel.classList.add("visible");
@@ -23,6 +83,8 @@ const showConfig = () => {
 const scrollToTop = () => (section.scrollTop = section.scrollHeight);
 
 const addEntry = (message, className) => {
+  logsList.push({ message: message, className: className });
+
   const div = document.createElement("div");
   div.textContent = message;
   div.className = className + " log-entry";
@@ -33,6 +95,8 @@ const action = (message) => addEntry(message, "action");
 const instruction = (instruction) => addEntry(instruction, "instruction");
 
 const logObject = (message, params, className = "informational") => {
+  logsList.push({ message: message, params: params, className: className });
+
   const div = document.createElement("div");
   div.className = `detail log-entry ${className}`;
   const title = document.createElement("div");
