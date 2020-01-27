@@ -47,8 +47,18 @@ module.exports = {
 
     function showDepositView() {
       showingDepositView = true;
-      setDevicePage(state.deposit_url);
-      showClosePanel();
+      const popup = window.open(
+        state.deposit_url,
+        "popup",
+        "width=320,height=480",
+      );
+      const timer = setInterval(() => {
+        if (popup.window.closed) {
+          clearInterval(timer);
+          showTransactionsView();
+        }
+      }, 100);
+      setDevicePage("pages/loader-with-popup-message.html");
     }
 
     function showTransactionsView() {
