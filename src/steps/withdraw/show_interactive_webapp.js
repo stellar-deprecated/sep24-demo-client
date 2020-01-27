@@ -17,7 +17,8 @@ module.exports = {
       action(
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
-      setDevicePage(url);
+      const popup = window.open(url, "popup", "width=320,height=480");
+      setDevicePage("pages/loader-with-popup-message.html");
       const cb = function(e) {
         let transaction = e.data.transaction;
         // Support older clients for now
@@ -59,6 +60,7 @@ module.exports = {
           state.withdraw_amount = transaction.amount_in;
           state.transaction_id = transaction.id || state.stellar_memo;
           window.removeEventListener("message", cb);
+          popup.close();
           resolve();
         }
         if (e.data.type === "log") {

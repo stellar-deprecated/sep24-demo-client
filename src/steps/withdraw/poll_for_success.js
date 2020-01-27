@@ -40,7 +40,12 @@ module.exports = {
               transactionResult.transaction.more_info_url,
             );
             urlBuilder.searchParams.set("jwt", state.token);
-            setDevicePage(urlBuilder.toString());
+            const popup = window.open(
+              urlBuilder.toString(),
+              "popup",
+              "width=320,height=480",
+            );
+            setDevicePage("pages/loader-with-popup-message.html");
           } else {
             setDevicePage(
               "pages/receipt.html?reference_number=" +

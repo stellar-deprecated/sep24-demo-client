@@ -6,7 +6,7 @@ module.exports = {
   autoStart: true,
   execute: async function(
     state,
-    { request, response, expect, instruction, setDevicePage, showClosePanel },
+    { request, response, expect, instruction, setDevicePage },
   ) {
     let lastStatus = "pending_user_transfer_start";
     let showingDepositView = true;
