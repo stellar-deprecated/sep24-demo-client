@@ -13,6 +13,7 @@ module.exports = {
       // Add the parent_url so we can use postMessage inside the webapp
       const urlBuilder = new URL(state.interactive_url);
       urlBuilder.searchParams.set("jwt", state.token);
+      urlBuilder.searchParams.set("callback", "postMessage");
       const url = urlBuilder.toString();
       action(
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
