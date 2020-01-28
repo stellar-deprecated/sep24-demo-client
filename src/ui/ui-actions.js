@@ -162,18 +162,6 @@ const expect = (expectation, message) => {
   }
 };
 
-const panel = $("close-panel");
-const cb = () => {
-  window.postMessage({
-    message: "close-button",
-  });
-  panel.style.display = "none";
-};
-panel.addEventListener("click", cb);
-const showClosePanel = () => {
-  panel.style.display = null;
-};
-
 const setDevicePage = (src) => {
   deviceFrame.src = src;
 };
@@ -215,5 +203,4 @@ module.exports = {
   showConfig,
   setDevicePage,
   waitForPageMessage,
-  showClosePanel,
 };

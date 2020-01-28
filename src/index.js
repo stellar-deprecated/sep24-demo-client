@@ -13,6 +13,8 @@ const StellarSdk = require("stellar-sdk");
  * @property {string} auth_server - URL hosting the SEP10 auth server
  * @property {string} transfer_server - URL hosting the SEP6 transfer server
  *
+ * @property {Window} popup - The popup window for the interactive webapp
+ *
  * From /info
  * @property {string} interactive_url - URL hosting the interactive webapp step
  *
@@ -95,7 +97,6 @@ const depositSteps = [
   require("./steps/withdraw/check_transactions_endpoint"),
   require("./steps/deposit/show_interactive_webapp"),
   require("./steps/deposit/show_close_button"),
-  // require("./steps/deposit/show_deposit_info"),
 ];
 
 let steps = null;
@@ -138,11 +139,7 @@ const next = async () => {
   if (currentStep && currentStep.execute) {
     uiActions.setLoading(true);
     try {
-      await Promise.all([
-        currentStep.execute(state, uiActions),
-        // Take at least a second for each step otherwise its overwhelming
-        new Promise((resolve) => setTimeout(resolve, 1000)),
-      ]);
+      await currentStep.execute(state, uiActions);
       steps.splice(0, 1);
     } catch (e) {
       uiActions.error(e);

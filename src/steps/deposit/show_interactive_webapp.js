@@ -18,7 +18,8 @@ module.exports = {
       action(
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
-      setDevicePage(url);
+      state.popup = window.open(url, "popup", "width=320,height=480");
+      setDevicePage("pages/loader-with-popup-message.html");
       window.addEventListener(
         "message",
         function(e) {

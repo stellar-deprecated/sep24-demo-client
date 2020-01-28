@@ -6,7 +6,7 @@ module.exports = {
   autoStart: true,
   execute: async function(
     state,
-    { request, response, expect, instruction, setDevicePage, showClosePanel },
+    { request, response, expect, instruction, setDevicePage },
   ) {
     let lastStatus = "pending_user_transfer_start";
     let showingDepositView = true;
@@ -47,8 +47,22 @@ module.exports = {
 
     function showDepositView() {
       showingDepositView = true;
-      setDevicePage(state.deposit_url);
-      showClosePanel();
+      if (state.popup.closed) {
+        state.popup = window.open(
+          state.deposit_url,
+          "popup",
+          "width=320,height=480",
+        );
+      } else {
+        state.popup.window.location = state.deposit_url;
+      }
+      const timer = setInterval(() => {
+        if (state.popup.closed) {
+          clearInterval(timer);
+          showTransactionsView();
+        }
+      }, 100);
+      setDevicePage("pages/loader-with-popup-message.html");
     }
 
     function showTransactionsView() {
