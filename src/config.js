@@ -154,7 +154,6 @@ const installUI = (panel) => {
       button.addEventListener(
         "click",
         function() {
-          console.log("Click", this);
           this.button.action(this, input);
         }.bind(field, input),
       );

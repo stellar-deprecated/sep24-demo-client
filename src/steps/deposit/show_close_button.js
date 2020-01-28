@@ -47,13 +47,17 @@ module.exports = {
 
     function showDepositView() {
       showingDepositView = true;
-      const popup = window.open(
-        state.deposit_url,
-        "popup",
-        "width=320,height=480",
-      );
+      if (state.popup.closed) {
+        state.popup = window.open(
+          state.deposit_url,
+          "popup",
+          "width=320,height=480",
+        );
+      } else {
+        state.popup.window.location = state.deposit_url;
+      }
       const timer = setInterval(() => {
-        if (popup.window.closed) {
+        if (state.popup.closed) {
           clearInterval(timer);
           showTransactionsView();
         }

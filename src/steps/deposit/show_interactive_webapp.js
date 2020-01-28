@@ -17,7 +17,7 @@ module.exports = {
       action(
         `Launching interactive webapp at ${url} and watching for postMessage callback`,
       );
-      const popup = window.open(url, "popup", "width=320,height=480");
+      state.popup = window.open(url, "popup", "width=320,height=480");
       setDevicePage("pages/loader-with-popup-message.html");
       window.addEventListener(
         "message",
@@ -53,7 +53,6 @@ module.exports = {
             urlBuilder.searchParams.set("jwt", state.token);
             state.deposit_url = urlBuilder.toString();
             state.transaction_id = transaction.id;
-            popup.close();
             resolve();
           }
           if (e.data.type === "log") {
