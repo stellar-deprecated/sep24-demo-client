@@ -1,5 +1,7 @@
 const get = require("src/util/get");
 const Config = require("src/config");
+const TransactionSchema = require("../../schema").TransactionSchema;
+const validate = require("jsonschema").validate;
 
 // TODO should this poll?
 module.exports = {
@@ -26,6 +28,11 @@ module.exports = {
           },
         );
         response("GET /transaction", transactionResult);
+        const validation = validate(transactionResult, TransactionSchema);
+        expect(
+          validation.valid,
+          "Transaction is not in the right schema: " + validation.errors,
+        );
         if (transactionResult.transaction.status === "completed") {
           expect(
             transactionResult.transaction.external_transaction_id ||
