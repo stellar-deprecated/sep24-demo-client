@@ -38,7 +38,7 @@ module.exports = {
     const asset = new StellarSdk.Asset(ASSET_CODE, state.asset_issuer);
 
     const transaction = new StellarSdk.TransactionBuilder(account, {
-      fee: feeStats.p70_accepted_fee,
+      fee: feeStats.max_fee.p70,
       networkPassphrase: state.network,
     })
       .addOperation(
