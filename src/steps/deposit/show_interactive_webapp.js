@@ -12,7 +12,6 @@ module.exports = {
     return new Promise((resolve, reject) => {
       // Add the parent_url so we can use postMessage inside the webapp
       const urlBuilder = new URL(state.interactive_url);
-      urlBuilder.searchParams.set("jwt", state.token);
       urlBuilder.searchParams.set("callback", "postMessage");
       const url = urlBuilder.toString();
       action(
@@ -51,7 +50,6 @@ module.exports = {
               "postMessage callback transaction contains no id",
             );
             const urlBuilder = new URL(transaction.more_info_url);
-            urlBuilder.searchParams.set("jwt", state.token);
             state.deposit_url = urlBuilder.toString();
             state.transaction_id = transaction.id;
             resolve();
