@@ -1,6 +1,7 @@
 const StellarSDK = require("stellar-sdk");
 const Config = require("src/config");
 const get = require("src/util/get");
+const crypto = require("crypto");
 
 module.exports = {
   instruction:
