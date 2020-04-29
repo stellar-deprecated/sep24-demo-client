@@ -1,6 +1,7 @@
 const StellarSDK = require("stellar-sdk");
 const Config = require("src/config");
 const get = require("src/util/get");
+const crypto = require("crypto");
 
 module.exports = {
   instruction:
@@ -11,9 +12,13 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const transfer_server = state.transfer_server;
+    state.stellar_memo = crypto.randomBytes(32).toString("base64");
+    state.stellar_memo_type = "hash";
     const params = {
       asset_code: ASSET_CODE,
       account: pk,
+      memo: state.stellar_memo,
+      memo_type: state.stellar_memo_type,
     };
     const email = Config.get("EMAIL_ADDRESS");
     if (email) {
