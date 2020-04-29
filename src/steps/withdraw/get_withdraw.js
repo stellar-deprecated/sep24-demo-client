@@ -11,9 +11,13 @@ module.exports = {
     const USER_SK = Config.get("USER_SK");
     const pk = StellarSDK.Keypair.fromSecret(USER_SK).publicKey();
     const transfer_server = state.transfer_server;
+    state.stellar_memo = crypto.randomBytes(32);
+    state.stellar_memo_type = "hash";
     const params = {
       asset_code: ASSET_CODE,
       account: pk,
+      memo: state.stellar_memo.toString("base64"),
+      memo_type: state.stellar_memo_type,
     };
     const email = Config.get("EMAIL_ADDRESS");
     if (email) {

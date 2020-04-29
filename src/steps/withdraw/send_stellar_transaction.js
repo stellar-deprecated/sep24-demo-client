@@ -13,7 +13,7 @@ module.exports = {
     const pk = StellarSdk.Keypair.fromSecret(USER_SK).publicKey();
     request("Sending the payment using the following anchor account info", {
       address: state.anchors_stellar_address,
-      memo: state.stellar_memo,
+      memo: state.stellar_memo.toString("hex"),
       memo_type: state.stellar_memo_type,
     });
     const server = new StellarSdk.Server(HORIZON_URL);
@@ -36,7 +36,7 @@ module.exports = {
         id: StellarSdk.Memo.id,
         hash: StellarSdk.Memo.hash,
       }[state.stellar_memo_type];
-      memo = memoType(state.stellar_memo);
+      memo = memoType(state.stellar_memo.toString("hex"));
     } catch (e) {
       expect(
         false,

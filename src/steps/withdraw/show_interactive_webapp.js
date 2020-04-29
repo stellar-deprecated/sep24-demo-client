@@ -58,7 +58,8 @@ module.exports = {
           state.stellar_memo = transaction.withdraw_memo;
           state.stellar_memo_type = transaction.withdraw_memo_type;
           state.withdraw_amount = transaction.amount_in;
-          state.transaction_id = transaction.id || state.stellar_memo;
+          state.transaction_id =
+            transaction.id || state.stellar_memo.toString("hex");
           window.removeEventListener("message", cb);
           popup.close();
           resolve();
