@@ -55,8 +55,6 @@ module.exports = {
             "id is undefined in postMessage callback.  Falling back to using memo as ID, but this will be removed shortly.  Please send an explicit id field.",
           );
           state.anchors_stellar_address = transaction.withdraw_anchor_account;
-          state.stellar_memo = transaction.withdraw_memo;
-          state.stellar_memo_type = transaction.withdraw_memo_type;
           state.withdraw_amount = transaction.amount_in;
           state.transaction_id =
             transaction.id || state.stellar_memo.toString("hex");
