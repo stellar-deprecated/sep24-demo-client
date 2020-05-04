@@ -8,6 +8,7 @@ module.exports = {
   execute: async function(state, { request, response, instruction, expect }) {
     const transfer_server = state.transfer_server;
     request("GET /info");
+    console.log(`${transfer_server}`);
     const result = await get(`${transfer_server}/info`);
     response("GET /info", result);
     expect(
