@@ -36,7 +36,14 @@ module.exports = {
         id: StellarSdk.Memo.id,
         hash: StellarSdk.Memo.hash,
       }[state.stellar_memo_type];
-      memo = memoType(state.stellar_memo);
+      if (state.stellar_memo_type == "hash") {
+        let memo_hex = Buffer.from(state.stellar_memo, "base64").toString(
+          "hex",
+        );
+        memo = memoType(memo_hex);
+      } else {
+        memo = memoType(state.stellar_memo);
+      }
     } catch (e) {
       expect(
         false,
