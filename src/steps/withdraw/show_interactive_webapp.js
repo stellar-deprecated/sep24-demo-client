@@ -1,5 +1,7 @@
 const Config = require("src/config");
 const StellarSdk = require("stellar-sdk");
+const validate = require("jsonschema").validate;
+const TransactionSchema = require("../../schema").TransactionSchema;
 
 module.exports = {
   instruction:
@@ -50,15 +52,17 @@ module.exports = {
             transaction.withdraw_memo_type,
             "withdraw_memo_type undefined in postMessage callback.",
           );
+          expect(transaction.id, "id is undefined in postMessage callback.");
+          const validation = validate({ transaction }, TransactionSchema);
           expect(
-            transaction.id,
-            "id is undefined in postMessage callback.  Falling back to using memo as ID, but this will be removed shortly.  Please send an explicit id field.",
+            validation.valid,
+            "Transaction is not in the right schema: " + validation.errors,
           );
           state.anchors_stellar_address = transaction.withdraw_anchor_account;
           state.stellar_memo = transaction.withdraw_memo;
           state.stellar_memo_type = transaction.withdraw_memo_type;
           state.withdraw_amount = transaction.amount_in;
-          state.transaction_id = transaction.id || state.stellar_memo;
+          state.transaction_id = transaction.id;
           window.removeEventListener("message", cb);
           popup.close();
           resolve();

@@ -1,5 +1,7 @@
 const Config = require("src/config");
 const StellarSdk = require("stellar-sdk");
+const TransactionSchema = require("../../schema").TransactionSchema;
+const validate = require("jsonschema").validate;
 
 module.exports = {
   instruction:
@@ -48,6 +50,11 @@ module.exports = {
             expect(
               transaction.id,
               "postMessage callback transaction contains no id",
+            );
+            const validation = validate({ transaction }, TransactionSchema);
+            expect(
+              validation.valid,
+              "Transaction is not in the right schema: " + validation.errors,
             );
             const urlBuilder = new URL(transaction.more_info_url);
             state.deposit_url = urlBuilder.toString();
