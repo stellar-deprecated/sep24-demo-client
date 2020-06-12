@@ -37,7 +37,7 @@ const TransactionSchema = {
         },
         stellar_transaction_id: {
           type: ["string", "null"],
-          pattern: "G[A-Z0-9]{55}",
+          pattern: "[a-zA-Z0-9]{64}",
         },
         external_transaction_id: {
           type: ["string", "null"],
