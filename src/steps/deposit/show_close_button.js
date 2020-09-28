@@ -79,7 +79,6 @@ module.exports = {
         lastStatus = transactionResult.transaction.status;
         instruction(`Status updated to ${lastStatus}`);
         if (lastStatus === "pending_trust") {
-          instruction("calling addTrustline");
           let resp = await addTrustline(state, instruction, request, expect);
         }
         const urlBuilder = new URL(transactionResult.transaction.more_info_url);
