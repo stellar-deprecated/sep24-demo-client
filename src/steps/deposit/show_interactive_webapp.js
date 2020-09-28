@@ -39,6 +39,7 @@ module.exports = {
                 transaction.status === "pending_external" ||
                 transaction.status === "pending_anchor" ||
                 transaction.status === "pending_stellar" ||
+                transaction.status === "pending_trust" ||
                 transaction.status === "pending_user_transfer_start",
               "Unknown transaction status: " + transaction.status,
             );
