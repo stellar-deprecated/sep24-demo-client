@@ -79,6 +79,12 @@ let fields = [
     value: false,
     type: "checkbox",
   },
+  {
+    key: "ON_CHANGE_CALLBACK",
+    label: "Value for on_change_callback",
+    value: null,
+    optional: true,
+  },
 ];
 
 const save = () => {
