@@ -19,19 +19,33 @@ html {
   height: 100%;
   display: grid;
   grid-template-columns: auto 420px;
-  grid-template-rows: auto 60px;
+  grid-template-rows: 60px auto 60px;
+}
+
+.deprecation-warning {
+  background-color: red;
+  flex-grow: 0;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+}
+.deprecation-warning-line {
+  color: white;
+  padding-top: 5px;
 }
 
 #device {
   display: flex;
   align-content: center;
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 2;
 }
 
 .instructions-section {
   overflow: auto;
-  grid-row: 1;
+  grid-row: 2;
   grid-column: 1;
   scrollbar-width: none;
 
@@ -56,7 +70,7 @@ html {
   padding: 8px;
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row: 2;
+  grid-row: 3;
   border-top: 1px solid $black-20;
   background-color: white;
   display: flex;
